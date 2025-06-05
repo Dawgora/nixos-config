@@ -5,7 +5,6 @@
 { inputs, config, lib, pkgs, callPackage, ... }:
 
 let
-  #screen-script = import ./screen-script.nix { inherit pkgs; };
   #unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
 {
@@ -167,16 +166,9 @@ services.resolved.enable = true;
     services.displayManager = {
       defaultSession = "none+i3";
       sddm.enable = true;
-      sddm.theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+      sddm.theme = "${import ./modules/sddm/sddm-theme.nix { inherit pkgs; }}";
       sddm.autoNumlock = true;
     };
-
-   #services.xserver.displayManager.setupCommands = ''${screen-script}/bin/screen-script'';
-
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

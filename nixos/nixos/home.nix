@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-   customNeovim = import ./nvim/nvim.nix;
-   elixir = import ./elixir/flake.nix;
+   customNeovim = import ./modules/nvim/nvim.nix;
+   elixir = import ./modules/elixir/flake.nix;
 in
 {
 

@@ -256,10 +256,6 @@ services.resolved.enable = true;
  environment.sessionVariables = {
   WLR_NO_HARDWARE_CURSORS = "1";
   NIXOS_OZONE_WL = "1";
-  #XDG_CURRENT_DESKTOP = "Hyprland";
-  #XDG_SESSION_TYPE = "wayland";
-  #XDG_SESSION_DESKTOP = "Hyperland";
-  #QT_QPA_PLATFORM = "wayland";
   MOZ_DISABLE_RDD_SANDBOX = "1";
   LIBVA_DRIVER_NAME = "nvidia";
   GBM_BACKEND = "nvidia-drm";
@@ -292,7 +288,7 @@ services.resolved.enable = true;
            "node"
            "rust"
            "deno"
-	   "tig"
+    	   "tig"
            "tmux"
            "mix"
            "nmap"

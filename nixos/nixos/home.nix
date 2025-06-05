@@ -117,6 +117,7 @@ in
       pkgs.bazecor
       pkgs.hyprshot
       pkgs.pavucontrol
+      pkgs.playerctl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

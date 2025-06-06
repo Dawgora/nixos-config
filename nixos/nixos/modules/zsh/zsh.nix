@@ -19,8 +19,6 @@
         "tmux"
         "mix"
         "nmap"
-        "nix-zsh-completions"
-        "nix-shell"
       ];
     };
   };

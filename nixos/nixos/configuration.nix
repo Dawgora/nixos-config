@@ -146,7 +146,7 @@ services.resolved.enable = true;
   };
   
     services.displayManager = {
-      defaultSession = "none+i3";
+      defaultSession = "hyprland";
       sddm.enable = true;
       sddm.theme = "${import ./modules/sddm/sddm-theme.nix { inherit pkgs; }}";
       sddm.autoNumlock = true;

@@ -39,7 +39,7 @@
         # use whatever version is currently defined in nixpkgs
         # elixir = pkgs-beam.elixir;
 
-        elixir = pkgs-beam.elixir_1_18;
+        elixir = pkgs-beam.elixir;
 
         # specify exact version of Elixir
         # elixir = pkgs-beam.elixir.override {

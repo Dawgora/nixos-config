@@ -9,22 +9,22 @@
 #    enable = lib.mkEnableOption "hyprlandwm";
 #  };
 
-  config = lib.mkIf config.dc-tec.graphical.hyprland.enable {
-    nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
+#  config = lib.mkIf config.dc-tec.graphical.hyprland.enable {
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
-    home.packages = with pkgs; [
-      qt5.qtwayland
-      qt6.qtwayland
-    ];
+  home.packages = with pkgs; [
+    qt5.qtwayland
+    qt6.qtwayland
+  ];
 
-    services = {
-      cliphist = {
-        enable = true;
-      };
+  services = {
+    cliphist = {
+      enable = true;
     };
+  };
 
       ## Took some stuff from the end4 dots config @ https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprland/general.conf
       wayland.windowManager.hyprland = {
@@ -240,5 +240,5 @@
           enable = true;
         };
       };
-    };
+#    };
   }

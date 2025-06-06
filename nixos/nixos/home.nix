@@ -168,7 +168,7 @@ in
   };
 
   home.shellAliases = {
-    "elixir-devel"="nix develop ~/flakes/nixos/nixos/elixir";
+    "elixir-devel"="nix develop ~/flakes/nixos/nixos/modules/elixir";
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#myNixos";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";

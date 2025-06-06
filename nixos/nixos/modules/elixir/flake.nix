@@ -18,10 +18,10 @@
         # ==== ERLANG ====
 
         # use whatever version is currently defined in nixpkgs
-        #erlang = pkgs.beam.interpreters.erlang;
+        #erlang = pkgs-beam.interpreters.erlang;
 
         # use latest version of Erlang 27
-        erlang = final.beam.interpreters.erlang_28;
+        erlang = final.beam.interpreters.erlang_27;
 
         # specify exact version of Erlang OTP
         # erlang = pkgs.beam.interpreters.erlang.override {

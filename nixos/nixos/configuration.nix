@@ -12,6 +12,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/nginx/nginx.nix
+      ./modules/zsh/zsh.nix
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -244,33 +245,6 @@ services.resolved.enable = true;
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  programs = {
-    zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      zsh-autoenv.enable = true;
-      syntaxHighlighting.enable = true;
-      ohMyZsh = {
-        enable = true;
-        theme = "robbyrussell";
-        plugins = [
-           "git"
-           "npm"
-           "history"
-           "node"
-           "rust"
-           "deno"
-    	   "tig"
-           "tmux"
-           "mix"
-           "nmap"
-         ];
-      };
-    };
-  };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

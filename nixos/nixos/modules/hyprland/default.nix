@@ -5,17 +5,11 @@
   inputs,
   ...
 }: {
-  options.dc-tec.graphical.hyprland = {
-    enable = lib.mkEnableOption "hyprlandwm";
-  };
+#  options.dc-tec.graphical.hyprland = {
+#    enable = lib.mkEnableOption "hyprlandwm";
+#  };
 
   config = lib.mkIf config.dc-tec.graphical.hyprland.enable {
-    environment.systemPackages = [
-      pkgs.wl-clipboard
-      pkgs.slurp
-      pkgs.grim
-    ];
-
     nix.settings = {
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];

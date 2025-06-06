@@ -77,8 +77,6 @@ services.resolved.enable = true;
 
 # razer
   hardware.openrazer.enable = true;
-  
-
 
 # wayland and hyperland
   programs.hyprland = {
@@ -144,24 +142,7 @@ services.resolved.enable = true;
     enable = true;
 
     videoDrivers = ["nvidia"];
-
     xkb.layout = "lv";
-    
-    desktopManager = {
-      xterm.enable = true;
-      wallpaper.mode = "fill";
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-        i3blocks
-        networkmanagerapplet
-      ];
-    };
   };
   
     services.displayManager = {

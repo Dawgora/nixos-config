@@ -159,7 +159,7 @@ in
             "$mod SHIFT, c, killactive"
             "$mod, E, exec, $fileManager"
             "$mod SHIFT, e, exit"
-            "$mod SHIFT, l, exec, ${pkgs.hyprlock}/bin/hyprlock"
+            "$mod SHIFT, l, exec, swaylock -f -c 000000"
 
             # Screen focus
             "$mod, v, togglefloating"

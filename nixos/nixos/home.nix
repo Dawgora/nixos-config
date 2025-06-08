@@ -117,7 +117,6 @@ in
     pkgs.python3
     pkgs.bazecor
     pkgs.hyprshot
-    pkgs.hyprlock
     pkgs.pavucontrol
     pkgs.playerctl
   ];

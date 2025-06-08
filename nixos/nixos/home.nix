@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  customNeovim = import ./modules/nvim/default.nix;
-  elixir = import ./modules/elixir/default.nix;
+  customNeovim = import ./modules/nvim;
+  elixir = ./modules/elixir;
 in
   {
 
@@ -169,7 +169,7 @@ in
   };
 
   home.shellAliases = {
-    "elixir-devel"="nix-shell ~/flakes/nixos/nixos/modules/elixir/elixir.nix --command zsh";
+    "elixir-devel"="nix-shell ${elixir} --command zsh";
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#myNixos";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";

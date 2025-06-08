@@ -9,26 +9,16 @@
   sleep-script = ./sleep.sh;
 in
   {
-#  options.dc-tec.graphical.hyprland = {
-#    enable = lib.mkEnableOption "hyprlandwm";
-#  };
+    home.packages = with pkgs; [
+      qt5.qtwayland
+      qt6.qtwayland
+    ];
 
-#  config = lib.mkIf config.dc-tec.graphical.hyprland.enable {
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
-
-  home.packages = with pkgs; [
-    qt5.qtwayland
-    qt6.qtwayland
-  ];
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland = {
+    wayland.windowManager.hyprland = {
       enable = true;
-    };
+      xwayland = {
+        enable = true;
+      };
 
         #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 

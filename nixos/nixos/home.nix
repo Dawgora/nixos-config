@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  customNeovim = import ./modules/nvim/nvim.nix;
-  elixir = import ./modules/elixir/flake.nix;
+  customNeovim = import ./modules/nvim/default.nix;
+  elixir = import ./modules/elixir/default.nix;
 in
   {
 
@@ -119,6 +119,8 @@ in
     pkgs.hyprshot
     pkgs.pavucontrol
     pkgs.playerctl
+    pkgs.steam
+    pkgs.gamescope
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -129,8 +131,6 @@ in
   programs.zsh = {
     enable = true;
     initExtra = ''
-    . "${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
-    . "${pkgs.asdf-vm}/share/asdf-vm/completions/asdf.bash"
     '';
   };
 

@@ -11,8 +11,9 @@ in
     imports =
       [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/nginx/nginx.nix
-      ./modules/zsh/zsh.nix
+      ./modules/nginx
+      ./modules/zsh
+      ./modules/steam
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -85,7 +86,6 @@ programs.hyprland = {
   xwayland.enable = true;
 };
 
-programs.steam.enable = true;
 
 services.blueman.enable = true;
 hardware.bluetooth.enable = true;

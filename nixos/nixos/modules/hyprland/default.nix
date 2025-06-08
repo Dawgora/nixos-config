@@ -44,6 +44,12 @@ in
             "DP-2, 2560x1440@120, 1080x0, 1"
           ];
 
+          workspace = [
+            "1,monitor:HDMI-A-2"
+            "2,monitor:DP-2"
+            "3,monitor:HDMI-A-1"
+          ];
+
           xwayland = {
             force_zero_scaling = true;
           };

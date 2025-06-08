@@ -4,7 +4,11 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let 
+  start-script = ./start.sh;
+  sleep-script = ./sleep.sh;
+in
+  {
 #  options.dc-tec.graphical.hyprland = {
 #    enable = lib.mkEnableOption "hyprlandwm";
 #  };
@@ -20,20 +24,13 @@
     qt6.qtwayland
   ];
 
-  services = {
-    cliphist = {
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland = {
       enable = true;
     };
-  };
 
-      ## Took some stuff from the end4 dots config @ https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprland/general.conf
-      wayland.windowManager.hyprland = {
-        enable = true;
-        xwayland = {
-          enable = true;
-        };
-
-        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
         settings = {
           "$terminal" = "alacritty";
@@ -56,9 +53,11 @@
             gaps_out = 4;
             border_size = 2;
             layout = "dwindle";
-            allow_tearing = true; # false
-            col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-            col.inactive_border = "rgba(595959aa)";
+            allow_tearing = false; # false
+
+
+            "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+            "col.inactive_border" = "rgba(595959aa)";
           };
 
           input = {
@@ -90,11 +89,13 @@
               ignore_opacity = false;
             };
 
-            drop_shadow = true;
-            shadow_ignore_window = true;
-            shadow_range = 20;
-            shadow_offset = "0 2";
-            shadow_render_power = 4;
+            shadow = {
+              enabled = true;
+              ignore_window = true;
+              range = 20;
+              offset = "0 2";
+              render_power = 4;
+            };
           };
 
           animations = {
@@ -137,7 +138,7 @@
           dwindle = {
             pseudotile = true;
             preserve_split = true;
-            no_gaps_when_only = 0;
+            #no_gaps_when_only = 0;
             smart_split = false;
             smart_resizing = false;
           };
@@ -152,7 +153,7 @@
             # General
             "$mod, return, exec, $terminal"
             "$mod, D, exec, rofi -show drun -show-icon"
-            "$, print, exec, hyprshot -m region"
+            ", print, exec, hyprshot -m region"
             "$mod, X, exec, wlogout"
             "$mod SHIFT, q, killactive"
             "$mod SHIFT, c, killactive"
@@ -231,8 +232,8 @@
             "XCURSOR_THEME,rose-pine-cursor"
           ];
           exec-once = [
-            "bash ~./config/hypr/start.sh"
-            "bash ~./config/hypr/sleep.sh"
+            "bash ${start-script}"
+            "bash ${sleep-script}"
             "sway-audio-idle-inhibit"
           ];
         };

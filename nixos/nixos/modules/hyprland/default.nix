@@ -159,7 +159,7 @@ in
             # General
             "$mod, return, exec, $terminal"
             "$mod, D, exec, rofi -show drun -show-icon"
-            ", print, exec, hyprshot -m region"
+            ", print, exec, hyprshot -m region -o ~/Documents/Screenshots"
             "$mod, X, exec, wlogout"
             "$mod SHIFT, q, killactive"
             "$mod SHIFT, c, killactive"

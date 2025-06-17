@@ -21,7 +21,6 @@ in
       };
 
         #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-
         settings = {
           "$terminal" = "alacritty";
           "$fileManager" = "thunar";
@@ -62,7 +61,8 @@ in
             touchpad = {
               natural_scroll = false;
             };
-            sensitivity = 0;
+            sensitivity = -0.5;
+
           };
 
           decoration = {

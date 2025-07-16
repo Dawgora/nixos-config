@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  customNeovim = import ./modules/nvim;
-  elixir = ./modules/elixir;
+    customNeovim = import ./modules/nvim;
+    elixir = ./modules/elixir;
 in
   {
 

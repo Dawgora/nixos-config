@@ -171,6 +171,7 @@ in
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#myNixos";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";
+    "update-home-flake" = "sudo nix flake update --flake ~/flakes/nixos"
   };
 
   # Let Home Manager install and manage itself.

@@ -119,6 +119,8 @@ in
     pkgs.playerctl
     pkgs.steam
     pkgs.gamescope
+    #pkgs.darktable
+    #pkgs.davinci-resolve
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

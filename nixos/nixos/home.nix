@@ -88,7 +88,6 @@ in
     pkgs.tigervnc
     pkgs.neofetch
     pkgs.signal-desktop
-    pkgs.davinci-resolve
     pkgs.obs-studio
     pkgs.qbittorrent
     pkgs.vlc
@@ -113,7 +112,6 @@ in
     pkgs.bashInteractiveFHS
     pkgs.plex
     pkgs.plexRaw
-    pkgs.darktable
     pkgs.python3
     pkgs.bazecor
     pkgs.hyprshot

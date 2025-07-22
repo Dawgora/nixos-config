@@ -104,9 +104,19 @@ services.pipewire = {
 
 
 # virt manager
-virtualisation.libvirtd.enable = true;
-virtualisation.spiceUSBRedirection.enable = true;
-programs.virt-manager.enable = true;
+virtualisation = {
+  libvirtd = {
+    enable = true;
+    qemu = {
+      swtpm.enable = true;
+      ovmf.enable = true;
+      ovmf.packages = [pkgs.OVMFFull.fd];
+    };
+  };
+  spiceUSBRedirection.enable = true;
+};
+
+#programs.virt-manager.enable = true;
 
 services.qemuGuest.enable = true;
 services.spice-vdagentd.enable = true;
@@ -214,6 +224,12 @@ networking.hostName = "dawgora"; # Define your hostname.
     wl-clipboard
     alsa-utils
     rose-pine-hyprcursor
+    virt-manager
+    virt-viewer
+    spice
+    spice-protocol
+    spice-gtk
+    adwaita-icon-theme
   ];
 
   fonts.packages = with pkgs; [

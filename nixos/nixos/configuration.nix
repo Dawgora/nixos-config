@@ -132,6 +132,8 @@ networking.hostName = "dawgora"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+
   # Set your time zone.
   time.timeZone = "Europe/Riga";
 

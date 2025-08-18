@@ -9,6 +9,7 @@ in
     imports = [
       ./modules/waybar
       ./modules/hyprland
+      ./modules/customPlex.nix #because of the version mismatch
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -110,8 +111,8 @@ in
     pkgs.jellyfin-ffmpeg
     pkgs.yt-dlp
     pkgs.bashInteractiveFHS
-    pkgs.plex
-    pkgs.plexRaw
+    #pkgs.plex
+    #pkgs.plexRaw
     pkgs.python3
     pkgs.bazecor
     pkgs.hyprshot
@@ -119,8 +120,8 @@ in
     pkgs.playerctl
     pkgs.steam
     pkgs.gamescope
-    #pkgs.darktable
-    #pkgs.davinci-resolve
+    pkgs.darktable
+    pkgs.davinci-resolve
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -145,7 +146,7 @@ in
     "obs-studio"
     "steam"
     "steam-unwrapped"
-    "plexmediaserver"
+    #"plexmediaserver"
     "vscode"
   ];
 

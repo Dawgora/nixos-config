@@ -120,30 +120,19 @@ in
     gamescope
     darktable
     davinci-resolve
-
-#    (plex.override {
-#      plexRaw = plexRaw.overrideAttrs (old: rec {
-#        pname = "plexmediaserver";
-#        version = "1.42.1.10060-4e8b05daf"; 
-#        src = fetchurl {
-#          url = "https://downloads.plex.tv/plex-media-server-new/1.42.1.10060-4e8b05daf/debian/plexmediaserver_1.42.1.10060-4e8b05daf_amd64.deb";
-#          hash = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";  
-#        };
-#        passthru = old.passthru // { inherit version; };
-#      });
-#    })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-  };
+#  # plain files is through 'home.file'.
+home.file = {
+};
 
-  programs.zsh = {
-    enable = true;
-    initExtra = ''
-    '';
-  };
+programs.zsh = {
+  enable = true;
+  initExtra = ''
+  '';
+};
+
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "nvidia-x11"
@@ -156,7 +145,6 @@ in
     "obs-studio"
     "steam"
     "steam-unwrapped"
-    "plexmediaserver"
     "vscode"
   ];
 

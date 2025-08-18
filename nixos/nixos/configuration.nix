@@ -35,7 +35,7 @@ in
       "davinci-resolve"
       "obs-studio"
       "steam"
-      #"plexmediaserver"
+      "plexmediaserver"
       "vscode"
     ];
 
@@ -288,13 +288,26 @@ networking.hostName = "dawgora"; # Define your hostname.
     '';
   };
 
-  #services.plex = {
-  #  enable = true;
-  #  openFirewall = true;
-  #  user="dawgora";
-  #};
 
-  #systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false; 
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+    user="dawgora";
+    package = (pkgs.plex.override {
+      plexRaw = pkgs.plexRaw.overrideAttrs (old: rec {
+        pname = "plexmediaserver";
+        version = "1.42.1.10060-4e8b05daf"; 
+        src = pkgs.fetchurl {
+          url = "https://downloads.plex.tv/plex-media-server-new/1.42.1.10060-4e8b05daf/debian/plexmediaserver_1.42.1.10060-4e8b05daf_amd64.deb";
+          hash = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";  
+        };
+        passthru = old.passthru // { inherit version; };
+      });
+    });
+
+  };
+
+  systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false; 
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

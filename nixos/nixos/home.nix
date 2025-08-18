@@ -45,91 +45,93 @@ in
   };
 
 
-  plex = pkgs.plex.overrideAttrs (_: rec {
-    version = "1.25.2.5319-c43dc0277";
-    src = pkgs.fetchurl {
-      url = "https://downloads.plex.tv/plex-media-server-new/${version}/redhat/plexmediaserver-${version}.x86_64.rpm";
-      sha256 = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";
-    };
-  });
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.firefox
-    pkgs.librewolf
-    pkgs.ungoogled-chromium
-    pkgs.vscode
-    pkgs.p7zip
-    pkgs.udisks
-    pkgs.libreoffice-qt
-    pkgs.libpqxx
-    pkgs.tree
-    pkgs.vim
-    pkgs.arandr
-    pkgs.alacritty
-    pkgs.discord
-    pkgs.vesktop
-    pkgs.razergenie
-    pkgs.spotify
-    pkgs.telegram-desktop
-    pkgs.tailscale
-    pkgs.alarm-clock-applet
-    pkgs.tmux
-    pkgs.flameshot
-    pkgs.jq
-    pkgs.gettext
-    pkgs.htop
-    pkgs.btop
-    pkgs.dconf
-    pkgs.mpv
-    pkgs.xss-lock
-    pkgs.prismlauncher
-    pkgs.xfce.thunar
-    pkgs.ranger
-    pkgs.feh
-    pkgs.bitwarden
-    pkgs.keepass
-    pkgs.xfce.mousepad
-    pkgs.yubikey-personalization
-    pkgs.yubioath-flutter
-    pkgs.obsidian
-    pkgs.tigervnc
-    pkgs.neofetch
-    pkgs.signal-desktop
-    pkgs.obs-studio
-    pkgs.qbittorrent
-    pkgs.vlc
-    pkgs.dbeaver-bin
-    pkgs.git
-    pkgs.unzip
-    pkgs.pamixer
-    pkgs.ncurses
-    pkgs.libssh
-    pkgs.openssl
-    pkgs.libssh
-    pkgs.icu
-    pkgs.tig
-    pkgs.postgresql
-    pkgs.docker
-    pkgs.inotify-tools
-    pkgs.nodejs_22
-    pkgs.networkmanagerapplet
-    pkgs.wireguard-tools
-    pkgs.jellyfin-ffmpeg
-    pkgs.yt-dlp
-    pkgs.bashInteractiveFHS
-    pkgs.plex
-    pkgs.plexRaw
-    pkgs.python3
-    pkgs.bazecor
-    pkgs.hyprshot
-    pkgs.pavucontrol
-    pkgs.playerctl
-    pkgs.steam
-    pkgs.gamescope
-    pkgs.darktable
-    pkgs.davinci-resolve
+  home.packages = with pkgs; [
+    firefox
+    librewolf
+    ungoogled-chromium
+    vscode
+    p7zip
+    udisks
+    libreoffice-qt
+    libpqxx
+    tree
+    vim
+    arandr
+    alacritty
+    discord
+    vesktop
+    razergenie
+    spotify
+    telegram-desktop
+    tailscale
+    alarm-clock-applet
+    tmux
+    flameshot
+    jq
+    gettext
+    htop
+    btop
+    dconf
+    mpv
+    xss-lock
+    prismlauncher
+    xfce.thunar
+    ranger
+    feh
+    bitwarden
+    keepass
+    xfce.mousepad
+    yubikey-personalization
+    yubioath-flutter
+    obsidian
+    tigervnc
+    neofetch
+    signal-desktop
+    obs-studio
+    qbittorrent
+    vlc
+    dbeaver-bin
+    git
+    unzip
+    pamixer
+    ncurses
+    libssh
+    openssl
+    libssh
+    icu
+    tig
+    postgresql
+    docker
+    inotify-tools
+    nodejs_22
+    networkmanagerapplet
+    wireguard-tools
+    jellyfin-ffmpeg
+    yt-dlp
+    bashInteractiveFHS
+    python3
+    bazecor
+    hyprshot
+    pavucontrol
+    playerctl
+    steam
+    gamescope
+    darktable
+    davinci-resolve
+
+#    (plex.override {
+#      plexRaw = plexRaw.overrideAttrs (old: rec {
+#        pname = "plexmediaserver";
+#        version = "1.42.1.10060-4e8b05daf"; 
+#        src = fetchurl {
+#          url = "https://downloads.plex.tv/plex-media-server-new/1.42.1.10060-4e8b05daf/debian/plexmediaserver_1.42.1.10060-4e8b05daf_amd64.deb";
+#          hash = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";  
+#        };
+#        passthru = old.passthru // { inherit version; };
+#      });
+#    })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

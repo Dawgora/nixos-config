@@ -35,7 +35,7 @@ in
       "davinci-resolve"
       "obs-studio"
       "steam"
-      "plexmediaserver"
+      #"plexmediaserver"
       "vscode"
     ];
 
@@ -288,13 +288,13 @@ networking.hostName = "dawgora"; # Define your hostname.
     '';
   };
 
-  services.plex = {
-    enable = true;
-    openFirewall = true;
-    user="dawgora";
-  };
+  #services.plex = {
+  #  enable = true;
+  #  openFirewall = true;
+  #  user="dawgora";
+  #};
 
-  systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false; 
+  #systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false; 
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

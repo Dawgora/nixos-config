@@ -1,15 +1,14 @@
 { config, pkgs, lib, ... }:
 
 let
-    customNeovim = import ./modules/nvim;
-    elixir = ./modules/elixir;
+  customNeovim = import ./modules/nvim;
+  elixir = ./modules/elixir;
 in
   {
 
     imports = [
       ./modules/waybar
       ./modules/hyprland
-      ./modules/customPlex.nix #because of the version mismatch
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -44,6 +43,15 @@ in
       size = 24;
     };
   };
+
+
+  plex = pkgs.plex.overrideAttrs (_: rec {
+    version = "1.25.2.5319-c43dc0277";
+    src = pkgs.fetchurl {
+      url = "https://downloads.plex.tv/plex-media-server-new/${version}/redhat/plexmediaserver-${version}.x86_64.rpm";
+      sha256 = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";
+    };
+  });
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -112,7 +120,7 @@ in
     pkgs.yt-dlp
     pkgs.bashInteractiveFHS
     pkgs.plex
-    #pkgs.plexRaw
+    pkgs.plexRaw
     pkgs.python3
     pkgs.bazecor
     pkgs.hyprshot

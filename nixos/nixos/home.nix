@@ -111,7 +111,7 @@ in
     pkgs.jellyfin-ffmpeg
     pkgs.yt-dlp
     pkgs.bashInteractiveFHS
-    #pkgs.plex
+    pkgs.plex
     #pkgs.plexRaw
     pkgs.python3
     pkgs.bazecor
@@ -146,7 +146,7 @@ in
     "obs-studio"
     "steam"
     "steam-unwrapped"
-    #"plexmediaserver"
+    "plexmediaserver"
     "vscode"
   ];
 

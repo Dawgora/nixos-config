@@ -160,7 +160,7 @@ networking.hostName = "dawgora"; # Define your hostname.
   services.displayManager = {
     defaultSession = "hyprland";
     sddm.enable = true;
-    sddm.theme = "${import ./modules/sddm/sddm-theme.nix { inherit pkgs; }}";
+    sddm.theme = "${import ../../modules/sddm/sddm-theme.nix { inherit pkgs; }}";
     sddm.autoNumlock = true;
   };
 

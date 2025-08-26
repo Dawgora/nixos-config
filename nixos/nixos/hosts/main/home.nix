@@ -118,7 +118,7 @@ in
     playerctl
     steam
     gamescope
-    darktable
+    #darktable
     davinci-resolve
   ];
 

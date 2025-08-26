@@ -1,14 +1,14 @@
 { config, pkgs, lib, ... }:
 
 let
-  customNeovim = import ./modules/nvim;
-  elixir = ./modules/elixir;
+  customNeovim = import ../../modules/nvim;
+  elixir = ../../modules/elixir;
 in
   {
 
     imports = [
-      ./modules/waybar
-      ./modules/hyprland
+      ../../modules/waybar
+      ../../modules/hyprland
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -169,7 +169,7 @@ programs.zsh = {
 
   home.shellAliases = {
     "elixir-devel"="nix-shell ${elixir} --command zsh";
-    "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#myNixos";
+    "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#main";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";
     "update-home-flake" = "sudo nix flake update --flake ~/flakes/nixos";

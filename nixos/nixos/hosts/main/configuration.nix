@@ -5,15 +5,14 @@
 { inputs, config, lib, pkgs, callPackage, ... }:
 
 let
-  #unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
   {
     imports =
       [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/nginx
-      ./modules/zsh
-      ./modules/steam
+      ../../modules/nginx
+      ../../modules/zsh
+      ../../modules/steam
       inputs.home-manager.nixosModules.home-manager
     ];
 

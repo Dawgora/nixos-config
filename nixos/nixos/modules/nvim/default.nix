@@ -1,4 +1,4 @@
-{lib, config, pkgs, ... }: 
+{lib, config, pkgs, ... }:
 with lib;
 let
     cfg = config.modules.nvim;
@@ -11,18 +11,36 @@ let
             sha256 = "sha256-iPjwx/rTd98LUPK1MUfqKXZhQ5NmKx/rN8RX1PIuDFA=";
         };
     };
+
+    settings = ./lua/settings.lua;
+    remap = ./lua/remap.lua;
+    telescope = ./lua/plugins/telescope.lua;
+    lsp = ./lua/plugins/lsp.lua;
+    treesitter = ./lua/plugins/treesitter.lua;
+    # undotree = ./lua/plugins/undotree.lua;
+    neo-tree = ./lua/plugins/neo-tree.lua;
+    # harpoon = ./lua/plugins/harpoon.lua;
 in {
 	enable = true;
 	vimAlias = true;
-	extraConfig = '' 
-	    luafile $NIXOS_HOME_CONFIG/nvim/lua/settings.lua
-	    luafile $NIXOS_HOME_CONFIG/nvim/lua/remap.lua
-        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/telescope.lua
-        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/lsp.lua
-        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/treesitter.lua
-        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/undotree.lua
-        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/neo-tree.lua
-        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/harpoon.lua
+	# extraConfig = ''
+	#     luafile $NIXOS_HOME_CONFIG/nvim/lua/settings.lua
+	#     luafile $NIXOS_HOME_CONFIG/nvim/lua/remap.lua
+ #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/telescope.lua
+ #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/lsp.lua
+ #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/treesitter.lua
+ #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/undotree.lua
+ #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/neo-tree.lua
+ #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/harpoon.lua
+	# '';
+	#
+	 	extraConfig = ''
+	    luafile ${settings}
+	    luafile ${remap}
+	    luafile ${telescope}
+	    luafile ${lsp}
+	    luafile ${treesitter}
+	    luafile ${neo-tree}
 	'';
 
 	plugins = with pkgs.vimPlugins; [

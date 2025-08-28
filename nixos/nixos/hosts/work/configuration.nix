@@ -240,7 +240,11 @@ services.desktopManager.gnome.enable = true;
     '';
   };
 
+  programs.nix-ld.enable = true;
 
+  programs.nix-ld.libraries = with pkgs; [
+    dart-sass
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -110,6 +110,8 @@ in
     pavucontrol
     playerctl
     zed-editor
+    protonvpn-gui
+    audacity
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

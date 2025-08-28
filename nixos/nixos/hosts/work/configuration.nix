@@ -48,6 +48,8 @@ nix.settings.experimental-features = ["nix-command" "flakes"];
 
 services.resolved.enable = true;
 
+services.teamviewer.enable = true;
+
 # video settings
 hardware.graphics = {
   enable = true;

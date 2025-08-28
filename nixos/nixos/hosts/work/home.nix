@@ -112,6 +112,7 @@ in
     zed-editor
     protonvpn-gui
     audacity
+    teamviewer
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -130,6 +131,7 @@ programs.zsh = {
     "discord"
     "spotify"
     "obsidian"
+    "teamviewer"
   ];
 
   programs.neovim = customNeovim pkgs;

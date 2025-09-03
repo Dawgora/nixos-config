@@ -26,9 +26,9 @@ in
 
     nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-        "discord"
-        "spotify"
-        "obsidian"
+      "discord"
+      "spotify"
+      "obsidian"
     ];
 
 # bootloader settings
@@ -47,7 +47,6 @@ boot.loader = {
 nix.settings.experimental-features = ["nix-command" "flakes"];
 
 services.resolved.enable = true;
-
 services.teamviewer.enable = true;
 
 # video settings
@@ -209,17 +208,24 @@ networking.hostName = "dawgora"; # Define your hostname.
     inter
   ];
 
- environment.localBinInPath = true;
+  environment.localBinInPath = true;
 
- environment.sessionVariables = {
-   WLR_NO_HARDWARE_CURSORS = "1";
-   NIXOS_OZONE_WL = "1";
-   MOZ_DISABLE_RDD_SANDBOX = "1";
-  NVD_BACKEND = "direct";
-  EGL_PLATFORM = "wayland";
-};
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    NVD_BACKEND = "direct";
+    EGL_PLATFORM = "wayland";
+    EDITOR = "nvim";
+  };
 
-services.desktopManager.gnome.enable = true;
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
+  services.desktopManager.gnome.enable = true;
+
+
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -236,9 +242,9 @@ services.desktopManager.gnome.enable = true;
     enableTCPIP = true;
     settings.port = 5432;
     authentication = lib.mkForce ''
-      local all all              trust
-      host  all all 127.0.0.1/32 trust
-      host  all all ::1/128      trust
+    local all all              trust
+    host  all all 127.0.0.1/32 trust
+    host  all all ::1/128      trust
     '';
   };
 

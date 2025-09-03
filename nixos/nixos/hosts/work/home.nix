@@ -113,6 +113,7 @@ in
     protonvpn-gui
     audacity
     teamviewer
+    slack
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -122,7 +123,8 @@ home.file = {
 
 programs.zsh = {
   enable = true;
-  initExtra = ''
+  initContent = ''
+  export EDITOR=nvim
   '';
 };
 
@@ -132,7 +134,13 @@ programs.zsh = {
     "spotify"
     "obsidian"
     "teamviewer"
+    "slack"
   ];
+
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/default-applications/terminal" = { exec = "${pkgs.alacritty}/bin/alacritty";};
+  };
 
   programs.neovim = customNeovim pkgs;
   # Home Manager can also manage your environment variables through
@@ -147,8 +155,7 @@ programs.zsh = {
   #  /etc/profiles/per-user/dawgora/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "nvim";
-    TERMINAL = "alacritty";
+    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
     GTK_THEME = "WhiteSur-Dark-solid";
     NIXOS_HOME_CONFIG = "/home/dawgora/.config";
   };

@@ -114,6 +114,7 @@ in
     audacity
     teamviewer
     slack
+    google-chrome
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -135,6 +136,7 @@ programs.zsh = {
     "obsidian"
     "teamviewer"
     "slack"
+    "google-chrome"
   ];
 
   dconf = {

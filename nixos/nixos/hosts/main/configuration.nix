@@ -85,9 +85,22 @@ programs.hyprland = {
   xwayland.enable = true;
 };
 
+  services.desktopManager.gnome.enable = true;
+
 
 services.blueman.enable = true;
-hardware.bluetooth.enable = true;
+hardware.bluetooth = {
+  enable = true;
+  settings = {
+    General = {
+        Experimental = true;
+        FastConnectable = true;
+    };
+    Policy = {
+      AutoEnable = true;
+    };
+  };
+};
 
 xdg.portal.enable = true;
 xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

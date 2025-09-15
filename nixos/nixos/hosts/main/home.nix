@@ -65,7 +65,7 @@ in
     razergenie
     spotify
     telegram-desktop
-    tailscale
+    #tailscale
     alarm-clock-applet
     tmux
     flameshot
@@ -86,7 +86,7 @@ in
     yubikey-personalization
     yubioath-flutter
     obsidian
-    tigervnc
+    #tigervnc
     neofetch
     signal-desktop
     obs-studio
@@ -118,8 +118,12 @@ in
     playerctl
     steam
     gamescope
+    heroic
     #darktable
     davinci-resolve
+    bluez
+    overskride
+    gnome-tweaks
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

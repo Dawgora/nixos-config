@@ -3,6 +3,7 @@
 let
   customNeovim = import ../../modules/nvim;
   elixir = ../../modules/elixir;
+  latex = ../../modules/latex;
 in
   {
 
@@ -87,6 +88,7 @@ in
     yubioath-flutter
     obsidian
     #tigervnc
+    multivnc
     neofetch
     signal-desktop
     obs-studio
@@ -124,6 +126,7 @@ in
     bluez
     overskride
     gnome-tweaks
+    p7zip
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -173,6 +176,7 @@ programs.zsh = {
 
   home.shellAliases = {
     "elixir-devel"="nix-shell ${elixir} --command zsh";
+    "latex-devel"="nix-shell ${latex} --command zsh";
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#main";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";

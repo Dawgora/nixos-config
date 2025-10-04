@@ -4,7 +4,7 @@
 
 with pkgs;
 let
-  latex = nixos.texliveTeTeX;
+  latex = texliveFull;
 in
   mkShell {
     buildInputs = [ latex ];

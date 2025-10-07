@@ -1,6 +1,6 @@
 local lsp = require("lsp-zero")
 local cmp = require('cmp')
-local lspconfig = require('lspconfig')
+-- local lspconfig = require('lspconfig')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_action = require("lsp-zero").cmp_action()
 local cmp_format = require("lsp-zero").cmp_format({details = true})
@@ -18,7 +18,9 @@ require('mason-lspconfig').setup({
   }
 })
 
-lspconfig.elixirls.setup{cmd = {'/home/dawgora/projects/elixir-ls/release/language_server.sh'};}
+-- lspconfig.elixirls.setup{cmd = {'/home/dawgora/projects/elixir-ls/release/language_server.sh'};}
+
+vim.lsp.config('elixirls', {cmd = {'/home/dawgora/projects/elixir-ls/release/language_server.sh'};})
 
 cmp.setup({
     window = {

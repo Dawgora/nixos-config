@@ -76,7 +76,7 @@ in
     btop
     dconf
     mpv
-    xss-lock
+    swaylock
     prismlauncher
     xfce.thunar
     ranger
@@ -87,8 +87,6 @@ in
     yubikey-personalization
     yubioath-flutter
     obsidian
-    #tigervnc
-    multivnc
     neofetch
     signal-desktop
     obs-studio
@@ -97,7 +95,7 @@ in
     dbeaver-bin
     git
     unzip
-    pamixer
+    #pamixer
     ncurses
     libssh
     openssl

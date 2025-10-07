@@ -135,8 +135,8 @@ virtualisation = {
     enable = true;
     qemu = {
       swtpm.enable = true;
-      ovmf.enable = true;
-      ovmf.packages = [pkgs.OVMFFull.fd];
+      #ovmf.enable = true;
+      #ovmf.packages = [pkgs.OVMFFull.fd];
     };
   };
   spiceUSBRedirection.enable = true;
@@ -232,7 +232,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     waybar
     mako
     libnotify
-    rofi-wayland
+    rofi
     swww
     noto-fonts
     noto-fonts-cjk-sans

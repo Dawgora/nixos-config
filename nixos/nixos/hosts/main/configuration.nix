@@ -85,7 +85,8 @@ programs.hyprland = {
   xwayland.enable = true;
 };
 
-  services.desktopManager.gnome.enable = true;
+#services.desktopManager.gnome.enable = true;
+#programs.seahorse.enable = true;
 
 
 services.blueman.enable = true;
@@ -93,8 +94,8 @@ hardware.bluetooth = {
   enable = true;
   settings = {
     General = {
-        Experimental = true;
-        FastConnectable = true;
+      Experimental = true;
+      FastConnectable = true;
     };
     Policy = {
       AutoEnable = true;
@@ -104,6 +105,19 @@ hardware.bluetooth = {
 
 xdg.portal.enable = true;
 xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+security = {
+  pam = {
+    services = {
+      dawgora = {
+        kwallet = {
+          enable = true;
+          package = pkgs.kdePackages.kwallet-pam;
+        };
+      };
+    };
+  };
+};
 
 security.rtkit.enable = true;
 services.pipewire = {

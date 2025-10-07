@@ -127,6 +127,7 @@ in
     overskride
     gnome-tweaks
     p7zip
+    veloren
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

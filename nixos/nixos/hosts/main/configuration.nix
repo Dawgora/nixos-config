@@ -5,8 +5,36 @@
 { inputs, config, lib, pkgs, callPackage, ... }:
 
 let
+  sway-session = pkgs.writeTextFile {
+    name = "sway.desktop";
+    destination = "";
+    text =''
+      [Desktop Entry]
+      Name=Sway
+      Comment=Sway session
+      Exec=sway
+      Type=Application
+      DesktopNames=sway
+      '';
+  };
+
+  custom-sway = pkgs.writeTextFile {
+    name = "sway-custom.desktop";
+    destination = "";
+    text = '' 
+      [Desktop Entry]
+      Name=Sway (custom)
+      Comment=Custom Sway Wayland session
+      Exec=sway --unsupported-gpu
+      Type=Application
+      DesktopNames=sway-custom
+    '';
+  };
 in
   {
+    environment.etc."wayland-sessions/sway.desktop".source = sway-session;
+    environment.etc."wayland-sessions/sway-custom.desktop".source = custom-sway;
+
     imports =
       [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -49,11 +77,15 @@ boot.loader = {
   };
 };
 
+boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+
 # Experimental
 
 nix.settings.experimental-features = ["nix-command" "flakes"];
 
 services.resolved.enable = true;
+
+services.gnome.gnome-keyring.enable = true;
 
 # video settings
 hardware.graphics = {
@@ -73,20 +105,29 @@ hardware.graphics = {
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    prime = {
+      sync.enable = true;
+
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:14:0:0";
+    };
   };
 
 # razer
 hardware.openrazer.enable = true;
 
 # wayland and hyperland
-programs.hyprland = {
+#programs.hyprland = {
+#  enable = true;
+#  xwayland.enable = true;
+#};
+
+programs.sway = {
   enable = true;
   xwayland.enable = true;
+  extraOptions = ["--unsupported-gpu"];
 };
-
-#services.desktopManager.gnome.enable = true;
-#programs.seahorse.enable = true;
 
 
 services.blueman.enable = true;
@@ -103,21 +144,9 @@ hardware.bluetooth = {
   };
 };
 
+#xdg.portal.wlr.enable = true;
 xdg.portal.enable = true;
 xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-security = {
-  pam = {
-    services = {
-      dawgora = {
-        kwallet = {
-          enable = true;
-          package = pkgs.kdePackages.kwallet-pam;
-        };
-      };
-    };
-  };
-};
 
 security.polkit.enable = true;
 security.rtkit.enable = true;
@@ -186,10 +215,20 @@ networking.hostName = "dawgora"; # Define your hostname.
   };
 
   services.displayManager = {
-    defaultSession = "hyprland";
-    sddm.enable = true;
-    sddm.theme = "${import ../../modules/sddm/sddm-theme.nix { inherit pkgs; }}";
-    sddm.autoNumlock = true;
+    defaultSession = "sway";
+
+    ly = {
+      enable = true;
+      x11Support = false;
+      settings = {
+        animate = true;
+        animation = 0;
+        waylandsessions="/etc/wayland-sessions";
+      };
+    };
+    #sddm.enable = true;
+    #sddm.theme = "${import ../../modules/sddm/sddm-theme.nix { inherit pkgs; }}";
+    #sddm.autoNumlock = true;
   };
 
   # Enable CUPS to print documents.
@@ -209,6 +248,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "vboxsf" "libvirtd"];
   };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -259,6 +299,9 @@ networking.hostName = "dawgora"; # Define your hostname.
     spice-protocol
     spice-gtk
     adwaita-icon-theme
+    wlroots
+
+    #custom 
   ];
 
   fonts.packages = with pkgs; [
@@ -273,6 +316,8 @@ networking.hostName = "dawgora"; # Define your hostname.
  environment.localBinInPath = true;
 
  environment.sessionVariables = {
+   MOZ_ENABLE_WAYLAND = "1";
+   WLR_RENDERER = "vulkan";
    WLR_NO_HARDWARE_CURSORS = "1";
    NIXOS_OZONE_WL = "1";
    MOZ_DISABLE_RDD_SANDBOX = "1";
@@ -281,6 +326,7 @@ networking.hostName = "dawgora"; # Define your hostname.
    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
    NVD_BACKEND = "direct";
    EGL_PLATFORM = "wayland";
+   XWAYLAND_NO_GLAMOR = "1";
  };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -335,6 +381,8 @@ networking.hostName = "dawgora"; # Define your hostname.
   };
 
   systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false; 
+
+  systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

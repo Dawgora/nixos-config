@@ -8,3 +8,4 @@ swww init &
 nm-applet --indicator &
 blueman-applet &
 waybar &
+kanshi &

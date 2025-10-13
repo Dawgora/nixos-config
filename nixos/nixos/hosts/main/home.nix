@@ -8,6 +8,7 @@ in
   {
 
     imports = [
+      ./kanshi.nix
       ../../modules/waybar
       ../../modules/hyprland
 #      ../../modules/sway
@@ -132,7 +133,6 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
 #  # plain files is through 'home.file'.
 home.file = {
-  ".config/i3/config" = ../../modules/sway/config;
   ".local/bin" = {
                     source = ../../scripts;
                     recursive = true;

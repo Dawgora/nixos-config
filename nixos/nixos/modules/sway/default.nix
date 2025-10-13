@@ -60,7 +60,8 @@ in
       #bar = {};
       focus.followMouse = true;
       startup = [
-        {command = "systemctl --user restart kanshi"; always = true;}
+        {command = "pkill kanshi; exec kanshi"; always = true;}
+        #{command = "systemctl --user restart kanshi"; always = true;}
         {command = "--no-startup-id /home/dawgora/.local/bin/start.sh";}
         {command = "--no-startup-id /home/dawgora/.local/bin/sleep.sh";}
       ];

@@ -9,8 +9,8 @@ in
 
     imports = [
       ../../modules/waybar
-#      ../../modules/hyprland
-      ../../modules/sway
+      ../../modules/hyprland
+#      ../../modules/sway
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -132,6 +132,11 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
 #  # plain files is through 'home.file'.
 home.file = {
+  ".config/i3/config" = ../../modules/sway/config;
+  ".local/bin" = {
+                    source = ../../scripts;
+                    recursive = true;
+                 };
 };
 
 programs.zsh = {
@@ -141,21 +146,21 @@ programs.zsh = {
 };
 
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
-    "discord"
-    "spotify"
-    "obsidian"
-    "davinci-resolve"
-    "obs-studio"
-    "steam"
-    "steam-unwrapped"
-    "vscode"
-  ];
+nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  "nvidia-x11"
+  "nvidia-settings"
+  "nvidia-persistenced"
+  "discord"
+  "spotify"
+  "obsidian"
+  "davinci-resolve"
+  "obs-studio"
+  "steam"
+  "steam-unwrapped"
+  "vscode"
+];
 
-  programs.neovim = customNeovim pkgs;
+programs.neovim = customNeovim pkgs;
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at

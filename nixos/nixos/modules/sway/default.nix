@@ -5,8 +5,6 @@
   inputs,
   ...
 }: let 
-  start-script = ./start.sh;
-  sleep-script = ./sleep.sh;
 in
   {
     wayland.windowManager.sway = {

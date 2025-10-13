@@ -11,7 +11,7 @@ in
       ./kanshi.nix
       ../../modules/waybar
       ../../modules/hyprland
-#      ../../modules/sway
+      ../../modules/sway
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -130,14 +130,23 @@ in
     veloren
   ];
 
+xdg.enable = true;
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
 #  # plain files is through 'home.file'.
 home.file = {
   ".local/bin" = {
                     source = ../../scripts;
                     recursive = true;
-                 };
+                  };
 };
+
+
+#xdg.configFile."sway/config" = {
+#  source = ../../modules/sway/config;
+#  enable = true;
+#  onChange = "systemctl --user restart kanshi.service";
+#};
 
 programs.zsh = {
   enable = true;

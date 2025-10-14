@@ -26,6 +26,19 @@ let
     '';
   };
 
+  niri = pkgs.writeTextFile {
+    name = "niri.desktop";
+    destination = "";
+    text = '' 
+    [Desktop Entry]
+    Name=niri
+    Comment=Niri wayland session
+    Exec=niri
+    Type=Application
+    DesktopNames=niri
+    '';
+  };
+
   hyprland = pkgs.writeTextFile {
     name = "hyprland.desktop";
     destination = "";
@@ -44,4 +57,5 @@ in {
   environment.etc."wayland-sessions/sway.desktop".source = sway-session;
   environment.etc."wayland-sessions/sway-custom.desktop".source = custom-sway;
   environment.etc."wayland-sessions/hyprland.desktop".source = hyprland;
+  environment.etc."wayland-sessions/niri.desktop".source = niri;
 }

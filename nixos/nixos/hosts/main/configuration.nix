@@ -97,6 +97,10 @@ programs.sway = {
   extraOptions = ["--unsupported-gpu"];
 };
 
+programs.niri = {
+  enable = true;
+};
+
 
 services.blueman.enable = true;
 hardware.bluetooth = {

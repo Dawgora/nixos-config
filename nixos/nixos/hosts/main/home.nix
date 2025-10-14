@@ -129,6 +129,7 @@ in
     p7zip
     veloren
     shikane
+    wlr-randr
   ];
 
 xdg.enable = true;
@@ -146,6 +147,8 @@ xdg.configFile."shikane/config.toml" = {
   source = ./shikane_config.toml;
   enable = true;
 };
+
+xdg.configFile.niri.source = config.lib.file.mkOutOfStoreSymlink ../../modules/niri;
 
 #xdg.configFile."sway/config" = {
 #  source = ../../modules/sway/config;
@@ -173,6 +176,7 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "steam-unwrapped"
   "vscode"
 ];
+
 
 programs.neovim = customNeovim pkgs;
   # Home Manager can also manage your environment variables through

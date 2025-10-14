@@ -31,7 +31,7 @@ let
     destination = "";
     text = '' 
     [Desktop Entry]
-    Name=niri
+    Name=Niri
     Comment=Niri wayland session
     Exec=niri
     Type=Application

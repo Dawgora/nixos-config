@@ -148,7 +148,10 @@ xdg.configFile."shikane/config.toml" = {
   enable = true;
 };
 
-xdg.configFile.niri.source = config.lib.file.mkOutOfStoreSymlink ../../modules/niri;
+xdg.configFile.niri = {
+  source = config.lib.file.mkOutOfStoreSymlink ../../modules/niri;
+  enable = true;
+};
 
 #xdg.configFile."sway/config" = {
 #  source = ../../modules/sway/config;

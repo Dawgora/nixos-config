@@ -18,5 +18,7 @@ name = "main"
     [[profile.output]]
     search = "DP-2"
     enable = true
-    position = "1080,0"
+    primary = true
+    position = "1080,480"
     transform = "normal"
+    mode = "2560x1440@120Hz"

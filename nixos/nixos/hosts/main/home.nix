@@ -8,7 +8,7 @@ in
   {
 
     imports = [
-      ./kanshi.nix
+#      ./kanshi.nix
       ../../modules/waybar
       ../../modules/hyprland
       ../../modules/sway
@@ -128,6 +128,7 @@ in
     gnome-tweaks
     p7zip
     veloren
+    shikane
   ];
 
 xdg.enable = true;
@@ -141,6 +142,10 @@ home.file = {
                   };
 };
 
+xdg.configFile."shikane/config.toml" = {
+  source = ./shikane_config.toml;
+  enable = true;
+};
 
 #xdg.configFile."sway/config" = {
 #  source = ../../modules/sway/config;

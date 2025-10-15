@@ -9,6 +9,7 @@ in
 
       modules-left = [
         "hyprland/workspaces"
+        "niri/workspaces"
         "sway/workspaces"
       ];
 
@@ -36,6 +37,7 @@ in
       modules-left = [
         "hyprland/workspaces"
         "sway/workspaces"
+        "niri/workspaces"
       ];
 
       modules-center = [
@@ -62,6 +64,7 @@ in
       modules-left = [
         "hyprland/workspaces"
         "sway/workspaces"
+        "niri/workspaces"
       ]; 
 
       modules-center = [

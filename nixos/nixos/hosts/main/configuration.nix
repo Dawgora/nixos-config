@@ -272,6 +272,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     spice-protocol
     spice-gtk
     adwaita-icon-theme
+    xwayland-satellite
     wlroots
   ];
 

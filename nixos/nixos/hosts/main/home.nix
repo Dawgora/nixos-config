@@ -12,6 +12,7 @@ in
       ../../modules/waybar
       ../../modules/hyprland
       ../../modules/sway
+      ../../modules/awakaned-poe-trade
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -130,6 +131,7 @@ in
     veloren
     shikane
     wlr-randr
+    zed-editor
   ];
 
 xdg.enable = true;
@@ -178,6 +180,7 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "steam"
   "steam-unwrapped"
   "vscode"
+  "zed-editor"
 ];
 
 

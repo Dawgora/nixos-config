@@ -7,4 +7,5 @@ swww init &
 
 nm-applet --indicator &
 blueman-applet &
+mako &
 waybar &

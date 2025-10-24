@@ -12,7 +12,7 @@ in
       ../../modules/waybar
       ../../modules/hyprland
       ../../modules/sway
-      ../../modules/awakaned-poe-trade
+      ../../modules/awakened-poe-trade
     ];
 
   # Home Manager needs a bit of information about you and the paths it should

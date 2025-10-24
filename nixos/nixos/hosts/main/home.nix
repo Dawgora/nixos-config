@@ -132,6 +132,7 @@ in
     shikane
     wlr-randr
     zed-editor
+    google-chrome
   ];
 
 xdg.enable = true;
@@ -181,6 +182,7 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "steam-unwrapped"
   "vscode"
   "zed-editor"
+  "google-chrome"
 ];
 
 

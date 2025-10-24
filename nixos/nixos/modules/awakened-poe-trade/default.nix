@@ -1,7 +1,9 @@
+{ pkgs, config, lib, cfg, ... }:
 let
-  pkgs = import nixpkgs { config = {}; overlays = []; };
   awakened-poe-trade = pkgs.callPackage ./awakened-poe-trade.nix { };
-in {
-  app = awakened-poe-trade.appimage;
-  desktop = awakened-poe-trade.desktopItem;
+in rec {
+  home.packages = [
+    awakened-poe-trade
+  ];
+
 }

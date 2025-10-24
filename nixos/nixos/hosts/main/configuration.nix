@@ -341,10 +341,10 @@ networking.hostName = "dawgora"; # Define your hostname.
     package = (pkgs.plex.override {
       plexRaw = pkgs.plexRaw.overrideAttrs (old: rec {
         pname = "plexmediaserver";
-        version = "1.42.1.10060-4e8b05daf"; 
+        version = "1.42.1.10060-4e8b05daf";
         src = pkgs.fetchurl {
           url = "https://downloads.plex.tv/plex-media-server-new/1.42.1.10060-4e8b05daf/debian/plexmediaserver_1.42.1.10060-4e8b05daf_amd64.deb";
-          hash = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";  
+          hash = "sha256:1x4ph6m519y0xj2x153b4svqqsnrvhq9n2cxjl50b9h8dny2v0is";
         };
         passthru = old.passthru // { inherit version; };
       });
@@ -352,7 +352,7 @@ networking.hostName = "dawgora"; # Define your hostname.
 
   };
 
-  systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false; 
+  systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false;
 
   systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 
@@ -386,17 +386,16 @@ networking.hostName = "dawgora"; # Define your hostname.
   system.stateVersion = "23.11"; # Did you read the comment?
 
   nixpkgs.overlays = [
-    (self: super: { 
+    (self: super: {
       waybar = super.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       });
       flameshot = super.flameshot.overrideAttrs (oldAttrs: {
         enableWlrSupport = true;
       });
-    })	
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;
 
 }
-

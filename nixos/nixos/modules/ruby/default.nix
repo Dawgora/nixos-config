@@ -21,9 +21,11 @@ in
 
     # Install specific bundler version
     gem install bundler -v 2.7.2
+    gem install rails
 
     ruby -v
     bundler -v
+    rails -v
     '';
     }
 

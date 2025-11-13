@@ -4,6 +4,7 @@ let
   customNeovim = import ../../modules/nvim;
   elixir = ../../modules/elixir;
   latex = ../../modules/latex;
+  ruby = ../../modules/ruby;
 in
   {
 
@@ -52,6 +53,7 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    audacity
     firefox
     librewolf
     ungoogled-chromium
@@ -84,7 +86,7 @@ in
     xfce.thunar
     ranger
     feh
-    bitwarden
+    bitwarden-desktop
     keepass
     xfce.mousepad
     yubikey-personalization
@@ -133,6 +135,7 @@ in
     wlr-randr
     zed-editor
     google-chrome
+    path-of-building
   ];
 
 xdg.enable = true;
@@ -208,6 +211,7 @@ programs.neovim = customNeovim pkgs;
   home.shellAliases = {
     "elixir-devel"="nix-shell ${elixir} --command zsh";
     "latex-devel"="nix-shell ${latex} --command zsh";
+    "ruby-devel"="nix-shell ${ruby} --command zsh";
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#main";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";

@@ -4,14 +4,15 @@
 
 with pkgs;
 let
-  elixir = beam.packages.erlang_27.elixir_1_18;
 in
 
   mkShell {
   description = "Ruby 3.4 development environment with Bundler 2.7.2";
 
     buildInputs = [
+      pkgs.libyaml
       pkgs.ruby_3_4
+      pkgs.tailwindcss
     ];
 
     shellHook = ''
@@ -22,6 +23,7 @@ in
     # Install specific bundler version
     gem install bundler -v 2.7.2
     gem install rails
+    gem install tailwindcss-rails
 
     ruby -v
     bundler -v

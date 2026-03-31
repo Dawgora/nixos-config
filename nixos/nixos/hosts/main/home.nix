@@ -5,6 +5,7 @@ let
   elixir = ../../modules/elixir;
   latex = ../../modules/latex;
   ruby = ../../modules/ruby;
+  php = ../../modules/php;
 in
   {
 
@@ -50,17 +51,27 @@ in
   };
 
 
+  gtk.gtk4.theme = {
+     name = "WhiteSur-Dark-solid";
+      package = pkgs.whitesur-gtk-theme;
+  };
+
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    tidal-hifi
     audacity
+    remmina
+    zoom-us
     firefox
     librewolf
+    httpie
     ungoogled-chromium
     vscode
     p7zip
     udisks
-    libreoffice-qt
+    libreoffice-qt-fresh
     libpqxx
     tree
     vim
@@ -83,16 +94,16 @@ in
     mpv
     swaylock
     prismlauncher
-    xfce.thunar
+    thunar
     ranger
     feh
     bitwarden-desktop
     keepass
-    xfce.mousepad
+    mousepad
     yubikey-personalization
     yubioath-flutter
     obsidian
-    neofetch
+    fastfetch
     signal-desktop
     obs-studio
     qbittorrent
@@ -130,12 +141,12 @@ in
     overskride
     gnome-tweaks
     p7zip
-    veloren
+    #veloren
     shikane
     wlr-randr
     zed-editor
     google-chrome
-    path-of-building
+    rusty-path-of-building
   ];
 
 xdg.enable = true;
@@ -159,6 +170,25 @@ xdg.configFile.niri = {
   enable = true;
 };
 
+xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
+      xdg-desktop-portal-hyprland
+      #xdg-desktop-portal-gtk
+    #  xdg-desktop-portal-wlr
+    ];
+    config = {
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [
+          "gnome"
+        ];
+         "org.freedesktop.impl.portal.FileChooser" = "kde";
+      };
+    };
+  };
+
 #xdg.configFile."sway/config" = {
 #  source = ../../modules/sway/config;
 #  enable = true;
@@ -167,6 +197,7 @@ xdg.configFile.niri = {
 
 programs.zsh = {
   enable = true;
+  dotDir = "${config.xdg.configHome}/zsh";
   initExtra = ''
   '';
 };
@@ -186,6 +217,8 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "vscode"
   "zed-editor"
   "google-chrome"
+  "castlabs-electron"
+  "zoom"
 ];
 
 
@@ -212,6 +245,7 @@ programs.neovim = customNeovim pkgs;
     "elixir-devel"="nix-shell ${elixir} --command zsh";
     "latex-devel"="nix-shell ${latex} --command zsh";
     "ruby-devel"="nix-shell ${ruby} --command zsh";
+    "php-devel"="nix-shell ${php} --command zsh";
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#main";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";

@@ -1,6 +1,6 @@
 { ... }:
 {
-  services.nginx = {
+    services.nginx = {
     enable = true;
   # give a name to the virtual host. It also becomes the server name.
     virtualHosts."local.plex.tld" = {

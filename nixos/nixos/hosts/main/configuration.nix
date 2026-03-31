@@ -10,7 +10,7 @@ in
     imports =
       [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../modules/nginx
+#      ../../modules/nginx
       ../../modules/zsh
       ../../modules/steam
       ../../modules/display-manager
@@ -116,10 +116,6 @@ hardware.bluetooth = {
   };
 };
 
-xdg.portal.wlr.enable = true;
-xdg.portal.enable = true;
-xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
 security.polkit.enable = true;
 security.rtkit.enable = true;
 services.pipewire = {
@@ -137,14 +133,10 @@ virtualisation = {
     enable = true;
     qemu = {
       swtpm.enable = true;
-      #ovmf.enable = true;
-      #ovmf.packages = [pkgs.OVMFFull.fd];
     };
   };
   spiceUSBRedirection.enable = true;
 };
-
-#programs.virt-manager.enable = true;
 
 services.qemuGuest.enable = true;
 services.spice-vdagentd.enable = true;
@@ -154,6 +146,7 @@ virtualisation.docker.enable = true;
 # shell settings
 
 users.defaultUserShell = pkgs.zsh;
+
 
 networking.hostName = "dawgora"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -238,8 +231,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     libsForQt5.qt5.qtgraphicaleffects
     gparted
     wlogout
-    netbird-ui
-    netbird
+    phodav
     git
     postgresql_jdbc
     openssl
@@ -274,6 +266,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     adwaita-icon-theme
     xwayland-satellite
     wlroots
+    libyaml
   ];
 
   fonts.packages = with pkgs; [
@@ -319,7 +312,7 @@ networking.hostName = "dawgora"; # Define your hostname.
   time.hardwareClockInLocalTime = true;
 
   # NETBIRD
-  services.netbird.enable = true;
+  #services.netbird.enable = true;
 
   services.postgresql = {
     enable = true;
@@ -355,6 +348,14 @@ networking.hostName = "dawgora"; # Define your hostname.
   systemd.services.plex.serviceConfig.ProtectHome = lib.mkForce false;
 
   systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
+
+  xdg.portal.wlr.enable = true;
+  
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    tailwindcss
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

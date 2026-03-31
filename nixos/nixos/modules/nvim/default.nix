@@ -16,7 +16,7 @@ let
     remap = ./lua/remap.lua;
     telescope = ./lua/plugins/telescope.lua;
     lsp = ./lua/plugins/lsp.lua;
-    treesitter = ./lua/plugins/treesitter.lua;
+    #treesitter = ./lua/plugins/treesitter.lua;
     # undotree = ./lua/plugins/undotree.lua;
     neo-tree = ./lua/plugins/neo-tree.lua;
     # harpoon = ./lua/plugins/harpoon.lua;
@@ -34,12 +34,13 @@ in {
  #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/harpoon.lua
 	# '';
 	#
+    #         luafile ${treesitter}
+
 	 	extraConfig = ''
 	    luafile ${settings}
 	    luafile ${remap}
 	    luafile ${telescope}
 	    luafile ${lsp}
-	    luafile ${treesitter}
 	    luafile ${neo-tree}
 	'';
 

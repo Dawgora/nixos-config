@@ -9,10 +9,13 @@ php = pkgs.php85.buildEnv {
     mbstring
     iconv
     pdo_mysql
+    pdo_sqlite
+    sqlite3
     mysqlnd
     openssl
     tokenizer
-    xml
+    # xml
+    zlib
     xmlwriter
     xmlreader
     ctype
@@ -42,6 +45,7 @@ in
       pkgs.git
       pkgs.curl
       pkgs.unzip
+      pkgs.sqlite
     ];
 
     shellHook = ''

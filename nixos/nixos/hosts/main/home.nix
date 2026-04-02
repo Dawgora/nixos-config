@@ -62,6 +62,7 @@ in
   home.packages = with pkgs; [
     tidal-hifi
     audacity
+    postman
     remmina
     zoom-us
     firefox
@@ -219,6 +220,7 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "google-chrome"
   "castlabs-electron"
   "zoom"
+  "postman"
 ];
 
 

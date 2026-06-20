@@ -30,14 +30,11 @@ in
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
-      "discord"
-      "spotify"
       "obsidian"
       "davinci-resolve"
       "obs-studio"
       "steam"
       "plexmediaserver"
-      "vscode"
     ];
 
 # bootloader settings
@@ -227,8 +224,8 @@ networking.hostName = "dawgora"; # Define your hostname.
     tmux
     htop
     nix-prefetch-git
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtgraphicaleffects
+    qt5.qtquickcontrols2
+    qt5.qtgraphicaleffects
     gparted
     wlogout
     phodav
@@ -239,7 +236,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     mako
     libnotify
     rofi
-    swww
+    awww
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-color-emoji

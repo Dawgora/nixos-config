@@ -14,7 +14,6 @@ in
       ../../modules/waybar
       ../../modules/hyprland
       ../../modules/sway
-      ../../modules/awakened-poe-trade
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -60,16 +59,15 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    discord
     tidal-hifi
+    bitwarden-menu
+    #bitwarden-desktop
     audacity
-    postman
+    tcpdump
     remmina
-    zoom-us
     firefox
-    librewolf
     httpie
-    ungoogled-chromium
-    vscode
     p7zip
     udisks
     libreoffice-qt-fresh
@@ -78,12 +76,8 @@ in
     vim
     arandr
     alacritty
-    discord
-    vesktop
     razergenie
-    spotify
     telegram-desktop
-    #tailscale
     alarm-clock-applet
     tmux
     flameshot
@@ -98,8 +92,6 @@ in
     thunar
     ranger
     feh
-    bitwarden-desktop
-    keepass
     mousepad
     yubikey-personalization
     yubioath-flutter
@@ -112,7 +104,6 @@ in
     dbeaver-bin
     git
     unzip
-    #pamixer
     ncurses
     libssh
     openssl
@@ -136,18 +127,14 @@ in
     steam
     gamescope
     heroic
-    #darktable
     davinci-resolve
     bluez
     overskride
     gnome-tweaks
     p7zip
-    #veloren
     shikane
     wlr-randr
     zed-editor
-    google-chrome
-    rusty-path-of-building
   ];
 
 xdg.enable = true;
@@ -208,19 +195,14 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "nvidia-x11"
   "nvidia-settings"
   "nvidia-persistenced"
-  "discord"
-  "spotify"
   "obsidian"
   "davinci-resolve"
   "obs-studio"
   "steam"
   "steam-unwrapped"
-  "vscode"
   "zed-editor"
-  "google-chrome"
+  "discord"
   "castlabs-electron"
-  "zoom"
-  "postman"
 ];
 
 

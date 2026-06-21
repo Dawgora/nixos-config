@@ -3,12 +3,14 @@
 let
   customNeovim = import ../../modules/nvim;
   elixir = ../../modules/elixir;
+  latex = ../../modules/latex;
 in
   {
 
     imports = [
       ../../modules/waybar
       ../../modules/hyprland
+      ../../modules/sway
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -44,12 +46,16 @@ in
     };
   };
 
+  xdg.configFile.niri = {
+    source = config.lib.file.mkOutOfStoreSymlink ../../modules/niri;
+    enable = true;
+  };
+
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
     firefox
-    librewolf
     p7zip
     udisks
     libreoffice-qt
@@ -60,9 +66,7 @@ in
     alacritty
     discord
     razergenie
-    spotify
     telegram-desktop
-    tailscale
     alarm-clock-applet
     tmux
     flameshot
@@ -74,17 +78,15 @@ in
     mpv
     xss-lock
     prismlauncher
-    xfce.thunar
+    thunar
     ranger
     feh
-    bitwarden
-    keepass
-    xfce.mousepad
+    mousepad
     yubikey-personalization
     yubioath-flutter
     obsidian
     tigervnc
-    neofetch
+    fastfetch
     signal-desktop
     vlc
     dbeaver-bin
@@ -110,11 +112,9 @@ in
     pavucontrol
     playerctl
     zed-editor
-    protonvpn-gui
+    proton-vpn
     audacity
-    teamviewer
-    slack
-    google-chrome
+    shikane
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -122,10 +122,15 @@ in
 home.file = {
 };
 
+xdg.configFile."shikane/config.toml" = {
+  source = ./shikane_config.toml;
+  enable = true;
+};
+
 programs.zsh = {
   enable = true;
-  initContent = ''
-  export EDITOR=nvim
+  dotDir = "${config.xdg.configHome}/zsh";
+  initExtra = ''
   '';
 };
 

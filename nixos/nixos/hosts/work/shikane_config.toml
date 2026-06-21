@@ -1,0 +1,9 @@
+[[profile]]
+name = "main"
+    [[profile.output]]
+    search = "eDP-1"
+    enable = true
+    primary = true
+    position = "0,0"
+    transform = "normal"
+    mode = "1920x1080@60Hz"

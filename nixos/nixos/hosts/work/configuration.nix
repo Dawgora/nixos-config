@@ -14,6 +14,7 @@ in
       ../../modules/nginx
       ../../modules/zsh
       ../../modules/steam
+      ../../modules/display-manager
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -66,9 +67,30 @@ programs.hyprland = {
   xwayland.enable = true;
 };
 
+programs.sway = {
+  enable = true;
+  xwayland.enable = true;
+  extraOptions = ["--unsupported-gpu"];
+};
+
+programs.niri = {
+  enable = true;
+};
+
 
 services.blueman.enable = true;
-hardware.bluetooth.enable = true;
+hardware.bluetooth = {
+  enable = true;
+  settings = {
+    General = {
+      Experimental = true;
+      FastConnectable = true;
+    };
+    Policy = {
+      AutoEnable = true;
+    };
+  };
+};
 
 xdg.portal.enable = true;
 xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -89,14 +111,10 @@ virtualisation = {
     enable = true;
     qemu = {
       swtpm.enable = true;
-      ovmf.enable = true;
-      ovmf.packages = [pkgs.OVMFFull.fd];
     };
   };
   spiceUSBRedirection.enable = true;
 };
-
-#programs.virt-manager.enable = true;
 
 services.qemuGuest.enable = true;
 services.spice-vdagentd.enable = true;
@@ -130,10 +148,18 @@ networking.hostName = "dawgora"; # Define your hostname.
   };
 
   services.displayManager = {
-    defaultSession = "hyprland";
-    sddm.enable = true;
-    sddm.theme = "${import ../../modules/sddm/sddm-theme.nix { inherit pkgs; }}";
-    sddm.autoNumlock = true;
+    defaultSession = "sway";
+
+    ly = {
+      enable = true;
+      x11Support = false;
+      settings = {
+        animate = true;
+        animation = 0;
+        waylandsessions="/etc/wayland-sessions";
+
+      };
+    };
   };
 
   # Enable CUPS to print documents.
@@ -165,8 +191,8 @@ networking.hostName = "dawgora"; # Define your hostname.
     tmux
     htop
     nix-prefetch-git
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtgraphicaleffects
+    qt5.qtquickcontrols2
+    qt5.qtgraphicaleffects
     gparted
     wlogout
     git
@@ -175,11 +201,11 @@ networking.hostName = "dawgora"; # Define your hostname.
     waybar
     mako
     libnotify
-    rofi-wayland
-    swww
+    rofi
+    awww
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols

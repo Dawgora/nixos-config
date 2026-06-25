@@ -227,6 +227,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     spice-protocol
     spice-gtk
     adwaita-icon-theme
+    xwayland-satellite
   ];
 
   fonts.packages = with pkgs; [
@@ -243,6 +244,9 @@ networking.hostName = "dawgora"; # Define your hostname.
     NVD_BACKEND = "direct";
     EGL_PLATFORM = "wayland";
     EDITOR = "nvim";
+    GDK_BACKEND = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
   };
 
   environment.variables = {

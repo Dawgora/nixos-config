@@ -4,7 +4,7 @@
   pkgs,
   inputs,
   ...
-}: let 
+}: let
   start-script = ./start.sh;
   sleep-script = ./sleep.sh;
 in
@@ -19,6 +19,7 @@ in
       xwayland = {
         enable = true;
       };
+      configType = "hyprlang"; ## TODO: change to lua
 
         #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         settings = {

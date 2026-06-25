@@ -9,3 +9,4 @@ nm-applet --indicator &
 blueman-applet &
 mako &
 waybar &
+protonvpn-app &

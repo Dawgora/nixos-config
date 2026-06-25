@@ -44,6 +44,8 @@ in
       package = pkgs.capitaine-cursors;
       size = 24;
     };
+
+    gtk4.theme = null;
   };
 
   xdg.configFile.niri = {
@@ -115,6 +117,7 @@ in
     proton-vpn
     audacity
     shikane
+    tidal-hifi
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -142,6 +145,7 @@ programs.zsh = {
     "teamviewer"
     "slack"
     "google-chrome"
+    "castlabs-electron"
   ];
 
   dconf = {

@@ -44,6 +44,10 @@ in {
 	    luafile ${neo-tree}
 	'';
 
+	##TODO: remove theese
+	withRuby = true;
+	withPython3 = true;
+
 	plugins = with pkgs.vimPlugins; [
         vim-nix
         plenary-nvim
@@ -62,13 +66,16 @@ in {
         {
             plugin = jabuti-nvim;
             config = "colorscheme jabuti";
+            type = "lua";
         }
         {
             plugin = indent-blankline-nvim;
             config = "lua require('ibl').setup({indent = {char = '┊'}})";
+            type = "lua";
         }
         {
             plugin = telescope-nvim;
             config = "lua require('telescope').setup()";
+            type = "lua";
         }];
 }

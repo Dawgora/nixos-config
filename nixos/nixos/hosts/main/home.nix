@@ -47,14 +47,9 @@ in
       package = pkgs.capitaine-cursors;
       size = 24;
     };
+
+    gtk4.theme = null;
   };
-
-
-  gtk.gtk4.theme = {
-     name = "WhiteSur-Dark-solid";
-      package = pkgs.whitesur-gtk-theme;
-  };
-
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -135,6 +130,7 @@ in
     shikane
     wlr-randr
     zed-editor
+    proton-vpn
   ];
 
 xdg.enable = true;

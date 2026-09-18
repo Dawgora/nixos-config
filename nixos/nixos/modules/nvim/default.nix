@@ -65,17 +65,17 @@ in {
         friendly-snippets
         {
             plugin = jabuti-nvim;
-            config = "colorscheme jabuti";
+            config = "colorscheme = jabuti;";
             type = "lua";
         }
         {
             plugin = indent-blankline-nvim;
-            config = "lua require('ibl').setup({indent = {char = '┊'}})";
+            config = "lua = require('ibl').setup({indent = {char = '┊'}});";
             type = "lua";
         }
         {
             plugin = telescope-nvim;
-            config = "lua require('telescope').setup()";
+            config = "lua = require('telescope').setup();";
             type = "lua";
         }];
 }

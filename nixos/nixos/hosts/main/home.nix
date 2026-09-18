@@ -25,10 +25,12 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.pointerCursor = {
+    enable = true;
     name = "capitaine-cursors";
     package = pkgs.capitaine-cursors;
     size = 24;
   };
+
 
   gtk = {
     enable = true;
@@ -54,10 +56,12 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    winbox
+    parallel
     discord
     tidal-hifi
     bitwarden-menu
-    #bitwarden-desktop
+    bitwarden-desktop
     audacity
     tcpdump
     remmina
@@ -65,7 +69,7 @@ in
     httpie
     p7zip
     udisks
-    libreoffice-qt-fresh
+    libreoffice-qt-stable
     libpqxx
     tree
     vim
@@ -133,15 +137,15 @@ in
     proton-vpn
   ];
 
-xdg.enable = true;
+  xdg.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
 #  # plain files is through 'home.file'.
 home.file = {
   ".local/bin" = {
-                    source = ../../scripts;
-                    recursive = true;
-                  };
+    source = ../../scripts;
+    recursive = true;
+  };
 };
 
 xdg.configFile."shikane/config.toml" = {
@@ -155,23 +159,23 @@ xdg.configFile.niri = {
 };
 
 xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal
-      xdg-desktop-portal-hyprland
+  enable = true;
+  extraPortals = with pkgs; [
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
       #xdg-desktop-portal-gtk
     #  xdg-desktop-portal-wlr
-    ];
-    config = {
-      hyprland = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [
-          "gnome"
-        ];
-         "org.freedesktop.impl.portal.FileChooser" = "kde";
-      };
+  ];
+  config = {
+    hyprland = {
+      default = [ "hyprland" "gtk" ];
+      "org.freedesktop.impl.portal.ScreenCast" = [
+        "gnome"
+      ];
+      "org.freedesktop.impl.portal.FileChooser" = "kde";
     };
   };
+};
 
 #xdg.configFile."sway/config" = {
 #  source = ../../modules/sway/config;
@@ -198,6 +202,8 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "steam-unwrapped"
   "zed-editor"
   "discord"
+  "discord-unwrapped"
+  "winbox"
   "castlabs-electron"
 ];
 
@@ -226,11 +232,38 @@ programs.neovim = customNeovim pkgs;
     "latex-devel"="nix-shell ${latex} --command zsh";
     "ruby-devel"="nix-shell ${ruby} --command zsh";
     "php-devel"="nix-shell ${php} --command zsh";
+    "rebuild-local-nixos-boot" = "sudo nixos-rebuild boot --flake ~/flakes/nixos/#main";
     "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#main";
     "update-nixos-channel" = "sudo nix-channel --update";
     "delete-nixos-garbage" = "nix-collect-garbage --delete-old";
     "update-home-flake" = "sudo nix flake update --flake ~/flakes/nixos";
+    "upload-obsidian" = "systemctl --user start proton-obsidian-sync";
   };
+
+ #=================================
+  systemd.user.services.proton-obsidian-sync = {
+    Unit.Description = "Backup Obsidian vault to Proton Drive";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "/home/dawgora/.local/bin/proton-obsidian-sync.sh";
+      Environment = [
+        "NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [ pkgs.libsecret pkgs.stdenv.cc.cc.lib pkgs.glib pkgs.dbus ]}"
+        "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+        "HOME=/home/dawgora"
+      ];
+    };
+  };
+
+  systemd.user.timers.proton-obsidian-sync = {
+    Unit.Description = "Timer for Obsidian vault backup";
+    Timer = {
+      OnCalendar = [ "*-*-* 02:00:00" "*-*-* 14:00:00" ];
+      Persistent = true;
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
+   #=================================
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

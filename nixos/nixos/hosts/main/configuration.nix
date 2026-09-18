@@ -149,6 +149,9 @@ networking.hostName = "dawgora"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.network.wait-online.enable = false;
+  boot.initrd.systemd.network.wait-online.enable = false;
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 
@@ -216,6 +219,8 @@ networking.hostName = "dawgora"; # Define your hostname.
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    libsecret
+    gnome-keyring
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     vdpauinfo # sudo vainfo
@@ -353,6 +358,13 @@ networking.hostName = "dawgora"; # Define your hostname.
   programs.nix-ld.libraries = with pkgs; [
     tailwindcss
   ];
+
+  environment.variables.NIX_LD_LIBRARY_PATH = lib.mkForce (pkgs.lib.makeLibraryPath [
+    pkgs.libsecret
+    pkgs.stdenv.cc.cc.lib
+    pkgs.glib
+    pkgs.dbus
+  ]);
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

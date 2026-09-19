@@ -284,6 +284,11 @@ networking.hostName = "dawgora"; # Define your hostname.
     dart-sass
   ];
 
+  programs.winbox = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

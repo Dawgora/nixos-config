@@ -135,6 +135,7 @@ in
     wlr-randr
     zed-editor
     proton-vpn
+    wlogout
   ];
 
   xdg.enable = true;

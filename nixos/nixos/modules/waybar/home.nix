@@ -6,6 +6,7 @@
     position = "top";
     output = "HDMI-A-2";
     modules-left = [ "niri/workspaces" "clock#2" "clock#3" ];
+    modules-right = [ "wlr/taskbar" ];
 
     "niri/workspaces" = {
       "disable-scroll" = true;
@@ -24,6 +25,7 @@
     position = "top";
     output = "DP-4";
     modules-left = [ "niri/workspaces" "clock#2" "clock#3" ];
+    modules-right = [ "wlr/taskbar" ];
 
     "niri/workspaces" = {
       "disable-scroll" = true;
@@ -46,6 +48,7 @@
       "clock"
       "idle_inhibitor"
       "niri/workspaces"
+      "wlr/taskbar"
       "tray"
     ];
 
@@ -58,6 +61,7 @@
       "custom/vpn"
       "group/hardware"
       "group/audio"
+      "custom/power"
     ];
 
 
@@ -70,6 +74,13 @@
         transition-left-to-right = true;
       };
       modules = [ "cpu" "memory" "disk" ];
+    };
+
+    "custom/power" = {
+      format = "⏻";
+      tooltip = true;
+      tooltip-format = "Power menu";
+      on-click = "wlogout";
     };
 
     "group/audio" = {
@@ -118,6 +129,16 @@
         activated = "󰾆";  # sun/inhibited state
         deactivated = "󰾅";  # moon/normal state
       };
+    };
+
+    "wlr/taskbar" = {
+      format = "{icon}";
+      icon-size = 20;          # pair with the bigger bar we just set
+      icon-theme = "WhiteSur-dark";  # match your GTK theme
+      tooltip-format = "{title}";
+      on-click = "activate";
+      on-click-middle = "close";
+      ignore-list = [ "Alacritty" ];  # apps you don't want pinned in the bar
     };
 
     "network" = {

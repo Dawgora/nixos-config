@@ -16,104 +16,119 @@
 
     window#waybar.hidden { opacity: 0.1; }
 
-    /* Pill styling - apply to ALL modules across all bars */
-    #window, #network, #language, #pulseaudio, #pulseaudio.microphone,
-    #taskbar, #clock, #clock.2, #clock.3, #cpu, #memory, #disk,
-    #battery, #idle_inhibitor, #tray, #workspaces {
+    /* =============================================
+       UNIVERSAL PILL — every module, every bar.
+       No merge rules; each module is a standalone
+       rounded pill with a small gap between them.
+       ============================================= */
+    #window, #niri-window,
+    #workspaces, #niri-workspaces,
+    #network, #language,
+    #clock, #clock.2, #clock.3,
+    #cpu, #memory, #disk, #battery,
+    #pulseaudio, #pulseaudio.microphone,
+    #idle_inhibitor, #tray, #taskbar, #mode, #custom-power,
+    #custom-vpn {
       color: #fdf6e3;
-      padding: 0px 10px 0px 10px;
+      padding: 0px 12px;
       background-color: #1a1a1a;
-      border-radius: 10px;
-      margin: 4px 2px 0 2px;
+      border-radius: 12px;
+      margin: 4px 3px 0 3px;
     }
 
-    /* Merge adjacent pills in group/hardware (cpu/memory/disk) */
-    #cpu, #memory, #disk {
-      margin-right: 0;
-      margin-left: 0;
-      border-radius: 0;
+    #custom-power {
+      font-size: 16px;  /* slightly smaller than the 20px global, fits the bar height */
     }
 
-    /* Merge taskbar → tray chain */
-    #workspaces, #taskbar, #pulseaudio {
-      margin-left: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    #network, #clock, #clock.2, #clock.3 {
-      margin-right: 0;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    /* Accent colors per module */
+    /* =============================================
+       ACCENT COLORS
+       ============================================= */
     #clock, #clock.2, #clock.3 {
       color: #268bd2;
       font-weight: bold;
     }
 
-    #pulseaudio { color: #2aa198; }
-    #memory { color: #cb4b16; }
-    #cpu { color: #6c71c4; }
-    #battery { color: #859900; }
-    #disk { color: #b58900; }
-    #network { color: #d33682; }
+    #network          { color: #d33682; }
+    #pulseaudio       { color: #2aa198; }
+    #memory           { color: #cb4b16; }
+    #cpu              { color: #6c71c4; }
+    #disk             { color: #b58900; }
+    #battery          { color: #859900; }
+
     #idle_inhibitor.activated { color: #2aa198; }
+
     #battery.warning, #battery.critical { color: #dc322f; }
 
-    #workspaces button {
+    #custom-vpn.connected    { color: #859900; }  /* green — VPN on  */
+    #custom-vpn.disconnected { color: #dc322f; }  /* red — VPN off */
+
+    /* =============================================
+       WORKSPACES
+       ============================================= */
+    #workspaces button, #niri-workspaces button {
       padding: 0 4px;
+      margin: 0;
       color: #fdf6e3;
+      background: transparent;
+      border-radius: 8px;
       transition: all 0.3s;
     }
-    #workspaces button.focused { color: #268bd2; }
-    #workspaces button:hover { background: #002b36; }
-
-    #taskbar button {
-      box-shadow: inset 0 -3px transparent;
-      padding: 4px;
-      transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
+    #workspaces button.focused, #niri-workspaces button.focused {
+      color: #268bd2;
     }
-    #taskbar button.active { box-shadow: inset 0 -3px #268bd2; }
+    #workspaces button:hover, #niri-workspaces button:hover {
+      background: #002b36;
+    }
 
+    /* =============================================
+       TRAY
+       ============================================= */
+    #tray > .passive {
+      -gtk-icon-effect: dim;
+    }
+    #tray > .needs-attention {
+      -gtk-icon-effect: highlight;
+      background-color: #dc322f;
+      border-radius: 8px;
+    }
+
+    /* =============================================
+       ANIMATION + TOOLTIP
+       ============================================= */
     @keyframes blink {
       to { background-color: rgba(220, 50, 47, 0.3); color: #fdf6e3; }
     }
 
+    #battery.critical:not(.charging) {
+      animation: blink 1s linear infinite alternate;
+    }
+
+    #taskbar {
+      padding: 0px 8px;
+    }
+
+    #taskbar button {
+      padding: 2px 4px;
+      margin: 2px 0;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    #taskbar button:hover {
+      background: #002b36;
+    }
+
+    /* active window's icon gets a highlighted underline */
+    #taskbar button.active {
+      box-shadow: inset 0 -3px #268bd2;
+    }
+
     tooltip {
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 15px;
       background-color: #1a1a1a;
       color: #fdf6e3;
-    }
-
-    #custom-vpn {
-      color: #fdf6e3;
-      padding: 0px 10px 0px 10px;
-      background-color: #1a1a1a;
-      border-radius: 10px;
-      margin: 4px 2px 0 2px;
-    }
-
-    #custom-vpn.connected {
-      color: #859900;  /* solarized green — VPN on */
-    }
-
-    #custom-vpn.disconnected {
-      color: #dc322f;  /* solarized red — VPN off */
-    }
-
-    #niri-window {
-      padding: 0px 10px 0px 10px;
-      background-color: #1a1a1a;
-      border-radius: 10px;
-      margin: 4px 2px 0 2px;
-    }
-
-    /* Truncate long titles gracefully */
-    #niri-window > label {
-      padding: 0 5px;
+      border: 1px solid #268bd2;
     }
   '';
 }

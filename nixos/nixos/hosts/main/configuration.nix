@@ -23,6 +23,7 @@ in
       users = {
         dawgora = import ./home.nix;
       };
+      backupFileExtension = "hm-backup";
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg:
@@ -332,7 +333,7 @@ networking.hostName = "dawgora"; # Define your hostname.
     systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 
   xdg.portal.wlr.enable = true;
-  
+
   programs.nix-ld.enable = true;
 
   programs.nix-ld.libraries = with pkgs; [

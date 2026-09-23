@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
+# Wallpaper
+awww init &
 
-swww init &
+waybar &
+sleep 2        # give the watcher a moment to own the D-Bus name
 
-#swww img &
-
+# Tray applets AFTER the watcher exists
 nm-applet --indicator &
 blueman-applet &
-mako &
-waybar &
 protonvpn-app &
+
+# Notification daemon
+mako &

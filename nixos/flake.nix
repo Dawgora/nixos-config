@@ -22,24 +22,34 @@
 
       nixosConfigurations = {
         main = nixpkgs.lib.nixosSystem {
-          specialArgs =  {
+          specialArgs = {
             inherit inputs system;
-           systemType = "main";
+            systemType = "main";
           };
 
           modules = [
             ./nixos/hosts/main/configuration.nix
+            {
+              home-manager.extraSpecialArgs = {
+                systemType = "main";
+              };
+            }
           ];
         };
 
         workPC = nixpkgs.lib.nixosSystem {
-          specialArgs =  {
+          specialArgs = {
             inherit inputs system;
             systemType = "work";
           };
 
           modules = [
             ./nixos/hosts/work/configuration.nix
+            {
+              home-manager.extraSpecialArgs = {
+                systemType = "work";
+              };
+            }
           ];
         };
 

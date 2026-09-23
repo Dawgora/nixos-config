@@ -56,6 +56,8 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    pamixer
+    pavucontrol
     winbox
     parallel
     discord
@@ -121,12 +123,10 @@ in
     python3
     bazecor
     hyprshot
-    pavucontrol
     playerctl
     steam
     gamescope
     heroic
-    davinci-resolve
     bluez
     overskride
     gnome-tweaks
@@ -196,7 +196,6 @@ nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
   "nvidia-settings"
   "nvidia-persistenced"
   "obsidian"
-  "davinci-resolve"
   "obs-studio"
   "steam"
   "steam-unwrapped"

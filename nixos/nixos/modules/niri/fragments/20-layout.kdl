@@ -1,0 +1,38 @@
+layout {
+    gaps 8
+
+    center-focused-column "always"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 3
+        active-color "#268bd2"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+    }
+
+    // Soft drop shadows for depth
+    shadow {
+        on
+        softness 40
+        spread 8
+        offset x=0 y=6
+        color "#000000AA"
+    }
+
+    // If the floating waybar ever overlaps maximized windows,
+    // uncomment to reserve top space:
+    struts {
+        // top 48
+    }
+}

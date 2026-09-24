@@ -199,7 +199,6 @@ networking.hostName = "dawgora"; # Define your hostname.
     postgresql_jdbc
     openssl
     waybar
-    mako
     libnotify
     rofi
     awww

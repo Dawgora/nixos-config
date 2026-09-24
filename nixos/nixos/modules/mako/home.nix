@@ -3,11 +3,10 @@
   imports = [ ./style.nix ];
 
   home.packages = with pkgs; [
-    libnotify  # for notify-send testing + makoctl comes bundled with mako
+    mako
+    libnotify
   ];
 
-  # Mako itself as a service so `mako &` in start.sh is optional —
-  # systemd brings it up with the session
   systemd.user.services.mako = {
     Unit = {
       Description = "Mako notification daemon";

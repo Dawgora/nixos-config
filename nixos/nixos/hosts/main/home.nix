@@ -15,6 +15,7 @@ in
       ../../modules/hyprland
       ../../modules/sway
       ../../modules/mako
+      ../../modules/niri
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -148,16 +149,6 @@ home.file = {
     source = ../../scripts;
     recursive = true;
   };
-};
-
-xdg.configFile."shikane/config.toml" = {
-  source = ./shikane_config.toml;
-  enable = true;
-};
-
-xdg.configFile.niri = {
-  source = config.lib.file.mkOutOfStoreSymlink ../../modules/niri;
-  enable = true;
 };
 
 xdg.portal = {

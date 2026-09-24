@@ -1,8 +1,7 @@
 { lib, config, specialArgs, ... }:
 let
   systemType = specialArgs.systemType or "default";
-  rofiConfig = if systemType == "main" then [ ./home.nix ]
-               else if systemType == "work" then [ ./work.nix ]
+  rofiConfig = if systemType == "main" || systemType == "work" then [ ./home.nix ]
                else [];
 in
 {

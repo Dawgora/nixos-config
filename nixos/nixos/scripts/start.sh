@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Wallpaper
-swww-daemon &
+awww-daemon &
 sleep 1
 
 set-backgrounds &

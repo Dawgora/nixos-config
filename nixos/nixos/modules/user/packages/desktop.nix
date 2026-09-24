@@ -14,6 +14,7 @@
     libreoffice-qt-stable
     dbeaver-bin
     zed-editor
+    proton-vpn
     # system tools
     fastfetch
     htop

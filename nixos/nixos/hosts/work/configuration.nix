@@ -141,6 +141,8 @@ networking.hostName = "dawgora"; # Define your hostname.
 
   environment.pathsToLink = [ "/libexec" ];
 
+  services.netbird.enable = true;
+
   services.xserver = {
     enable = true;
 
@@ -183,6 +185,7 @@ networking.hostName = "dawgora"; # Define your hostname.
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    netbird-ui
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     vdpauinfo # sudo vainfo

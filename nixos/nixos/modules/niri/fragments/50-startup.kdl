@@ -4,6 +4,5 @@ spawn-sh-at-startup "~/.local/bin/start.sh"
 spawn-sh-at-startup "~/.local/bin/sleep.sh"
 
 hotkey-overlay {
-    // uncomment to disable the hotkeys popup at startup:
-    // skip-at-startup
+    skip-at-startup
 }

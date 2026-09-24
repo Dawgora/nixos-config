@@ -1,184 +1,60 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
+{
+  imports = [
+    # shared desktop stack
+    ../../modules/waybar
+    ../../modules/mako
+    ../../modules/niri
+    ../../modules/alacritty
 
-let
-  customNeovim = import ../../modules/nvim;
-  elixir = ../../modules/elixir;
-  latex = ../../modules/latex;
-in
-  {
+    # shared user modules
+    ../../modules/user/packages
+    ../../modules/user/theme
+    ../../modules/user/shell
+    ../../modules/user/portals
+    ../../modules/user/obsidian-sync
+    ../../modules/user/neovim
 
-    imports = [
-      ../../modules/waybar
-      ../../modules/hyprland
-      ../../modules/sway
-    ];
+    # work-machine extras
+    ./packages.nix
+  ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "dawgora";
   home.homeDirectory = "/home/dawgora";
+  home.stateVersion = "23.11";
 
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  xdg.enable = true;
 
-  home.pointerCursor = {
-    name = "capitaine-cursors";
-    package = pkgs.capitaine-cursors;
-    size = 24;
+  home.file.".local/bin" = {
+    source = ../../scripts;
+    recursive = true;
   };
-
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "WhiteSur-dark";
-      package = pkgs.whitesur-icon-theme;
-    };
-
-    theme = {
-      name = "WhiteSur-Dark-solid";
-      package = pkgs.whitesur-gtk-theme;
-    };
-
-    cursorTheme = {
-      name = "capitaine-cursors";
-      package = pkgs.capitaine-cursors;
-      size = 24;
-    };
-
-    gtk4.theme = null;
-  };
-
-  xdg.configFile.niri = {
-    source = config.lib.file.mkOutOfStoreSymlink ../../modules/niri;
-    enable = true;
-  };
-
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    firefox
-    p7zip
-    udisks
-    libreoffice-qt
-    libpqxx
-    tree
-    vim
-    arandr
-    alacritty
-    discord
-    razergenie
-    telegram-desktop
-    alarm-clock-applet
-    tmux
-    flameshot
-    jq
-    gettext
-    htop
-    btop
-    dconf
-    mpv
-    xss-lock
-    prismlauncher
-    thunar
-    ranger
-    feh
-    mousepad
-    yubikey-personalization
-    yubioath-flutter
-    obsidian
-    tigervnc
-    fastfetch
-    signal-desktop
-    vlc
-    dbeaver-bin
-    git
-    unzip
-    pamixer
-    ncurses
-    libssh
-    openssl
-    libssh
-    icu
-    tig
-    postgresql
-    docker
-    inotify-tools
-    nodejs_22
-    networkmanagerapplet
-    wireguard-tools
-    yt-dlp
-    bashInteractiveFHS
-    python3
-    hyprshot
-    pavucontrol
-    playerctl
-    zed-editor
-    proton-vpn
-    audacity
-    shikane
-    tidal-hifi
-  ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-#  # plain files is through 'home.file'.
-home.file = {
-};
-
-xdg.configFile."shikane/config.toml" = {
-  source = ./shikane_config.toml;
-  enable = true;
-};
-
-programs.zsh = {
-  enable = true;
-  dotDir = "${config.xdg.configHome}/zsh";
-  initExtra = ''
-  '';
-};
-
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-    "spotify"
-    "obsidian"
-    "teamviewer"
-    "slack"
-    "google-chrome"
-    "castlabs-electron"
+    "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
+    "obsidian" "obs-studio" "steam" "steam-unwrapped"
+    "zed-editor" "discord" "discord-unwrapped" "winbox" "castlabs-electron"
+    "teamviewer" "slack" "google-chrome"
   ];
+
+  # machine-specific aliases — note the flake target
+  home.shellAliases = {
+    "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#work";
+    "rebuild-local-nixos-boot" = "sudo nixos-rebuild boot --flake ~/flakes/nixos/#work";
+  };
 
   dconf = {
     enable = true;
-    settings."org/gnome/desktop/default-applications/terminal" = { exec = "${pkgs.alacritty}/bin/alacritty";};
+    settings."org/gnome/desktop/default-applications/terminal" = {
+      exec = "${pkgs.alacritty}/bin/alacritty";
+    };
   };
 
-  programs.neovim = customNeovim pkgs;
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/dawgora/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
-    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
+    TERMINAL = "alacritty";
     GTK_THEME = "WhiteSur-Dark-solid";
     NIXOS_HOME_CONFIG = "/home/dawgora/.config";
   };
 
-  home.shellAliases = {
-    "elixir-devel"="nix-shell ${elixir} --command zsh";
-    "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#workPC";
-    "update-nixos-channel" = "sudo nix-channel --update";
-    "delete-nixos-garbage" = "nix-collect-garbage --delete-old";
-    "update-home-flake" = "sudo nix flake update --flake ~/flakes/nixos";
-  };
-
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

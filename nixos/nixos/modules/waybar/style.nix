@@ -54,6 +54,8 @@
     #cpu              { color: #6c71c4; }
     #disk             { color: #b58900; }
     #battery          { color: #859900; }
+    #battery.warning  { color: #b58900; }
+    #battery.critical { color: #dc322f; }
 
     #idle_inhibitor.activated { color: #2aa198; }
 

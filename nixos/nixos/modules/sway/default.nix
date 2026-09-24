@@ -4,7 +4,7 @@
   pkgs,
   inputs,
   ...
-}: let 
+}: let
   mod = "Mod4";
 in
   {
@@ -59,8 +59,6 @@ in
       focus.followMouse = true;
       startup = [
         {command = "shikane"; always = true;}
-        #{command = "pkill kanshi; exec kanshi"; always = true;}
-        #{command = "systemctl --user restart kanshi"; always = true;}
         {command = "--no-startup-id /home/dawgora/.local/bin/start.sh";}
         {command = "--no-startup-id /home/dawgora/.local/bin/sleep.sh";}
       ];

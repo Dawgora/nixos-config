@@ -40,5 +40,10 @@
       NIXOS_HOME_CONFIG = "/home/dawgora/.config";
     };
 
+    home.shellAliases = {
+      "rebuild-local-nixos-boot" = "sudo nixos-rebuild boot --flake ~/flakes/nixos/#main";
+      "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#main";
+    };
+
     programs.home-manager.enable = true;
 }

@@ -14,6 +14,7 @@ in
       ../../modules/waybar
       ../../modules/hyprland
       ../../modules/sway
+      ../../modules/mako
     ];
 
   # Home Manager needs a bit of information about you and the paths it should

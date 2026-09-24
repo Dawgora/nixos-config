@@ -10,6 +10,3 @@ sleep 2        # give the watcher a moment to own the D-Bus name
 nm-applet --indicator &
 blueman-applet &
 protonvpn-app &
-
-# Notification daemon
-mako &

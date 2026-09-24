@@ -37,7 +37,7 @@
           ];
         };
 
-        workPC = nixpkgs.lib.nixosSystem {
+        work = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs system;
             systemType = "work";

@@ -27,6 +27,11 @@
       recursive = true;
     };
 
+    home.file.".local/share/backgrounds" = {
+      source = ./backgrounds;
+      recursive = true;
+    };
+
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
       "obsidian" "obs-studio" "steam" "steam-unwrapped"

@@ -8,12 +8,12 @@
     ../../modules/alacritty
 
     # shared user modules
-    ../../modules/user/packages
-    ../../modules/user/theme
-    ../../modules/user/shell
-    ../../modules/user/portals
-    ../../modules/user/obsidian-sync
-    ../../modules/user/neovim
+    ../../modules/user/packages      # directory — no .nix
+    ../../modules/user/theme.nix     # ← explicit extension
+    ../../modules/user/shell.nix     # ← explicit extension
+    ../../modules/user/portals.nix   # ← explicit extension
+    ../../modules/user/obsidian-sync.nix  # ← explicit extension
+    ../../modules/user/neovim.nix    # ← explicit extension
 
     # work-machine extras
     ./packages.nix

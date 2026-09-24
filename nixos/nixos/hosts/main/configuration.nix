@@ -240,7 +240,6 @@ networking.hostName = "dawgora"; # Define your hostname.
     waybar
     mako
     libnotify
-    rofi
     awww
     noto-fonts
     noto-fonts-cjk-sans

@@ -8,9 +8,8 @@ let
 
 in
 {
-  imports = systemConfig;
+  imports = systemConfig ++ [ ../rofi ];
 
-  # Optional: assert loudly on mismatches
   assertions = [{
     assertion = systemType == "main" || systemType == "work";
     message = "waybar/settings.nix: unrecognized systemType '${systemType}'";

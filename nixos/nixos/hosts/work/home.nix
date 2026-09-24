@@ -17,6 +17,7 @@
 
     # work-machine extras
     ./packages.nix
+    ./backgrounds.nix
   ];
 
   home.username = "dawgora";

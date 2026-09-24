@@ -14,6 +14,8 @@
       ../../modules/user/portals.nix   # ← explicit extension
       ../../modules/user/obsidian-sync.nix  # ← explicit extension
       ../../modules/user/neovim.nix    # ← explicit extension
+
+      ./backgrounds.nix
   ];
 
   home.username = "dawgora";

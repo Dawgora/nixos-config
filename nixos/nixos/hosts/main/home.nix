@@ -10,12 +10,12 @@ in
   {
 
     imports = [
-#      ./kanshi.nix
       ../../modules/waybar
       ../../modules/hyprland
       ../../modules/sway
       ../../modules/mako
       ../../modules/niri
+      ../../modules/alacritty
     ];
 
   # Home Manager needs a bit of information about you and the paths it should

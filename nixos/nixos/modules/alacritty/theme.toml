@@ -1,0 +1,80 @@
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold   = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+size = 14
+
+[window]
+# Padding between text and border — matches niri corner radius
+padding = { x = 12, y = 12 }
+
+# Window dimensions
+dynamic_padding = true
+
+# Transparency (optional, matches your dark theme)
+opacity = 0.95
+
+decorations = "Transparent"
+startup_mode = "Maximized"
+blur = true
+
+[colors]
+# Solarized Dark palette
+background = "#002b36"
+foreground = "#fdf6e3"
+
+# Dim colors (optional)
+dim_foreground = "#839496"
+bright_foreground = "#ffffff"
+
+[colors.normal]
+black = "#002b36"
+red = "#dc322f"
+green = "#859900"
+yellow = "#b58900"
+blue = "#268bd2"
+magenta = "#6c71c4"
+cyan = "#2aa198"
+white = "#eee8d5"
+
+[colors.bright]
+black = "#657b83"
+red = "#dc322f"
+green = "#859900"
+yellow = "#b58900"
+blue = "#268bd2"
+magenta = "#6c71c4"
+cyan = "#2aa198"
+white = "#fdf6e3"
+
+# Cursor colors
+[colors.cursor]
+cursor = "#ffffff"
+text = "#002b36"
+
+# Selection
+[colors.selection]
+background = "#268bd2"
+text = "#ffffff"
+
+# Indexed colors
+[[colors.indexed_colors]]
+index = 16
+color = "#cb4b16"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#d33682"
+
+[cursor]
+style = "Block"
+thickness = 0.15
+unfocused_hollow = true
+blink_interval = 500
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[mouse]
+hide_when_typing = false

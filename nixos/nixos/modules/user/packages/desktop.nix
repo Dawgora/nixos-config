@@ -1,0 +1,40 @@
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    firefox
+    thunar
+    mousepad
+    obsidian
+    signal-desktop
+    telegram-desktop
+    discord
+    bitwarden-desktop
+    bitwarden-menu
+    remmina
+    libreoffice-qt-stable
+    dbeaver-bin
+    zed-editor
+    # system tools
+    fastfetch
+    htop
+    btop
+    tree
+    jq
+    p7zip
+    unzip
+    git
+    tig
+    dconf
+    gnome-tweaks
+    wlogout
+    swaylock
+    wlr-randr
+    arandr
+    shikane
+    networkmanagerapplet
+    bluez
+    overskride
+    yubikey-personalization
+    yubioath-flutter
+  ];
+}

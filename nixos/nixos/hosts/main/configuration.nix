@@ -180,7 +180,7 @@ networking.hostName = "dawgora"; # Define your hostname.
   };
 
   services.displayManager = {
-    defaultSession = "sway";
+    defaultSession = "niri";
 
     ly = {
       enable = true;

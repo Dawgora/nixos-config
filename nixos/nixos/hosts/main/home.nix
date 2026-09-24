@@ -1,22 +1,19 @@
 { pkgs, lib, ... }:
 {
-  imports = [
-    # desktop environment modules
-    ../../modules/waybar
-    ../../modules/rofi
-    ../../modules/mako
-    ../../modules/niri
-    ../../modules/alacritty
-    ../../modules/hyprland
-    ../../modules/sway
+    imports = [
+      ../../modules/waybar
+      ../../modules/hyprland
+      ../../modules/sway
+      ../../modules/mako
+      ../../modules/niri
+      ../../modules/alacritty
 
-    # user-level modules
-    ../../modules/user/packages
-    ../../modules/user/theme
-    ../../modules/user/shell
-    ../../modules/user/portals
-    ../../modules/user/obsidian-sync
-    ../../modules/user/neovim
+      ../../modules/user/packages      # directory — no .nix
+      ../../modules/user/theme.nix     # ← explicit extension
+      ../../modules/user/shell.nix     # ← explicit extension
+      ../../modules/user/portals.nix   # ← explicit extension
+      ../../modules/user/obsidian-sync.nix  # ← explicit extension
+      ../../modules/user/neovim.nix    # ← explicit extension
   ];
 
   home.username = "dawgora";

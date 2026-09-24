@@ -1,20 +1,25 @@
 output "HDMI-A-2" {
-    mode "2560x1440@120"
+    mode "2560x1440@119.998"
     scale 1
     transform "90"
     position x=0 y=0
 }
 
-output "HDMI-A-1" {
-    mode "2560x1440@120"
+output "DP-3" {
+    mode "2560x1440@120.000"
     scale 1
     transform "normal"
-    position x=1440 y=1120
+    position x=1440 y=560
+    focus-at-startup
 }
 
 output "DP-4" {
-    mode "2560x1440@120"
+    mode "2560x1440@120.000"
     scale 1
     transform "270"
-    position x=2880 y=0
+    position x=4000 y=0
+}
+
+output "HDMI-A-1" {
+    off
 }

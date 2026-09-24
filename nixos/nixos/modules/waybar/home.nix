@@ -42,7 +42,7 @@
   programs.waybar.settings.mainBar = {
     layer = "top";
     position = "top";
-    output = "HDMI-A-1";
+    output = "DP-3";
 
     modules-left = [
       "clock"

@@ -23,6 +23,7 @@
       "bluetooth"
       "network"
       "tray"
+      "custom/vpn"
       "custom/power"
     ];
 
@@ -142,6 +143,15 @@
       tooltip = true;
       tooltip-format = "Power menu";
       on-click = "wlogout";
+    };
+
+    "custom/vpn" = {
+      format = "󰖂 {}";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/vpn-status.sh";
+      return-type = "json";
+      interval = 10;
+      on-click = "protonvpn-app";
+      tooltip = true;
     };
   };
 }

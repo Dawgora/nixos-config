@@ -138,9 +138,10 @@
     };
 
     "custom/power" = {
-      "format" = "";
-      "tooltip" = false;
-      "on-click" = "wlogout";
+      format = "⏻";
+      tooltip = true;
+      tooltip-format = "Power menu";
+      on-click = "wlogout";
     };
   };
 }

@@ -78,7 +78,6 @@ in
     tree
     vim
     arandr
-    alacritty
     razergenie
     telegram-desktop
     alarm-clock-applet

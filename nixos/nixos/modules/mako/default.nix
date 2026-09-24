@@ -15,8 +15,7 @@
     Service = {
       ExecStart = "${pkgs.mako}/bin/mako";
       Restart = "on-failure";
-      Environment = "WAYLAND_DISPLAY=${config.wayland.display}" # or just rely on env
-      TimeoutSec = 30;
+      TimeoutSec = "30";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];

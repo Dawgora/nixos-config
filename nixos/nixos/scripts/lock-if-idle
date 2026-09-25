@@ -1,15 +1,22 @@
 #!/usr/bin/env sh
 
-# Skip lock if media is actively playing
-if playerctl status 2>/dev/null | grep -q '^Playing'; then
-  exit 0
-fi
+# Check if any MPRIS-capable player has a track loaded (covers browsers during playback)
+for player in $(playerctl -l 2>/dev/null); do
+  STATUS=$(playerctl status -p "$player" 2>/dev/null)
+  if echo "$STATUS" | grep -qiE '^(Playing|Paused)$'; then
+    # Extra verification: does this player actually have media loaded?
+    TITLE=$(playerctl metadata --format '{{title}}' -p "$player" 2>/dev/null)
+    if [ -n "$TITLE" ]; then
+      exit 0  # Media is loaded — skip lock
+    fi
+  fi
+done
 
-# Skip lock if a fullscreen window is focused (games, fullscreen video)
+# Fallback: check for fullscreen window (catches games that don't use MPRIS)
 WINDOW_INFO=$(niri msg -j focused-window 2>/dev/null)
 if echo "$WINDOW_INFO" | jq -e '.is_focused_fullscreen' >/dev/null 2>&1; then
-  exit 0
+  exit 0  # Fullscreen window detected — skip lock
 fi
 
-# Otherwise, lock the screen
+# Nothing to prevent lock — proceed
 exec lock-screen

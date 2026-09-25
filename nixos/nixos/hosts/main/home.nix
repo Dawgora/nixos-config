@@ -8,12 +8,13 @@
       ../../modules/niri
       ../../modules/alacritty
 
-      ../../modules/user/packages      # directory — no .nix
-      ../../modules/user/theme.nix     # ← explicit extension
-      ../../modules/user/shell.nix     # ← explicit extension
-      ../../modules/user/portals.nix   # ← explicit extension
-      ../../modules/user/obsidian-sync.nix  # ← explicit extension
-      ../../modules/user/neovim.nix    # ← explicit extension
+      ../../modules/user/packages
+      ../../modules/user/theme.nix
+      ../../modules/user/shell.nix
+      ../../modules/user/portals.nix
+      ../../modules/user/obsidian-sync.nix
+      ../../modules/user/neovim.nix
+      ../../modules/user/swaylock.nix
 
       ./backgrounds.nix
   ];

@@ -7,7 +7,6 @@ font pango:monospace 8
 
 #exec --no-startup-id nm-applet
 exec --no-startup-id /home/dawgora/.local/bin/start.sh
-exec --no-startup-id /home/dawgora/.local/bin/sleep.sh
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -140,7 +139,7 @@ bindsym $mod+r mode "resize"
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+  client.placeholder      #000000 #0c0c0c #ffffff #000000
 
   client.background       #2B2C2B
 

@@ -60,7 +60,6 @@ in
       startup = [
         {command = "shikane"; always = true;}
         {command = "--no-startup-id /home/dawgora/.local/bin/start.sh";}
-        {command = "--no-startup-id /home/dawgora/.local/bin/sleep.sh";}
       ];
       bars = [];
       window.titlebar = false;

@@ -6,7 +6,6 @@
   ...
 }: let
   start-script = ./start.sh;
-  sleep-script = ./sleep.sh;
 in
   {
     home.packages = with pkgs; [

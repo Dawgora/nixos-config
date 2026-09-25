@@ -4,6 +4,7 @@
 
   home.packages = with pkgs; [
     mako
+    libnotify
   ];
 
   systemd.user.services.mako = {

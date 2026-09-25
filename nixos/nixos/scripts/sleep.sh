@@ -2,6 +2,6 @@
 
 sleep 1
 
-swayidle -w timeout 300 'lock-if-idle' \
-         timeout 600 'niri msg action power-off-monitors' \
+swayidle -w timeout 300 'lock-if-idle lock' \
+         timeout 600 'lock-if-idle poweroff' \
          resume 'niri msg action power-on-monitors' &

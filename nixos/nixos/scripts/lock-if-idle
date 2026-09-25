@@ -1,22 +1,23 @@
 #!/usr/bin/env sh
 
-# Check if any MPRIS-capable player has a track loaded (covers browsers during playback)
+# Usage: lock-if-idle [lock|poweroff]
+# Blocks the action if media is playing or a fullscreen window is focused.
+ACTION="${1:-lock}"
+
 for player in $(playerctl -l 2>/dev/null); do
   STATUS=$(playerctl status -p "$player" 2>/dev/null)
-  if echo "$STATUS" | grep -qiE '^(Playing|Paused)$'; then
-    # Extra verification: does this player actually have media loaded?
-    TITLE=$(playerctl metadata --format '{{title}}' -p "$player" 2>/dev/null)
-    if [ -n "$TITLE" ]; then
-      exit 0  # Media is loaded — skip lock
-    fi
+  if [ "$STATUS" = "Playing" ]; then
+    exit 0
   fi
 done
 
-# Fallback: check for fullscreen window (catches games that don't use MPRIS)
 WINDOW_INFO=$(niri msg -j focused-window 2>/dev/null)
 if echo "$WINDOW_INFO" | jq -e '.is_focused_fullscreen' >/dev/null 2>&1; then
-  exit 0  # Fullscreen window detected — skip lock
+  exit 0
 fi
 
-# Nothing to prevent lock — proceed
+if [ "$ACTION" = "poweroff" ]; then
+  exec niri msg action power-off-monitors
+fi
+
 exec lock-screen

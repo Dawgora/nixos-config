@@ -249,7 +249,6 @@ networking.hostName = "dawgora"; # Define your hostname.
     dina-font
     font-awesome
     proggyfonts
-    swaylock
     swayidle
     sway-audio-idle-inhibit
     grim

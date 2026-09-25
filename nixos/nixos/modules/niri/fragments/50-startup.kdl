@@ -5,4 +5,6 @@ spawn-sh-at-startup "~/.local/bin/sleep.sh"
 
 hotkey-overlay {
     skip-at-startup
+    title "Lock the Screen"
+    spawn "lock-screen"  # was "swaylock"
 }

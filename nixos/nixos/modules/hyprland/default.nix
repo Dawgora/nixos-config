@@ -6,6 +6,7 @@
   ...
 }: let
   start-script = ./start.sh;
+  sleep-script = ./sleep.sh;
 in
   {
     home.packages = with pkgs; [
@@ -155,7 +156,7 @@ in
             "$mod SHIFT, c, killactive"
             "$mod, E, exec, $fileManager"
             "$mod SHIFT, e, exit"
-            "$mod SHIFT, l, exec, swaylock -f -c 000000"
+            "$mod SHIFT, l, exec, swaylock -f"
 
             # Screen focus
             "$mod, v, togglefloating"

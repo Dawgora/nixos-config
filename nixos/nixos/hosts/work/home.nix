@@ -20,6 +20,10 @@
     ./backgrounds.nix
   ];
 
+  dawgora.swaylock.images = [
+    "eDP-1:/home/dawgora/.local/share/backgrounds/middle-screen.png"
+  ];
+
   home.username = "dawgora";
   home.homeDirectory = "/home/dawgora";
   home.stateVersion = "23.11";

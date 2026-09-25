@@ -52,7 +52,7 @@ in
 
             "${mod}+Shift+r" = "exec swaymsg reload";
             "--release Print" = "exec --no-startup-id hyprshot -m region -o ~/Documents/Screenshots";
-          "${mod}+Ctrl+l" = "exec swaylock -f -c 000000";
+          "${mod}+Ctrl+l" = "exec swaylock -f";
           "${mod}+Ctrl+q" = "exit";
         }
       ];

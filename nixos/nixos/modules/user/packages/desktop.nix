@@ -28,7 +28,6 @@
     dconf
     gnome-tweaks
     wlogout
-    swaylock
     wlr-randr
     arandr
     shikane

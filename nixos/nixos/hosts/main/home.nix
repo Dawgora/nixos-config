@@ -19,6 +19,12 @@
       ./backgrounds.nix
   ];
 
+  dawgora.swaylock.images = [
+    "HDMI-A-2:/home/dawgora/.local/share/backgrounds/side-screens.png"
+    "DP-3:/home/dawgora/.local/share/backgrounds/middle-screen-2.jpg"
+    "DP-4:/home/dawgora/.local/share/backgrounds/side-screens.png"
+  ];
+
   home.username = "dawgora";
     home.homeDirectory = "/home/dawgora";
     home.stateVersion = "23.11";

@@ -1,14 +1,15 @@
 #!/usr/bin/env sh
 
-# skip lock if media is actively playing
+# Skip lock if media is actively playing
 if playerctl status 2>/dev/null | grep -q '^Playing'; then
   exit 0
 fi
 
-# skip lock if a fullscreen window is focused (games, fullscreen video)
+# Skip lock if a fullscreen window is focused (games, fullscreen video)
 WINDOW_INFO=$(niri msg -j focused-window 2>/dev/null)
 if echo "$WINDOW_INFO" | jq -e '.is_focused_fullscreen' >/dev/null 2>&1; then
   exit 0
 fi
 
-exec swaylock -f
+# Otherwise, lock the screen
+exec lock-screen

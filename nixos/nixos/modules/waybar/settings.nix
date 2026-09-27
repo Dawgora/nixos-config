@@ -1,9 +1,11 @@
-{ lib, config, specialArgs, ... }:
+{ lib, specialArgs, ... }:
 let
   systemType = specialArgs.systemType or "default";
-  systemConfig = if systemType == "main" then [ ./home.nix ]
-                 else if systemType == "work" then [ ./work-pc.nix ]
-                 else [ ./home.nix ];
+
+  systemConfig =
+    if systemType == "main" then [ ./home-bars/main.nix ./home-bars/left.nix ./home-bars/right.nix ]
+    else if systemType == "work" then [ ./work-pc.nix ]
+    else [ ./home-bars/main.nix ./home-bars/left.nix ./home-bars/right.nix ];
 
 in
 {

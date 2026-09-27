@@ -51,6 +51,16 @@
       background-color: rgba(238, 168, 216, 0.2);  /* Solarized base3, subtle hover */
     }
 
+    #custom-disk-root { color: #268bd2; }     /* blue - system */
+    #custom-disk-ssd { color: #859900; }      /* green - oldssd */
+    #custom-disk-hdd { color: #b58900; }      /* yellow - hdd */
+    #custom-disk-win { color: #d33682; }      /* pink - windows */
+
+    #custom-disk-root.offline,
+    #custom-disk-ssd.offline,
+    #custom-disk-hdd.offline,
+    #custom-disk-win.offline { color: #657b83; }
+
     /* =============================================
        ACCENT COLORS
        ============================================= */

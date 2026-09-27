@@ -70,10 +70,10 @@
       orientation = "inherit";
       drawer = {
         transition-duration = 500;
-        children-class = "not-power";
+        children-class = "hardware";
         transition-left-to-right = true;
       };
-      modules = [ "cpu" "memory" "disk" ];
+      modules = [ "cpu" "memory" "custom/disk-root" "custom/disk-ssd" "custom/disk-hdd" "custom/disk-win" ];
     };
 
     "custom/power" = {
@@ -196,21 +196,45 @@
     };
 
     "cpu" = {
-      interval = 5;
-      format = " {usage}%";
-      tooltip = false;
+      interval = 2;
+      format = "  {usage}%";
+      tooltip = true;
+      tooltip-format = "Overall: {usage}%\nCores:\n{all-cores}\n\nTemperature:\nPackage: {temperature-c}°C";
+      format-core = "Core {core}: {usage}%";
     };
 
     "memory" = {
       interval = 5;
-      format = " {percentage}%";
+      format = " 󰟓 {percentage}%";
+      tooltip = true;
+      tooltip-format = "Total: {total} GiB\nUsed: {used} GiB ({percentage_used}%)\nFree: {free} GiB\nCached: {cached} GiB\n\nSwap:\nUsed: {swapUsed} GiB ({percentage_swap_used}%)\nTotal: {swapTotal} GiB";
+    };
+
+    "custom/disk-root" = {
+      interval = 60;
+      return-type = "json";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /";
+      tooltip = false;  # Info in tooltip already
+    };
+
+    "custom/disk-ssd" = {
+      interval = 60;
+      return-type = "json";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /mnt/old_ssd";
       tooltip = false;
     };
 
-    "disk" = {
-      interval = 30;
-      format = " {percentage_used}%";
-      path = "/";
+    "custom/disk-hdd" = {
+      interval = 60;
+      return-type = "json";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /mnt/hdd";
+      tooltip = false;
+    };
+
+    "custom/disk-win" = {
+      interval = 60;
+      return-type = "json";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /mnt/windows_game_dir";
       tooltip = false;
     };
 

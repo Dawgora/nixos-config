@@ -6,152 +6,88 @@
     height = 40;
     output = "eDP-1";
 
-    modules-left = [
-      "niri/workspaces"
-      "niri/window"
-    ];
+    modules-left = [ "niri/workspaces" "niri/window" "clock" ];
+    modules-center = [];
+    modules-right = [ "network" "group/media" "group/hardware" "group/audio" "battery" "backlight" "bluetooth" "tray" "custom/power" ];
 
-    modules-center = [
-      "clock"
-    ];
-
-    modules-right = [
-      "group/hardware"
-      "group/audio"
-      "battery"
-      "backlight"
-      "bluetooth"
-      "network"
-      "tray"
-      "custom/vpn"
-      "custom/power"
-    ];
-
-    "niri/workspaces" = {
-      "format" = "{name}";
-      "on-click" = "activate";
-    };
-
-    "niri/window" = {
-      "format" = "{}";
-      "max-length" = 40;
-    };
-
+    # === ENHANCED FEATURES FROM HOME.NIX ===
     "clock" = {
-      "format" = "{:%H:%M  %m-%d}";
-      "tooltip" = false;
-      "interval" = 60;
+      format = " {:%H:%M:%S}";
+      tooltip-format = "<tt><big>{calendar}</big></tt>";
+      interval = 1;
+      locale = "en_GB.UTF-8";
+      calendar = {
+        mode = "month";
+        mode-mon-col = true;
+        weeks-pos = "right";
+        on-scroll = 1;
+        format = {
+          today = "<span weight='bold' foreground='#268bd2'>{}</span>";
+        };
+      };
     };
 
-    "group/hardware" = {
+    "group/media" = {
       orientation = "inherit";
-      drawer = {
-        "transition-duration" = 300;
-        "transition-left-to-right" = false;
-      };
-      modules = [
-        "cpu"
-        "memory"
-        "disk"
-      ];
+      modules = [ "custom/media-prev" "custom/media-play" "custom/media-next" ];
     };
 
-    "cpu" = {
-      "interval" = 5;
-      "format" = "CPU {usage:2}%";
+    "custom/media-prev" = {
+      format = "󰒮";
+      tooltip = false;
+      on-click = "playerctl previous -p chromium";
     };
 
-    "memory" = {
-      "interval" = 5;
-      "format" = "Mem {}%";
+    "custom/media-play" = {
+      format = " {} ";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/media-status.sh";
+      return-type = "json";
+      interval = 2;
+      on-click = "playerctl play-pause -p chromium 2>/dev/null || tidal-hifi";
+      on-click-right = "tidal-hifi";
     };
 
-    "disk" = {
-      "interval" = 30;
-      "format" = "Disk {percentage_used:2}%";
-      "path" = "/";
+    "custom/media-next" = {
+      format = "󰒭";
+      tooltip = false;
+      on-click = "playerctl next -p chromium";
     };
 
-    "group/audio" = {
-      orientation = "inherit";
-      drawer = {
-        "transition-duration" = 300;
-        "transition-left-to-right" = false;
-      };
-      modules = [
-        "pulseaudio"
-      ];
-    };
-
-    "pulseaudio" = {
-      "format" = "{icon} {volume:2}%";
-      "format-muted" = "MUTE";
-      "format-icons" = {
-        "headphones" = "";
-        "default" = [ "" "" ];
-      };
-      "scroll-step" = 5;
-      "on-click" = "pamixer -t";
-      "on-click-right" = "pavucontrol";
-    };
-
-    # ---- laptop modules ----
-
+    # === LAPTOP-SPECIFIC MODULES ===
     "battery" = {
-      "states" = {
-        "good" = 80;
-        "warning" = 30;
-        "critical" = 15;
+      states = {
+        good = 80;
+        warning = 30;
+        critical = 15;
       };
-      "format" = "{icon} {capacity:2}%";
-      "format-charging" = " {capacity:2}%";
-      "format-plugged" = " {capacity:2}%";
-      "format-icons" = [ "" "" "" "" "" ];
-      "interval" = 30;
-      "tooltip" = false;
+      format = "{icon} {capacity:2}%";
+      format-charging = " {capacity:2}%";
+      format-plugged = " {capacity:2}%";
+      format-icons = [ "" "" "" "" "" ];
+      interval = 30;
+      tooltip = false;
     };
 
     "backlight" = {
-      "device" = "intel_backlight";
-      "format" = "{icon} {percent:2}%";
-      "format-icons" = [ "" "" "" "" "" "" "" "" ];
-      "on-scroll-up" = "brightnessctl set +5%";
-      "on-scroll-down" = "brightnessctl set 5%-";
+      device = "intel_backlight";
+      format = "{icon} {percent:2}%";
+      format-icons = [ "" "" "" "" "" "" "" "" ];
+      on-scroll-up = "brightnessctl set +5%";
+      on-scroll-down = "brightnessctl set 5%-";
     };
 
     "bluetooth" = {
-      "format" = " {status}";
-      "format-connected" = " {num_connections}";
-      "tooltip-format" = "{device_alias}";
-      "on-click" = "overskride";
+      format = " {status}";
+      format-connected = " {num_connections}";
+      tooltip-format = "{deviceAlias}";
+      on-click = "overskride";
     };
 
     "network" = {
-      "format-wifi" = " {essid}";
-      "format-ethernet" = " Wired";
-      "format-disconnected" = "⚠ Offline";
-      "tooltip" = false;
-    };
-
-    "tray" = {
-      "icon-size" = 20;
-      "spacing" = 8;
-    };
-
-    "custom/power" = {
-      format = "⏻";
-      tooltip = true;
-      tooltip-format = "Power menu";
-      on-click = "wlogout";
-    };
-
-    "custom/vpn" = {
-      format = "󰖂 {}";
-      exec = "/home/dawgora/flakes/nixos/nixos/scripts/vpn-status.sh";
-      return-type = "json";
-      interval = 10;
-      on-click = "protonvpn-app";
-      tooltip = true;
+      format-wifi = " {essid}";
+      format-ethernet = " Wired";
+      format-disconnected = "⚠ Offline";
+      tooltip = false;
     };
   };
 }

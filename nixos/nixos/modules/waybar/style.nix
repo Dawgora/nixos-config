@@ -28,6 +28,7 @@
     #cpu, #memory, #disk, #battery,
     #pulseaudio, #pulseaudio.microphone,
     #idle_inhibitor, #tray, #taskbar, #mode, #custom-power, #media,
+    #custom-disk-root, #custom-disk-ssd, #custom-disk-hdd, #custom-disk-win,
     #custom-vpn {
       color: #fdf6e3;
       padding: 0px 12px;
@@ -35,6 +36,11 @@
       border-radius: 12px;
       margin: 4px 3px 0 3px;
     }
+
+    #custom-memory { color: #cb4b16; }  /* orange */
+
+    #custom-memory.used.warning { color: #b58900; }  /* yellow at 80% */
+    #custom-memory.used.critical { color: #dc322f; }  /* red at 90% */
 
     #custom-power {
       font-size: 16px;  /* slightly smaller than the 20px global, fits the bar height */

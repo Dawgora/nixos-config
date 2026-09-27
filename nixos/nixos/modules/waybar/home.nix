@@ -73,7 +73,7 @@
         children-class = "hardware";
         transition-left-to-right = true;
       };
-      modules = [ "cpu" "memory" "custom/disk-root" "custom/disk-ssd" "custom/disk-hdd" "custom/disk-win" ];
+      modules = [ "cpu" "custom/memory" "custom/disk-root" "custom/disk-ssd" "custom/disk-hdd" "custom/disk-win" ];
     };
 
     "custom/power" = {
@@ -203,11 +203,11 @@
       format-core = "Core {core}: {usage}%";
     };
 
-    "memory" = {
+    "custom/memory" = {
       interval = 5;
-      format = " 󰟓 {percentage}%";
-      tooltip = true;
-      tooltip-format = "Total: {total} GiB\nUsed: {used} GiB ({percentage_used}%)\nFree: {free} GiB\nCached: {cached} GiB\n\nSwap:\nUsed: {swapUsed} GiB ({percentage_swap_used}%)\nTotal: {swapTotal} GiB";
+      return-type = "json";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/memory-info.sh";
+      tooltip = false;
     };
 
     "custom/disk-root" = {

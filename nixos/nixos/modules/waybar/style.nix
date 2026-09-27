@@ -27,7 +27,7 @@
     #clock, #clock.2, #clock.3,
     #cpu, #memory, #disk, #battery,
     #pulseaudio, #pulseaudio.microphone,
-    #idle_inhibitor, #tray, #taskbar, #mode, #custom-power,
+    #idle_inhibitor, #tray, #taskbar, #mode, #custom-power, #media,
     #custom-vpn {
       color: #fdf6e3;
       padding: 0px 12px;
@@ -38,6 +38,17 @@
 
     #custom-power {
       font-size: 16px;  /* slightly smaller than the 20px global, fits the bar height */
+    }
+
+    #custom-media-prev, #custom-media-play, #custom-media-next {
+      padding: 0 8px;
+      border-radius: 12px;
+    }
+
+    #custom-media-prev:hover,
+    #custom-media-next:hover,
+    #custom-media-play:hover {
+      background-color: rgba(238, 168, 216, 0.2);  /* Solarized base3, subtle hover */
     }
 
     /* =============================================

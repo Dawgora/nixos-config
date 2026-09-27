@@ -59,11 +59,11 @@
     modules-right = [
       "network"
       "custom/vpn"
+      "group/media"
       "group/hardware"
       "group/audio"
       "custom/power"
     ];
-
 
     # Drawer groups remain the same
     "group/hardware" = {
@@ -93,6 +93,32 @@
       modules = [ "pulseaudio" "pulseaudio#microphone" ];
     };
 
+    "group/media" = {
+      orientation = "inherit";
+      modules = ["custom/media-prev" "custom/media-play" "custom/media-next"];
+    };
+
+
+    "custom/media-prev" = {
+      format = "󰒮";
+      tooltip = false;
+      on-click = "playerctl previous -p chromium";
+    };
+
+    "custom/media-play" = {
+      format = " {} ";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/media-status.sh";
+      return-type = "json";
+      interval = 2;
+      on-click = "playerctl play-pause -p chromium 2>/dev/null || proton-tidal-hifi";
+      on-click-right = "tidal-hifi";  # Right-click launches Tidal if idle
+    };
+
+    "custom/media-next" = {
+      format = "󰒭";
+      tooltip = false;
+      on-click = "playerctl next -p chromium";
+    };
 
     "custom/vpn" = {
       format = "󰖂 {}";

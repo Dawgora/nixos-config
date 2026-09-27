@@ -29,7 +29,7 @@
     #pulseaudio, #pulseaudio.microphone,
     #idle_inhibitor, #tray, #taskbar, #mode, #custom-power, #media,
     #custom-disk-root, #custom-disk-ssd, #custom-disk-hdd, #custom-disk-win,
-    #custom-memory,
+    #custom-memory, #custom-cpu,
     #custom-vpn {
       color: #fdf6e3;
       padding: 0px 12px;

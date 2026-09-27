@@ -157,6 +157,13 @@ networking.hostName = "dawgora"; # Define your hostname.
   # Set your time zone.
   time.timeZone = "Europe/Riga";
 
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "en_GB.UTF-8/UTF-8"
+  ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

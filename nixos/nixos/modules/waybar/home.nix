@@ -110,7 +110,7 @@
       exec = "/home/dawgora/flakes/nixos/nixos/scripts/media-status.sh";
       return-type = "json";
       interval = 2;
-      on-click = "playerctl play-pause -p chromium 2>/dev/null || proton-tidal-hifi";
+      on-click = "playerctl play-pause -p chromium 2>/dev/null || tidal-hifi";
       on-click-right = "tidal-hifi";  # Right-click launches Tidal if idle
     };
 
@@ -129,18 +129,27 @@
       tooltip = true;
     };
 
-    # Module configs (same as before, swapping niri/*)
     "clock" = {
-      "format" = " {:%H:%M:%S}";
-      "tooltip-format" = "<tt>{calendar}</tt>";
-      "interval" = 1;
+      format = " {:%H:%M:%S}";
+      tooltip-format = "<tt><big>{calendar}</big></tt>";
+      interval = 1;
+      locale = "en_GB.UTF-8";
+      calendar = {
+        mode = "month";
+        mode-mon-col = true;
+        weeks-pos = "right";
+        on-scroll = 1;
+        format = {
+          today = "<span weight='bold' foreground='#268bd2'>{}</span>";
+        };
+      };
     };
 
     "niri/workspaces" = {
       "disable-scroll" = true;
       "all-outputs" = false;
       "format" = "{name}";
-      "on-click" = "activate";  # ← add this to leftSidebar/mainBar too for consistency
+      "on-click" = "activate";
     };
 
     "niri/window" = {
@@ -169,6 +178,7 @@
 
     "network" = {
       interval = 2;
+      interface = "enp8s0";   # ← pin it to your wired NIC
       format = "{ifname}";
       format-wifi = " {bandwidthDownBytes}  {bandwidthUpBytes} ";
       format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes} 󰈁";

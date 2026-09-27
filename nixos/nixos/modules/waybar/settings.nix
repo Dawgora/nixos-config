@@ -3,9 +3,9 @@ let
   systemType = specialArgs.systemType or "default";
 
   systemConfig =
-    if systemType == "main" then [ ./home-bars/main.nix ./home-bars/left.nix ./home-bars/right.nix ]
+    if systemType == "main" then [ ./home/main.nix ./home/left.nix ./home/right.nix ]
     else if systemType == "work" then [ ./work-pc.nix ]
-    else [ ./home-bars/main.nix ./home-bars/left.nix ./home-bars/right.nix ];
+    else [ ./home/main.nix ./home/left.nix ./home/right.nix ];
 
 in
 {

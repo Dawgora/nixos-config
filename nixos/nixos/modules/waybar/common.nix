@@ -1,4 +1,13 @@
-{ ... }:
+{ lib, specialArgs, ... }:
+let
+  systemType = specialArgs.systemType or "default";
+  isMain = systemType == "main";
+
+  diskModules =
+    if isMain
+    then [ "custom/disk-root" "custom/disk-ssd" "custom/disk-hdd" "custom/disk-win" ]
+    else [ "custom/disk-root" ];
+in
 {
   programs.waybar.settings.mainBar = {
     "niri/workspaces" = {
@@ -39,15 +48,57 @@
       };
     };
 
-    "group/hardware" = {
-      orientation = "inherit";
-      drawer = {
-        transition-duration = 500;
-        children-class = "hardware";
-        transition-left-to-right = true;
+    "clock" = {
+      format = " {:%H:%M:%S}";
+      tooltip-format = "<tt><big>{calendar}</big></tt>";
+      interval = 1;
+      locale = "en_GB.UTF-8";
+      calendar = {
+        mode = "month";
+        mode-mon-col = true;
+        weeks-pos = "right";
+        on-scroll = 1;
+        format = {
+          today = "<span weight='bold' foreground='#268bd2'>{}</span>";
+        };
       };
-      modules = [ "custom/cpu" "custom/memory" "custom/disk-root" "custom/disk-ssd" "custom/disk-hdd" "custom/disk-win" ];
     };
+
+    "group/media" = {
+      orientation = "inherit";
+      modules = [ "custom/media-prev" "custom/media-play" "custom/media-next" ];
+    };
+
+    "custom/media-prev" = {
+      format = "󰒮";
+      tooltip = false;
+      on-click = "playerctl previous -p chromium";
+    };
+
+    "custom/media-play" = {
+      format = " {} ";
+      exec = "/home/dawgora/flakes/nixos/nixos/scripts/media-status.sh";
+      return-type = "json";
+      interval = 2;
+      on-click = "playerctl play-pause -p chromium 2>/dev/null || tidal-hifi";
+      on-click-right = "tidal-hifi";
+    };
+
+    "custom/media-next" = {
+      format = "󰒭";
+      tooltip = false;
+      on-click = "playerctl next -p chromium";
+    };
+
+    "group/hardware" = {
+          orientation = "inherit";
+          drawer = {
+            transition-duration = 500;
+            children-class = "hardware";
+            transition-left-to-right = true;
+          };
+          modules = [ "custom/cpu" "custom/memory" ] ++ diskModules;
+        };
 
     "custom/cpu" = {
       interval = 5;
@@ -68,21 +119,21 @@
       tooltip = true;
     };
 
-    "custom/disk-ssd" = {
+    "custom/disk-ssd" = lib.mkIf isMain {
       interval = 60;
       return-type = "json";
       exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /mnt/old_ssd";
       tooltip = true;
     };
 
-    "custom/disk-hdd" = {
+    "custom/disk-hdd" = lib.mkIf isMain {
       interval = 60;
       return-type = "json";
       exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /mnt/hdd";
       tooltip = true;
     };
 
-    "custom/disk-win" = {
+    "custom/disk-win" = lib.mkIf isMain {
       interval = 60;
       return-type = "json";
       exec = "/home/dawgora/flakes/nixos/nixos/scripts/disk-info.sh /mnt/windows_game_dir";

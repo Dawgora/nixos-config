@@ -8,50 +8,11 @@
 
     modules-left = [ "niri/workspaces" "niri/window" "clock" ];
     modules-center = [];
-    modules-right = [ "network" "group/media" "group/hardware" "group/audio" "battery" "backlight" "bluetooth" "tray" "custom/power" ];
-
-    # === ENHANCED FEATURES FROM HOME.NIX ===
-    "clock" = {
-      format = " {:%H:%M:%S}";
-      tooltip-format = "<tt><big>{calendar}</big></tt>";
-      interval = 1;
-      locale = "en_GB.UTF-8";
-      calendar = {
-        mode = "month";
-        mode-mon-col = true;
-        weeks-pos = "right";
-        on-scroll = 1;
-        format = {
-          today = "<span weight='bold' foreground='#268bd2'>{}</span>";
-        };
-      };
-    };
-
-    "group/media" = {
-      orientation = "inherit";
-      modules = [ "custom/media-prev" "custom/media-play" "custom/media-next" ];
-    };
-
-    "custom/media-prev" = {
-      format = "󰒮";
-      tooltip = false;
-      on-click = "playerctl previous -p chromium";
-    };
-
-    "custom/media-play" = {
-      format = " {} ";
-      exec = "/home/dawgora/flakes/nixos/nixos/scripts/media-status.sh";
-      return-type = "json";
-      interval = 2;
-      on-click = "playerctl play-pause -p chromium 2>/dev/null || tidal-hifi";
-      on-click-right = "tidal-hifi";
-    };
-
-    "custom/media-next" = {
-      format = "󰒭";
-      tooltip = false;
-      on-click = "playerctl next -p chromium";
-    };
+    modules-right = [
+      "network#wifi" "network#eth"
+      "group/media" "group/hardware" "group/audio"
+      "battery" "backlight" "bluetooth" "tray" "custom/power"
+    ];
 
     # === LAPTOP-SPECIFIC MODULES ===
     "battery" = {
@@ -83,11 +44,18 @@
       on-click = "overskride";
     };
 
-    "network" = {
+    "network#wifi" = {
+      interface = "wlp3s0";   # change me
       format-wifi = " {essid}";
+      format-disconnected = "";  # invisible when no wifi
+      tooltip-format = "{ifname} {essid} ({signalStrength}%) {ipaddr}";
+    };
+
+    "network#eth" = {
+      interface = "enp0s31f6";  # change me
       format-ethernet = " Wired";
-      format-disconnected = "⚠ Offline";
-      tooltip = false;
+      format-disconnected = "";
+      tooltip-format = "{ifname} {ipaddr}";
     };
   };
 }

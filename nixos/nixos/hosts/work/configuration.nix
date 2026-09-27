@@ -125,6 +125,13 @@ virtualisation.docker.enable = true;
 
 users.defaultUserShell = pkgs.zsh;
 
+i18n.defaultLocale = "en_US.UTF-8";
+
+i18n.supportedLocales = [
+  "en_US.UTF-8/UTF-8"
+  "en_GB.UTF-8/UTF-8"
+];
+
 networking.hostName = "dawgora"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

@@ -3,7 +3,7 @@
   programs.waybar.settings.leftSidebar = {
     layer = "top";
     position = "top";
-    output = "DP-4";
+    output = "DP-1";
     modules-left = [ "niri/workspaces" "clock#2" "clock#3" ];
     modules-right = [ "wlr/taskbar" ];
 

@@ -3,7 +3,7 @@
   programs.waybar.settings.mainBar = {
     layer = "top";
     position = "top";
-    output = "DP-3";
+    output = "HDMI-A-1";
 
     modules-left = [ "clock" "idle_inhibitor" "niri/workspaces" "wlr/taskbar" "tray" ];
     modules-center = [ "niri/window" ];

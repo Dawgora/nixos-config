@@ -20,9 +20,9 @@
   ];
 
   dawgora.swaylock.images = [
+    "DP-1:/home/dawgora/.local/share/backgrounds/side-screens.png"
+    "HDMI-A-1:/home/dawgora/.local/share/backgrounds/middle-screen-2.jpg"
     "HDMI-A-2:/home/dawgora/.local/share/backgrounds/side-screens.png"
-    "DP-3:/home/dawgora/.local/share/backgrounds/middle-screen-2.jpg"
-    "DP-4:/home/dawgora/.local/share/backgrounds/side-screens.png"
   ];
 
   home.username = "dawgora";

@@ -1,4 +1,4 @@
-{ inputs, pkgs, config, ... }:
+{ inputs, pkgs, config, lib, ... }:
 let
   fonts = config.stylix.fonts;
 in
@@ -55,6 +55,12 @@ in
 
   # HM only writes the fontconfig defaults when this is on
   fonts.fontconfig.enable = true;
+
+  # Electron/Chromium (Bitwarden, Discord, …) and some GTK3 apps fall back to the
+  # GTK theme name / prefer-dark flag when they can't read the portal's color-scheme.
+  # Stylix sets plain "adw-gtk3"; its colours come from gtk.css either way.
+  gtk.theme.name = lib.mkForce "adw-gtk3-dark";
+  gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
 
   # Stylix's gtk target doesn't set these. libadwaita reads them via the portal.
   dconf.settings."org/gnome/desktop/interface" = {

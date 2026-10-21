@@ -23,7 +23,7 @@
     "wlr/taskbar" = {
       format = "{icon}";
       icon-size = 20;
-      icon-theme = "WhiteSur-dark";
+      icon-theme = "Papirus-Dark";
       tooltip-format = "{title}";
       on-click = "activate";
       on-click-middle = "close";

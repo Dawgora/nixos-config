@@ -4,7 +4,7 @@
     configuration {
       modi: "drun,run,window";
       show-icons: true;
-      icon-theme: "WhiteSur-dark";
+      icon-theme: "Papirus-Dark";
       font: "JetBrainsMono Nerd Font 20";
       display-drun: "󰀻 Apps";
       display-run: "󰘳 Run";

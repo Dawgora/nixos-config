@@ -10,10 +10,8 @@ in
     imports =
       [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-#      ../../modules/nginx
       ../../modules/zsh
       ../../modules/steam
-      ../../modules/display-manager
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -81,12 +79,6 @@ hardware.graphics = {
 
 # razer
 hardware.openrazer.enable = true;
-
-# wayland and hyperland
-programs.hyprland = {
-  enable = true;
-  xwayland.enable = true;
-};
 
 programs.sway = {
   enable = true;
@@ -194,8 +186,6 @@ networking.hostName = "dawgora"; # Define your hostname.
       settings = {
         animate = true;
         animation = 0;
-        waylandsessions="/etc/wayland-sessions";
-
       };
     };
     #sddm.enable = true;
@@ -262,7 +252,6 @@ networking.hostName = "dawgora"; # Define your hostname.
     slurp
     wl-clipboard
     alsa-utils
-    rose-pine-hyprcursor
     virt-manager
     virt-viewer
     spice
@@ -331,11 +320,6 @@ networking.hostName = "dawgora"; # Define your hostname.
     host  all all ::1/128      trust
     '';
   };
-
-
-    systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
-
-  xdg.portal.wlr.enable = true;
 
   programs.nix-ld.enable = true;
 

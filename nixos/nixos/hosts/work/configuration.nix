@@ -61,12 +61,6 @@ hardware.graphics = {
     ];
   };
 
-# wayland and hyperland
-programs.hyprland = {
-  enable = true;
-  xwayland.enable = true;
-};
-
 programs.sway = {
   enable = true;
   xwayland.enable = true;
@@ -228,7 +222,6 @@ networking.hostName = "dawgora"; # Define your hostname.
     slurp
     wl-clipboard
     alsa-utils
-    rose-pine-hyprcursor
     virt-manager
     virt-viewer
     spice

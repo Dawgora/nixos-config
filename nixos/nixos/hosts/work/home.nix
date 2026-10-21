@@ -11,10 +11,12 @@
     ../../modules/user/packages
     ../../modules/user/theme.nix
     ../../modules/user/shell.nix
-    ../../modules/user/portals.nix
     ../../modules/user/obsidian-sync.nix
     ../../modules/user/neovim.nix
     ../../modules/user/swaylock.nix
+    ../../modules/user/session-services.nix
+
+
     # work-machine extras
     ./packages.nix
     ./backgrounds.nix

@@ -2,7 +2,6 @@
 {
     imports = [
       ../../modules/waybar
-      ../../modules/hyprland
       ../../modules/sway
       ../../modules/mako
       ../../modules/niri
@@ -11,10 +10,10 @@
       ../../modules/user/packages
       ../../modules/user/theme.nix
       ../../modules/user/shell.nix
-      ../../modules/user/portals.nix
       ../../modules/user/obsidian-sync.nix
       ../../modules/user/neovim.nix
       ../../modules/user/swaylock.nix
+      ../../modules/user/session-services.nix
 
       ./backgrounds.nix
   ];

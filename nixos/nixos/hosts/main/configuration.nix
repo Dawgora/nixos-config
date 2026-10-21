@@ -114,6 +114,13 @@ services.pipewire = {
   jack.enable = true;
 };
 
+xdg.terminal-exec = {
+  enable = true;
+  settings.default = [ "Alacritty.desktop" ];
+};
+
+services.xserver.excludePackages = [ pkgs.xterm ];
+
 
 # virt manager
 virtualisation = {

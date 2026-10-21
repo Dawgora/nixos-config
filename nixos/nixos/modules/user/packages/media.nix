@@ -11,5 +11,6 @@
     yt-dlp
     flameshot
     hyprshot
+    swayimg
   ];
 }

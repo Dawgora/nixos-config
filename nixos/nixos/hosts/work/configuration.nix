@@ -23,6 +23,7 @@ in
       users = {
         dawgora = import ./home.nix;
       };
+      backupFileExtension = "hm-backup";
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg:
@@ -98,6 +99,12 @@ services.pipewire = {
   jack.enable = true;
 };
 
+xdg.terminal-exec = {
+  enable = true;
+  settings.default = [ "Alacritty.desktop" ];
+};
+
+services.xserver.excludePackages = [ pkgs.xterm ];
 
 # virt manager
 virtualisation = {

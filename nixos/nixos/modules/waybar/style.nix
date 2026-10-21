@@ -1,15 +1,32 @@
-{ ... }:
+{ config, ... }:
+let
+  c = config.lib.stylix.colors.withHashtag;
+  mono = config.stylix.fonts.monospace.name;
+in
 {
   programs.waybar.style = ''
+    /* Palette from Stylix (modules/user/theme.nix) */
+    @define-color bg      ${c.base00};
+    @define-color surface ${c.base02};
+    @define-color fg      ${c.base05};
+    @define-color dim     ${c.base04};
+    @define-color red     ${c.base08};
+    @define-color orange  ${c.base09};
+    @define-color yellow  ${c.base0A};
+    @define-color green   ${c.base0B};
+    @define-color cyan    ${c.base0C};
+    @define-color blue    ${c.base0D};
+    @define-color purple  ${c.base0E};
+
     * {
-      font-family: "JetBrainsMono Nerd Font", "FontAwesome", monospace;
+      font-family: "${mono}", "FontAwesome", monospace;
       font-size: 14px;
       min-height: 0;
     }
 
     window#waybar {
       background-color: rgba(0, 0, 0, 0);
-      color: #fdf6e3;
+      color: @fg;
       transition-property: background-color;
       transition-duration: 0.5s;
     }
@@ -18,8 +35,6 @@
 
     /* =============================================
        UNIVERSAL PILL — every module, every bar.
-       No merge rules; each module is a standalone
-       rounded pill with a small gap between them.
        ============================================= */
     #window, #niri-window,
     #workspaces, #niri-workspaces,
@@ -31,22 +46,21 @@
     #custom-disk-root, #custom-disk-ssd, #custom-disk-hdd, #custom-disk-win,
     #custom-memory, #custom-cpu,
     #custom-vpn {
-      color: #fdf6e3;
+      color: @fg;
       padding: 0px 12px;
-      background-color: #1a1a1a;
+      background-color: @bg;
       border-radius: 12px;
       margin: 4px 3px 0 3px;
     }
 
-    #custom-cpu { color: #6c71c4; }
+    #custom-cpu { color: @purple; }
 
-    #custom-memory { color: #cb4b16; }  /* orange */
-
-    #custom-memory.used.warning { color: #b58900; }  /* yellow at 80% */
-    #custom-memory.used.critical { color: #dc322f; }  /* red at 90% */
+    #custom-memory { color: @orange; }
+    #custom-memory.used.warning { color: @yellow; }
+    #custom-memory.used.critical { color: @red; }
 
     #custom-power {
-      font-size: 16px;  /* slightly smaller than the 20px global, fits the bar height */
+      font-size: 16px;
     }
 
     #custom-media-prev, #custom-media-play, #custom-media-next {
@@ -57,42 +71,40 @@
     #custom-media-prev:hover,
     #custom-media-next:hover,
     #custom-media-play:hover {
-      background-color: rgba(238, 168, 216, 0.2);  /* Solarized base3, subtle hover */
+      background-color: alpha(@purple, 0.2);
     }
 
-    #custom-disk-root { color: #268bd2; }     /* blue - system */
-    #custom-disk-ssd { color: #859900; }      /* green - oldssd */
-    #custom-disk-hdd { color: #b58900; }      /* yellow - hdd */
-    #custom-disk-win { color: #d33682; }      /* pink - windows */
+    #custom-disk-root { color: @blue; }    /* system */
+    #custom-disk-ssd  { color: @green; }   /* oldssd */
+    #custom-disk-hdd  { color: @yellow; }  /* hdd */
+    #custom-disk-win  { color: @purple; }  /* windows */
 
     #custom-disk-root.offline,
     #custom-disk-ssd.offline,
     #custom-disk-hdd.offline,
-    #custom-disk-win.offline { color: #657b83; }
+    #custom-disk-win.offline { color: @dim; }
 
     /* =============================================
        ACCENT COLORS
        ============================================= */
     #clock, #clock.2, #clock.3 {
-      color: #268bd2;
+      color: @blue;
       font-weight: bold;
     }
 
-    #network          { color: #d33682; }
-    #pulseaudio       { color: #2aa198; }
-    #memory           { color: #cb4b16; }
-    #cpu              { color: #6c71c4; }
-    #disk             { color: #b58900; }
-    #battery          { color: #859900; }
-    #battery.warning  { color: #b58900; }
-    #battery.critical { color: #dc322f; }
+    #network          { color: @red; }
+    #pulseaudio       { color: @cyan; }
+    #memory           { color: @orange; }
+    #cpu              { color: @purple; }
+    #disk             { color: @yellow; }
+    #battery          { color: @green; }
+    #battery.warning,
+    #battery.critical { color: @red; }
 
-    #idle_inhibitor.activated { color: #2aa198; }
+    #idle_inhibitor.activated { color: @cyan; }
 
-    #battery.warning, #battery.critical { color: #dc322f; }
-
-    #custom-vpn.connected    { color: #859900; }  /* green — VPN on  */
-    #custom-vpn.disconnected { color: #dc322f; }  /* red — VPN off */
+    #custom-vpn.connected    { color: @green; }
+    #custom-vpn.disconnected { color: @red; }
 
     /* =============================================
        WORKSPACES
@@ -100,16 +112,16 @@
     #workspaces button, #niri-workspaces button {
       padding: 0 4px;
       margin: 0;
-      color: #fdf6e3;
+      color: @fg;
       background: transparent;
       border-radius: 8px;
       transition: all 0.3s;
     }
     #workspaces button.focused, #niri-workspaces button.focused {
-      color: #268bd2;
+      color: @blue;
     }
     #workspaces button:hover, #niri-workspaces button:hover {
-      background: #002b36;
+      background: @surface;
     }
 
     /* =============================================
@@ -120,7 +132,7 @@
     }
     #tray > .needs-attention {
       -gtk-icon-effect: highlight;
-      background-color: #dc322f;
+      background-color: @red;
       border-radius: 8px;
     }
 
@@ -128,7 +140,7 @@
        ANIMATION + TOOLTIP
        ============================================= */
     @keyframes blink {
-      to { background-color: rgba(220, 50, 47, 0.3); color: #fdf6e3; }
+      to { background-color: alpha(@red, 0.3); color: @fg; }
     }
 
     #battery.critical:not(.charging) {
@@ -147,20 +159,20 @@
     }
 
     #taskbar button:hover {
-      background: #002b36;
+      background: @surface;
     }
 
     /* active window's icon gets a highlighted underline */
     #taskbar button.active {
-      box-shadow: inset 0 -3px #268bd2;
+      box-shadow: inset 0 -3px @blue;
     }
 
     tooltip {
       border-radius: 12px;
       padding: 15px;
-      background-color: #1a1a1a;
-      color: #fdf6e3;
-      border: 1px solid #268bd2;
+      background-color: @bg;
+      color: @fg;
+      border: 1px solid @blue;
     }
   '';
 }

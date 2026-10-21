@@ -1,11 +1,16 @@
-{ ... }:
+{ config, ... }:
+let
+  c = config.lib.stylix.colors.withHashtag;
+  mono = config.stylix.fonts.monospace.name;
+  icons = config.stylix.icons.dark;
+in
 {
   xdg.configFile."rofi/config.rasi".text = ''
     configuration {
       modi: "drun,run,window";
       show-icons: true;
-      icon-theme: "Papirus-Dark";
-      font: "JetBrainsMono Nerd Font 20";
+      icon-theme: "${icons}";
+      font: "${mono} 20";
       display-drun: "󰀻 Apps";
       display-run: "󰘳 Run";
       display-window: "󰎔 Window";
@@ -14,11 +19,13 @@
     }
 
     * {
-      bg: #1a1a1a;
-      bg-alt: #073642;
-      fg: #ffffff;
-      fg-dim: #586e75;
-      accent: #268bd2;
+      bg: ${c.base00};
+      bg-alt: ${c.base01};
+      surface: ${c.base02};
+      fg: ${c.base05};
+      fg-dim: ${c.base04};
+      accent: ${c.base0D};
+      urgent: ${c.base08};
       background-color: transparent;
       text-color: @fg;
     }
@@ -26,7 +33,7 @@
     window {
       width: 720px;
       border: 2px;
-      border-color: #268bd2;
+      border-color: @accent;
       border-radius: 14px;
       background-color: @bg;
       padding: 18px;
@@ -36,7 +43,7 @@
       spacing: 8px;
       padding: 12px;
       border-radius: 12px;
-      background-color: #002b36;
+      background-color: @bg-alt;
       children: [ "prompt", "entry" ];
     }
 
@@ -79,50 +86,25 @@
       text-color: inherit;
     }
 
-    element selected {
-      background-color: @accent;
-      text-color: #ffffff;
+    element normal.normal,
+    element alternate.normal,
+    element normal.urgent,
+    element normal.active,
+    element alternate.active {
+      background-color: @bg;
+      text-color: @fg;
     }
 
-    element selected.normal {
-      background-color: @accent;
-      text-color: #ffffff;
-    }
-
+    element selected,
+    element selected.normal,
     element selected.active {
       background-color: @accent;
-      text-color: #ffffff;
-    }
-
-    element normal.normal {
-      background-color: @bg;
-      text-color: @fg;
-    }
-
-    element alternate.normal {
-      background-color: @bg;
-      text-color: @fg;
-    }
-
-    element normal.odd {
-      background-color: @bg;
-      text-color: @fg;
-    }
-
-    element normal.even {
-      background-color: @bg;
-      text-color: @fg;
-    }
-
-
-    element urgent.normal {
-      background-color: @bg;
-      text-color: @fg;
+      text-color: @bg;
     }
 
     element selected.urgent {
-      background-color: #dc322f;
-      text-color: #ffffff;
+      background-color: @urgent;
+      text-color: @bg;
     }
 
     mode-switcher {
@@ -132,18 +114,13 @@
     button {
       padding: 8px 14px;
       border-radius: 10px;
-      background-color: @bg-alt;
-      text-color: @fg;
-    }
-
-    element active.normal {
-      background-color: @bg;
+      background-color: @surface;
       text-color: @fg;
     }
 
     button selected {
       background-color: @accent;
-      text-color: #ffffff;
+      text-color: @bg;
     }
   '';
 }

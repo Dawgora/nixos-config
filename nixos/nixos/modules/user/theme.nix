@@ -17,6 +17,7 @@ in
       base0A = "e0af68"; # yellow
       base0D = "7aa2f7"; # blue (accent)
       base0F = "d18616"; # brown (base0F was a second red)
+      base0C = "7dcfff";
     };
 
     fonts = {
@@ -35,7 +36,7 @@ in
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Classic";
-      size = 24;
+      size = 20;
     };
 
     icons = {

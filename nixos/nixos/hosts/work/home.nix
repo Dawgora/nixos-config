@@ -16,6 +16,7 @@
     ../../modules/user/swaylock.nix
     ../../modules/user/session-services.nix
     ../../modules/user/default-apps.nix
+    ../../modules/user/file-manager.nix
 
     # work-machine extras
     ./packages.nix

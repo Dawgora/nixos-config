@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     firefox
-    thunar
     mousepad
     obsidian
     signal-desktop
@@ -36,6 +35,5 @@
     overskride
     yubikey-personalization
     yubioath-flutter
-    ranger
   ];
 }

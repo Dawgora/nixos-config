@@ -70,8 +70,10 @@ programs.sway = {
 
 programs.niri = {
   enable = true;
+  useNautilus = false;
 };
 
+services.gvfs.enable = true;
 
 services.blueman.enable = true;
 hardware.bluetooth = {
@@ -105,6 +107,7 @@ xdg.terminal-exec = {
 };
 
 services.xserver.excludePackages = [ pkgs.xterm ];
+environment.gnome.excludePackages = [ pkgs.nautilus ];
 
 # virt manager
 virtualisation = {

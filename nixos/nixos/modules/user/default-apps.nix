@@ -7,7 +7,8 @@ let
     image       = "swayimg.desktop";
     video       = "mpv.desktop";
     audio       = "mpv.desktop";
-    fileManager = "thunar.desktop";            # should change this
+    fileManager = "nemo.desktop";
+    archive     = "org.gnome.FileRoller.desktop";
   };
 
   mimeTypes = {
@@ -36,6 +37,15 @@ let
       "audio/wav" "audio/x-wav" "audio/mp4" "audio/aac"
     ];
     fileManager = [ "inode/directory" ];
+    archive = [
+      "application/zip" "application/x-7z-compressed"
+      "application/vnd.rar" "application/x-rar"
+      "application/x-tar" "application/gzip"
+      "application/x-compressed-tar"        # .tar.gz
+      "application/x-bzip2-compressed-tar"  # .tar.bz2
+      "application/x-xz-compressed-tar"     # .tar.xz
+      "application/x-zstd-compressed-tar"   # .tar.zst
+    ];
   };
 
   schemeHandlers = {

@@ -16,6 +16,16 @@ in
   '';
 
   systemd.user.services = {
+    waybar = {
+      Unit = niriUnit "Waybar";
+      Service = {
+        ExecStart = "${config.programs.waybar.package}/bin/waybar";
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
+      Install.WantedBy = [ "niri.service" ];
+    };
+
     awww = {
       Unit = niriUnit "awww wallpaper daemon";
       Service = {
@@ -23,6 +33,7 @@ in
         # wait until the daemon answers, then set per-screen images
         ExecStartPost = "${pkgs.bash}/bin/sh -c 'until ${pkgs.awww}/bin/awww query >/dev/null 2>&1; do sleep 0.2; done; set-backgrounds'";
         Restart = "on-failure";
+        RestartSec = 2;
       };
       Install.WantedBy = [ "niri.service" ];
     };
@@ -32,6 +43,7 @@ in
       Service = {
         ExecStart = "${pkgs.proton-vpn}/bin/protonvpn-app";
         Restart = "on-failure";
+        RestartSec = 2;
       };
       Install.WantedBy = [ "niri.service" ];
     };
@@ -41,6 +53,7 @@ in
       Service = {
         ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${bin}/lock-if-idle lock' timeout 600 '${bin}/lock-if-idle poweroff' resume 'niri msg action power-on-monitors'";
         Restart = "on-failure";
+        RestartSec = 2;
       };
       Install.WantedBy = [ "niri.service" ];
     };

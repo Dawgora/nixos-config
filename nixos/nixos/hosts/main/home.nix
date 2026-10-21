@@ -50,7 +50,6 @@
     # SESSION VARIABLES — global environment, stays with identity
     home.sessionVariables = {
       TERMINAL = "alacritty";
-      GTK_THEME = "WhiteSur-Dark-solid";
       NIXOS_HOME_CONFIG = "/home/dawgora/.config";
     };
 

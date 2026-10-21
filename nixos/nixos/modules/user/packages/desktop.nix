@@ -36,5 +36,6 @@
     overskride
     yubikey-personalization
     yubioath-flutter
+    ranger
   ];
 }

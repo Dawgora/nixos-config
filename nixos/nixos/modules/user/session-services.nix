@@ -8,6 +8,13 @@ let
   };
 in
 {
+  xdg.configFile."autostart/remmina-applet.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Remmina Applet
+    Hidden=true
+  '';
+
   systemd.user.services = {
     awww = {
       Unit = niriUnit "awww wallpaper daemon";

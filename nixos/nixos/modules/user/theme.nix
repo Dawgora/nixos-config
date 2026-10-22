@@ -1,6 +1,7 @@
 { inputs, pkgs, config, lib, ... }:
 let
   fonts = config.stylix.fonts;
+  colors = config.lib.stylix.colors.withHashtag;
 in
 {
   imports = [ inputs.stylix.homeModules.stylix ];
@@ -47,7 +48,17 @@ in
     };
 
     targets = {
-      gtk.enable = true;           # adw-gtk3 + gtk.css for GTK3 and libadwaita
+      gtk = {
+        enable = true;            # adw-gtk3 + gtk.css for GTK3 and libadwaita
+        # Scrollbar thumb from the palette (adw-gtk3 uses a translucent text colour).
+        # Firefox reads these GTK colours for its own scrollbars.
+        extraCss = ''
+          scrollbar slider { background-color: ${colors.base03}; }
+          scrollbar slider:hover { background-color: ${colors.base04}; }
+          scrollbar slider:active,
+          scrollbar.dragging slider { background-color: ${colors.base0D}; }
+        '';
+      };
       qt.enable = true;            # qtct + Base16Kvantum
       fontconfig.enable = true;    # sans/serif/mono/emoji defaults
       font-packages.enable = true; # installs the fonts above for the user

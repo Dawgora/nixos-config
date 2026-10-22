@@ -28,6 +28,9 @@ in {
 
 	withRuby = false;
 	withPython3 = false;
+	extraPackages = [
+	    pkgs.beam.packages.erlang_27.elixir-ls
+	];
 
 	plugins = with pkgs.vimPlugins; [
         {

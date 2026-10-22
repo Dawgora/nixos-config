@@ -11,13 +11,12 @@ require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip").filetype_extend("heex", {"html", "elixir"})
 
 require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {"elixirls"},
-})
+-- Servers installed through Mason are enabled automatically (mason-lspconfig 2.x).
+-- elixir-ls comes from Nix (programs.neovim.extraPackages), not from Mason.
+require('mason-lspconfig').setup({})
 
--- lspconfig.elixirls.setup{cmd = {'/home/dawgora/projects/elixir-ls/release/language_server.sh'};}
-
-vim.lsp.config('elixirls', {cmd = {'/home/dawgora/projects/elixir-ls/release/language_server.sh'};})
+vim.lsp.config('elixirls', { cmd = { 'elixir-ls' } })
+vim.lsp.enable('elixirls')
 
 cmp.setup({
     window = {

@@ -2,45 +2,25 @@
 with lib;
 let
     cfg = config.modules.nvim;
-    jabuti-nvim = pkgs.vimUtils.buildVimPlugin {
-        name = "jabuti-nvim";
-        src = pkgs.fetchFromGitHub {
-            owner = "jabuti-theme";
-            repo = "jabuti-nvim";
-            rev = "17f1b94cbf1871a89cdc264e4a8a2b3b4f7c76d2";
-            sha256 = "sha256-iPjwx/rTd98LUPK1MUfqKXZhQ5NmKx/rN8RX1PIuDFA=";
-        };
-    };
 
     settings = ./lua/settings.lua;
     remap = ./lua/remap.lua;
     telescope = ./lua/plugins/telescope.lua;
     lsp = ./lua/plugins/lsp.lua;
-    #treesitter = ./lua/plugins/treesitter.lua;
+    treesitter = ./lua/plugins/treesitter.lua;
     # undotree = ./lua/plugins/undotree.lua;
     neo-tree = ./lua/plugins/neo-tree.lua;
     # harpoon = ./lua/plugins/harpoon.lua;
 in {
 	enable = true;
 	vimAlias = true;
-	# extraConfig = ''
-	#     luafile $NIXOS_HOME_CONFIG/nvim/lua/settings.lua
-	#     luafile $NIXOS_HOME_CONFIG/nvim/lua/remap.lua
- #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/telescope.lua
- #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/lsp.lua
- #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/treesitter.lua
- #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/undotree.lua
- #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/neo-tree.lua
- #        luafile $NIXOS_HOME_CONFIG/nvim/lua/plugins/harpoon.lua
-	# '';
-	#
-    #         luafile ${treesitter}
 
-	 	extraConfig = ''
+	extraConfig = ''
 	    luafile ${settings}
 	    luafile ${remap}
 	    luafile ${telescope}
 	    luafile ${lsp}
+	    luafile ${treesitter}
 	    luafile ${neo-tree}
 	'';
 
@@ -49,6 +29,16 @@ in {
 	withPython3 = true;
 
 	plugins = with pkgs.vimPlugins; [
+        {
+            # Tokyo Night "night" = the Stylix palette in modules/user/theme.nix
+            # (bg #1a1b26, sidebars #16161e). Hardcoded: change this if the desktop palette changes.
+            plugin = tokyonight-nvim;
+            type = "lua";
+            config = ''
+              require("tokyonight").setup({ style = "night" })
+              vim.cmd.colorscheme("tokyonight-night")
+            '';
+        }
         vim-nix
         plenary-nvim
         mason-nvim
@@ -64,18 +54,13 @@ in {
         harpoon
         friendly-snippets
         {
-            plugin = jabuti-nvim;
-            config = "colorscheme = jabuti;";
-            type = "lua";
-        }
-        {
             plugin = indent-blankline-nvim;
-            config = "lua = require('ibl').setup({indent = {char = '┊'}});";
+            config = "require('ibl').setup({ indent = { char = '┊' } })";
             type = "lua";
         }
         {
             plugin = telescope-nvim;
-            config = "lua = require('telescope').setup();";
+            config = "require('telescope').setup()";
             type = "lua";
         }];
 }

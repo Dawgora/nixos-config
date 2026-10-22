@@ -8,25 +8,26 @@ let
     telescope = ./lua/plugins/telescope.lua;
     lsp = ./lua/plugins/lsp.lua;
     treesitter = ./lua/plugins/treesitter.lua;
-    # undotree = ./lua/plugins/undotree.lua;
+    undotree-lua = ./lua/plugins/undotree.lua;
+    harpoon-lua = ./lua/plugins/harpoon.lua;
     neo-tree = ./lua/plugins/neo-tree.lua;
-    # harpoon = ./lua/plugins/harpoon.lua;
 in {
 	enable = true;
 	vimAlias = true;
 
 	extraConfig = ''
-	    luafile ${settings}
-	    luafile ${remap}
-	    luafile ${telescope}
-	    luafile ${lsp}
-	    luafile ${treesitter}
-	    luafile ${neo-tree}
+     luafile ${settings}
+     luafile ${remap}
+     luafile ${telescope}
+     luafile ${lsp}
+     luafile ${treesitter}
+     luafile ${neo-tree}
+     luafile ${undotree-lua}
+     luafile ${harpoon-lua}
 	'';
 
-	##TODO: remove theese
-	withRuby = true;
-	withPython3 = true;
+	withRuby = false;
+	withPython3 = false;
 
 	plugins = with pkgs.vimPlugins; [
         {

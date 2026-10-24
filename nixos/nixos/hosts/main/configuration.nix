@@ -34,7 +34,12 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
-  hardware.openrazer.enable = true; # razer
+  # The daemon only starts for members of the openrazer group
+  hardware.openrazer = {
+    enable = true; # razer
+    users = [ "dawgora" ];
+  };
+
   dawgora.unfreePackages = [ "nvidia-x11" "nvidia-settings" ];
 
   # ── Session ─────────────────────────────────────────────────────────────

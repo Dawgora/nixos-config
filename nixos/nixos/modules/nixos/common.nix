@@ -11,6 +11,8 @@
   # ── Home Manager ────────────────────────────────────────────────────────
   # The host file sets home-manager.users.dawgora = import ./home.nix
   home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
     extraSpecialArgs = { inherit inputs systemType; };
     backupFileExtension = "hm-backup";
   };
@@ -22,17 +24,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-      flameshot = super.flameshot.overrideAttrs (oldAttrs: {
-        enableWlrSupport = true;
-      });
-    })
-  ];
 
   # ── Boot ────────────────────────────────────────────────────────────────
   boot.loader = {

@@ -1,6 +1,6 @@
 # Home Manager settings shared by both hosts. Host files (hosts/<host>/home.nix)
 # import this and add host-only modules, wallpapers and home.stateVersion.
-{ lib, systemType, ... }:
+{ systemType, ... }:
 {
   imports = [
     ../waybar
@@ -28,13 +28,6 @@
     source = ../../scripts;
     recursive = true;
   };
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
-    "obsidian" "obs-studio" "steam" "steam-unwrapped"
-    "zed-editor" "discord" "discord-unwrapped" "winbox" "castlabs-electron"
-    "teamviewer" "slack" "google-chrome"
-  ];
 
   home.sessionVariables = {
     TERMINAL = "alacritty";

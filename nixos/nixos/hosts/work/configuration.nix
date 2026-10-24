@@ -10,7 +10,7 @@
 
   home-manager.users.dawgora = import ./home.nix;
 
-  networking.hostName = "dawgora";
+  networking.hostName = "work";
 
   # ── Session ─────────────────────────────────────────────────────────────
 

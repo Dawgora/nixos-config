@@ -10,7 +10,7 @@
 
   home-manager.users.dawgora = import ./home.nix;
 
-  networking.hostName = "dawgora";
+  networking.hostName = "main";
 
   # ── Boot / GPU ──────────────────────────────────────────────────────────
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];

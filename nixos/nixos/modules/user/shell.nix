@@ -15,9 +15,7 @@ in {
     "latex-devel" = "nix-shell ${latex} --command zsh";
     "ruby-devel" = "nix-shell ${ruby} --command zsh";
     "php-devel" = "nix-shell ${php} --command zsh";
-    "update-nixos-channel" = "sudo nix-channel --update";
-    "delete-nixos-garbage" = "nix-collect-garbage --delete-old";
-    "update-home-flake" = "sudo nix flake update --flake ~/flakes/nixos";
+    "update-home-flake" = "nix flake update --flake ~/flakes/nixos";
     "upload-obsidian" = "systemctl --user start proton-obsidian-sync";
   };
 }

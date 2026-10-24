@@ -4,6 +4,7 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.nix-index-database.nixosModules.nix-index
     ./unfree.nix
     ../zsh
   ];
@@ -11,8 +12,8 @@
   # ── Home Manager ────────────────────────────────────────────────────────
   # The host file sets home-manager.users.dawgora = import ./home.nix
   home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
+    useGlobalPkgs = true;   # HM uses this system's pkgs (one nixpkgs, one unfree policy)
+    useUserPackages = true; # home.packages go to /etc/profiles/per-user/dawgora
     extraSpecialArgs = { inherit inputs systemType; };
     backupFileExtension = "hm-backup";
   };
@@ -23,7 +24,28 @@
     allowed-users = [ "@wheel" ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  # Hard-link identical files in the store when new paths are added
+  nix.settings.auto-optimise-store = true;
+
+  # nh: `nh os switch` (shows a package diff, asks for sudo itself) and
+  # garbage collection. nh clean replaces nix.gc; don't enable both.
+  programs.nh = {
+    enable = true;
+    flake = "/home/dawgora/flakes/nixos"; # NH_FLAKE; nh picks the host by hostname
+    clean = {
+      enable = true;
+      dates = "weekly";
+      extraArgs = "--keep 5 --keep-since 7d";
+    };
+  };
+
+  # nix-index with a prebuilt database: `, <command>` runs a program without
+  # installing it, and unknown commands print which package has them.
+  programs.nix-index-database.comma.enable = true;
+
+  # No channels: <nixpkgs> and `nix run nixpkgs#…` already use this flake's
+  # nixpkgs (nixpkgs.flake.*). This also removes the nix-channel command.
+  nix.channel.enable = false;
 
   # ── Boot ────────────────────────────────────────────────────────────────
   boot.loader = {

@@ -1,24 +1,8 @@
-{ pkgs, lib, ... }:
+# work: Home Manager for dawgora. Shared modules are in modules/user/common.nix.
+{ pkgs, ... }:
 {
   imports = [
-    # shared desktop stack
-    ../../modules/waybar
-    ../../modules/mako
-    ../../modules/niri
-    ../../modules/alacritty
-
-    # shared user modules
-    ../../modules/user/packages
-    ../../modules/user/theme.nix
-    ../../modules/user/shell.nix
-    ../../modules/user/obsidian-sync.nix
-    ../../modules/user/neovim.nix
-    ../../modules/user/swaylock.nix
-    ../../modules/user/session-services.nix
-    ../../modules/user/default-apps.nix
-    ../../modules/user/file-manager.nix
-
-    # work-machine extras
+    ../../modules/user/common.nix
     ./packages.nix
     ./backgrounds.nix
   ];
@@ -27,30 +11,7 @@
     "eDP-1:/home/dawgora/.local/share/backgrounds/middle-screen.png"
   ];
 
-  home.username = "dawgora";
-  home.homeDirectory = "/home/dawgora";
-  home.stateVersion = "23.11";
-
-  xdg.enable = true;
-
-  home.file.".local/bin" = {
-    source = ../../scripts;
-    recursive = true;
-  };
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
-    "obsidian" "obs-studio" "steam" "steam-unwrapped"
-    "zed-editor" "discord" "discord-unwrapped" "winbox" "castlabs-electron"
-    "teamviewer" "slack" "google-chrome"
-  ];
-
-  # machine-specific aliases — note the flake target
-  home.shellAliases = {
-    "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#work";
-    "rebuild-local-nixos-boot" = "sudo nixos-rebuild boot --flake ~/flakes/nixos/#work";
-  };
-
+  # GNOME's terminal setting (GNOME session only)
   dconf = {
     enable = true;
     settings."org/gnome/desktop/default-applications/terminal" = {
@@ -58,10 +19,6 @@
     };
   };
 
-  home.sessionVariables = {
-    TERMINAL = "alacritty";
-    NIXOS_HOME_CONFIG = "/home/dawgora/.config";
-  };
-
-  programs.home-manager.enable = true;
+  # First Home Manager version used here. Never change it.
+  home.stateVersion = "23.11";
 }

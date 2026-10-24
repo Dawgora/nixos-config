@@ -2,7 +2,10 @@
 { pkgs, ... }:
 
 {
-  home.file.".local/share/backgrounds".source = ./backgrounds;
+  home.file.".local/share/backgrounds" = {
+    source = ./backgrounds;
+    recursive = true;
+  };
 
   home.packages = [
     (pkgs.writeShellScriptBin "set-backgrounds" ''

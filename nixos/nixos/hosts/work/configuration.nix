@@ -1,345 +1,58 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+{ pkgs, ... }:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/nixos/common.nix
+    ../../modules/steam
+    ../../modules/nginx
+    ../../modules/display-manager
+  ];
 
-{ inputs, config, lib, pkgs, callPackage, ... }:
+  home-manager.users.dawgora = import ./home.nix;
 
-let
-  #unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
-  {
-    imports =
-      [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/nginx
-      ../../modules/zsh
-      ../../modules/steam
-      ../../modules/display-manager
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  networking.hostName = "dawgora";
 
-    home-manager = {
-      extraSpecialArgs = {inherit inputs; };
-      users = {
-        dawgora = import ./home.nix;
-      };
-      backupFileExtension = "hm-backup";
-    };
-
-    nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "discord"
-      "spotify"
-      "obsidian"
-    ];
-
-# bootloader settings
-boot.loader = {
-  efi.canTouchEfiVariables = true;
-  grub = {
-    enable = true;
-    devices = [ "nodev" ];
-    efiSupport = true;
-    useOSProber = true;
-  };
-};
-
-# Experimental
-
-nix.settings.experimental-features = ["nix-command" "flakes"];
-
-services.resolved.enable = true;
-services.teamviewer.enable = true;
-
-# video settings
-hardware.graphics = {
-  enable = true;
-    #driSupport = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      vdpauinfo # sudo vainfo
-      libva-utils # sudo vainfo
-    ];
-  };
-
-programs.sway = {
-  enable = true;
-  xwayland.enable = true;
-  extraOptions = ["--unsupported-gpu"];
-};
-
-programs.niri = {
-  enable = true;
-  useNautilus = false;
-};
-
-services.gvfs.enable = true;
-
-services.blueman.enable = true;
-hardware.bluetooth = {
-  enable = true;
-  settings = {
-    General = {
-      Experimental = true;
-      FastConnectable = true;
-    };
-    Policy = {
-      AutoEnable = true;
-    };
-  };
-};
-
-xdg.portal.enable = true;
-xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-security.rtkit.enable = true;
-services.pipewire = {
-  enable = true;
-  alsa.enable = true;
-  alsa.support32Bit = true;
-  pulse.enable = true;
-  jack.enable = true;
-};
-
-xdg.terminal-exec = {
-  enable = true;
-  settings.default = [ "Alacritty.desktop" ];
-};
-
-services.xserver.excludePackages = [ pkgs.xterm ];
-environment.gnome.excludePackages = [ pkgs.nautilus ];
-
-# virt manager
-virtualisation = {
-  libvirtd = {
-    enable = true;
-    qemu = {
-      swtpm.enable = true;
-    };
-  };
-  spiceUSBRedirection.enable = true;
-};
-
-services.qemuGuest.enable = true;
-services.spice-vdagentd.enable = true;
-
-# docker
-virtualisation.docker.enable = true;
-# shell settings
-
-users.defaultUserShell = pkgs.zsh;
-
-i18n.defaultLocale = "en_US.UTF-8";
-
-i18n.supportedLocales = [
-  "en_US.UTF-8/UTF-8"
-  "en_GB.UTF-8/UTF-8"
-];
-
-networking.hostName = "dawgora"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
-
-  # Set your time zone.
-  time.timeZone = "Europe/Riga";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  environment.pathsToLink = [ "/libexec" ];
-
-  services.netbird.enable = true;
-
-  services.xserver = {
-    enable = true;
-
-    xkb.layout = "lv";
-  };
+  # ── Session ─────────────────────────────────────────────────────────────
 
   services.displayManager = {
     defaultSession = "sway";
-
-    ly = {
-      enable = true;
-      x11Support = false;
-      settings = {
-        animate = true;
-        animation = 0;
-        waylandsessions="/etc/wayland-sessions";
-
-      };
-    };
-  };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  #sound.enable = true;
-  #hardware.pulseaudio.enable = true;
-
-  nix.settings.allowed-users = [ "@wheel" ];
-
-  # Enable touchpad support (enabled default in most delibvirtdsktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.dawgora = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "vboxsf" "libvirtd"];
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    netbird-ui
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    vdpauinfo # sudo vainfo
-    libva-utils # sudo vainfo
-    home-manager
-    tmux
-    htop
-    nix-prefetch-git
-    qt5.qtquickcontrols2
-    qt5.qtgraphicaleffects
-    gparted
-    wlogout
-    git
-    postgresql_jdbc
-    openssl
-    waybar
-    libnotify
-    rofi
-    awww
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    font-awesome
-    proggyfonts
-    swayidle
-    sway-audio-idle-inhibit
-    grim
-    slurp
-    wl-clipboard
-    alsa-utils
-    virt-manager
-    virt-viewer
-    spice
-    spice-protocol
-    spice-gtk
-    adwaita-icon-theme
-    xwayland-satellite
-  ];
-
-  fonts.packages = with pkgs; [
-    font-awesome
-    inter
-  ];
-
-  environment.localBinInPath = true;
-
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-    MOZ_DISABLE_RDD_SANDBOX = "1";
-    NVD_BACKEND = "direct";
-    EGL_PLATFORM = "wayland";
-    EDITOR = "nvim";
-    GDK_BACKEND = "wayland";
-    QT_QPA_PLATFORM = "wayland";
-    SDL_VIDEODRIVER = "wayland";
-  };
-
-  environment.variables = {
-    EDITOR = "nvim";
+    ly.settings.waylandsessions = "/etc/wayland-sessions";
   };
 
   services.desktopManager.gnome.enable = true;
+  environment.gnome.excludePackages = [ pkgs.nautilus ];
 
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
+  hardware.bluetooth.settings.General.Experimental = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # ── Work services ───────────────────────────────────────────────────────
+  services.teamviewer.enable = true;
+  services.netbird.enable = true;
 
-  # all services
-  services.envfs.enable = true;
-
-  # TIME
-  time.hardwareClockInLocalTime = true;
-
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_16;
-    enableTCPIP = true;
-    settings.port = 5432;
-    authentication = lib.mkForce ''
-    local all all              trust
-    host  all all 127.0.0.1/32 trust
-    host  all all ::1/128      trust
-    '';
-  };
-
-  programs.nix-ld.enable = true;
-
-  programs.nix-ld.libraries = with pkgs; [
-    dart-sass
-  ];
+  dawgora.unfreePackages = [ "teamviewer" "google-chrome" ];
 
   programs.winbox = {
     enable = true;
     openFirewall = true;
   };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  programs.nix-ld.libraries = [ pkgs.dart-sass ];
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+    GDK_BACKEND = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+  };
+  environment.variables.EDITOR = "nvim";
 
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "23.11"; # Did you read the comment?
-
-  nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-      flameshot = super.flameshot.overrideAttrs (oldAttrs: {
-        enableWlrSupport = true;
-      });
-    })
+  environment.systemPackages = with pkgs; [
+    netbird-ui
+    rofi
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
+  # First NixOS version installed on this machine. Never change it.
+  system.stateVersion = "23.11"; # Did you read the comment?
 }

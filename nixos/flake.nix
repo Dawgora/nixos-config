@@ -15,49 +15,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { nixpkgs, ... }@inputs:
   let
-    system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
+    mkHost = systemType: nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs systemType; };
+      modules = [ ./nixos/hosts/${systemType}/configuration.nix ];
+    };
   in {
-
-      nixosConfigurations = {
-        main = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs system;
-            systemType = "main";
-          };
-
-          modules = [
-            ./nixos/hosts/main/configuration.nix
-            {
-              home-manager.extraSpecialArgs = {
-                systemType = "main";
-              };
-            }
-          ];
-        };
-
-        work = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs system;
-            systemType = "work";
-          };
-
-          modules = [
-            ./nixos/hosts/work/configuration.nix
-            {
-              home-manager.extraSpecialArgs = {
-                systemType = "work";
-              };
-            }
-          ];
-        };
-
-      };
+    nixosConfigurations = {
+      main = mkHost "main";
+      work = mkHost "work";
+    };
   };
 }

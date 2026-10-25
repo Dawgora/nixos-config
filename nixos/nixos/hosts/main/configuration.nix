@@ -13,7 +13,6 @@
   networking.hostName = "main";
 
   # ── Boot / GPU ──────────────────────────────────────────────────────────
-  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
 

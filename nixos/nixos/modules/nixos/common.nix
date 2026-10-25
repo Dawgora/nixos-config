@@ -175,10 +175,7 @@
   environment.localBinInPath = true;
 
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    MOZ_DISABLE_RDD_SANDBOX = "1";
-    NVD_BACKEND = "direct";
     EGL_PLATFORM = "wayland";
   };
 

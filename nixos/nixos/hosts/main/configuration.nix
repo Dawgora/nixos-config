@@ -16,8 +16,6 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.graphics.extraPackages = [ pkgs.nvidia-vaapi-driver ];
-
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -29,9 +27,35 @@
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
   };
+
+  # niri wiki (Nvidia): without this the driver keeps freed buffers in niri's
+  # heap and niri ends up using ~1 GiB of VRAM instead of ~100 MiB.
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text =
+    builtins.toJSON {
+      rules = [
+        {
+          pattern = {
+            feature = "procname";
+            matches = "niri";
+          };
+          profile = "Limit Free Buffer Pool On Wayland Compositors";
+        }
+      ];
+      profiles = [
+        {
+          name = "Limit Free Buffer Pool On Wayland Compositors";
+          settings = [
+            {
+              key = "GLVidHeapReuseRatio";
+              value = 0;
+            }
+          ];
+        }
+      ];
+    };
 
   # The daemon only starts for members of the openrazer group
   hardware.openrazer = {

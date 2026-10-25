@@ -7,6 +7,7 @@
       dedicatedServer.openFirewall = false;
       gamescopeSession.enable = true;
       extraCompatPackages = [pkgs.proton-ge-bin];
+      extraPackages = [pkgs.mangohud];
     };
 
     gamescope = {
@@ -17,6 +18,11 @@
         "--expose-wayland"
       ];
     };
-  };
-}
 
+    gamemode.enable = true;
+  };
+
+  environment.systemPackages = [pkgs.mangohud];
+
+  users.users.dawgora.extraGroups = ["gamemode"];
+}

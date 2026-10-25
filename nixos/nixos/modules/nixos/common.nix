@@ -195,23 +195,10 @@
     qt5.qtquickcontrols2
     qt5.qtgraphicaleffects
     gparted
-    wlogout
     git
     postgresql_jdbc
     openssl
-    waybar
-    libnotify
     awww
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    font-awesome
-    proggyfonts
     swayidle
     sway-audio-idle-inhibit
     grim

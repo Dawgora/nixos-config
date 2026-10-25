@@ -4,6 +4,5 @@
     google-chrome
     xss-lock
     tigervnc
-    udisks
   ];
 }

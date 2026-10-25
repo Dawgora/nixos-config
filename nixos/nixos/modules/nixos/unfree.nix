@@ -19,7 +19,6 @@
       "obsidian"
       "winbox"
       "castlabs-electron" # tidal-hifi
-      "zsh-autoenv"
     ];
   };
 }

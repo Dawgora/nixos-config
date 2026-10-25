@@ -16,22 +16,18 @@
     proton-vpn
     # system tools
     fastfetch
-    htop
     btop
     tree
     jq
     p7zip
     unzip
-    git
     tig
-    dconf
     gnome-tweaks
     wlogout
     wlr-randr
     arandr
     shikane
     networkmanagerapplet
-    bluez
     overskride
     yubikey-personalization
     yubioath-flutter

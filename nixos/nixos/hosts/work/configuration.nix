@@ -50,7 +50,6 @@
 
   environment.systemPackages = with pkgs; [
     netbird-ui
-    rofi
   ];
 
   # First NixOS version installed on this machine. Never change it.

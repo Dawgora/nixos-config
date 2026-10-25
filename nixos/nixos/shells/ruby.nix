@@ -1,6 +1,4 @@
-{
-  pkgs ? import <nixpkgs> { },
-}:
+{ pkgs }:
 
 with pkgs;
 let
@@ -30,4 +28,3 @@ in
     rails -v
     '';
     }
-

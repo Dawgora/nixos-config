@@ -12,7 +12,7 @@
     ./theme.nix
     ./shell.nix
     ./obsidian-sync.nix
-    ./neovim.nix
+    ../nvim
     ./swaylock.nix
     ./session-services.nix
     ./default-apps.nix

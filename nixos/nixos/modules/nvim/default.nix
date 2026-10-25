@@ -11,6 +11,8 @@ let
     undotree-lua = ./lua/plugins/undotree.lua;
     harpoon-lua = ./lua/plugins/harpoon.lua;
     neo-tree = ./lua/plugins/neo-tree.lua;
+
+    elixirTools = import ../../lib/elixir.nix pkgs;
 in {
 	enable = true;
 	vimAlias = true;
@@ -29,7 +31,7 @@ in {
 	withRuby = false;
 	withPython3 = false;
 	extraPackages = [
-	    pkgs.beam.packages.erlang_27.elixir-ls
+	    elixirTools.elixir-ls
 	];
 
 	plugins = with pkgs.vimPlugins; [

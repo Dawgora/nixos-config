@@ -32,5 +32,9 @@
       main = mkHost "main";
       work = mkHost "work";
     };
+
+    devShells.x86_64-linux = import ./nixos/shells {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    };
   };
 }

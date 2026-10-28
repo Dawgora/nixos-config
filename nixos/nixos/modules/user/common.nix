@@ -1,6 +1,6 @@
 # Home Manager settings shared by both hosts. Host files (hosts/<host>/home.nix)
 # import this and add host-only modules, wallpapers and home.stateVersion.
-{ systemType, ... }:
+{ ... }:
 {
   imports = [
     ../waybar
@@ -35,8 +35,8 @@
   };
 
   home.shellAliases = {
-    "rebuild-local-nixos" = "sudo nixos-rebuild switch --flake ~/flakes/nixos/#${systemType}";
-    "rebuild-local-nixos-boot" = "sudo nixos-rebuild boot --flake ~/flakes/nixos/#${systemType}";
+    "rebuild-local-nixos" = "nh os switch";
+    "rebuild-local-nixos-boot" = "nh os boot";
   };
 
   programs.home-manager.enable = true;

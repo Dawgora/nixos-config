@@ -1,10 +1,14 @@
+screenshot-path "~/Documents/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "sh" "-c" "pkill rofi || rofi -show drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "lock-screen"; }
-    Print hotkey-overlay-title="Hypershot" { spawn "sh" "-c" "pkill hypershot || hyprshot -m region -o ~/Documents/Screenshots"; }
+    Print      { screenshot show-pointer=false; }
+    Ctrl+Print { screenshot-screen show-pointer=false; }
+    Alt+Print  { screenshot-window; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }

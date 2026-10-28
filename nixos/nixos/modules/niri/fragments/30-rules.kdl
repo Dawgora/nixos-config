@@ -22,6 +22,7 @@ window-rule {
 }
 
 window-rule {
+    open-on-workspace "main"
     match app-id=r#"^steam_app_"#
     match app-id=r#"^gamescope$"#
     open-maximized false
@@ -32,3 +33,19 @@ window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
 }
+
+  // Steam client on the middle screen (its notification toasts keep the rule above)
+  window-rule {
+      match app-id=r#"^steam$"#
+      exclude title=r#"^notificationtoasts_\d+_desktop$"#
+      open-on-workspace "main"
+  }
+
+  // Chat and music on the right screen
+  window-rule {
+      match app-id=r#"^org\.telegram\.desktop$"#
+      match app-id=r#"^signal$"#
+      match app-id=r#"^discord$"#
+      match app-id=r#"^tidal-hifi$"#
+      open-on-workspace "chat"
+  }

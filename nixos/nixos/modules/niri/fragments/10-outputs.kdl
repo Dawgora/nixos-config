@@ -20,3 +20,15 @@ output "HDMI-A-2" {
     transform "270"
     position x=4000 y=0
 }
+
+workspace "web" {
+    open-on-output "DP-1"
+}
+
+workspace "main" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "chat" {
+    open-on-output "HDMI-A-2"
+}

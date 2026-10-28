@@ -11,6 +11,7 @@ output "HDMI-A-1" {
     transform "normal"
     position x=1440 y=560
     focus-at-startup
+    variable-refresh-rate on-demand=true
 }
 
 output "HDMI-A-2" {

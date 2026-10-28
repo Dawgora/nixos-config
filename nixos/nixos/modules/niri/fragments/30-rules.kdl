@@ -41,11 +41,19 @@ window-rule {
       open-on-workspace "main"
   }
 
-  // Chat and music on the right screen
-  window-rule {
-      match app-id=r#"^org\.telegram\.desktop$"#
-      match app-id=r#"^signal$"#
-      match app-id=r#"^discord$"#
-      match app-id=r#"^tidal-hifi$"#
-      open-on-workspace "chat"
-  }
+// Chat and music on the right screen
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+    match app-id=r#"^signal$"#
+    match app-id=r#"^discord$"#
+    match app-id=r#"^tidal-hifi$"#
+    open-on-workspace "chat"
+}
+
+// Hide password manager and private chat from screen sharing (portal screencasts, OBS).
+// Screenshots still show them.
+window-rule {
+    match app-id=r#"^bitwarden$"#
+    match app-id=r#"^signal$"#
+    block-out-from "screencast"
+}

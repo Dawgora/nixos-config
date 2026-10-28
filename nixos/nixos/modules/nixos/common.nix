@@ -111,12 +111,6 @@
     useNautilus = false;
   };
 
-  programs.sway = {
-    enable = true;
-    xwayland.enable = true;
-    extraOptions = [ "--unsupported-gpu" ];
-  };
-
   xdg.terminal-exec = {
     enable = true;
     settings.default = [ "Alacritty.desktop" ];
@@ -196,7 +190,6 @@
     openssl
     awww
     swayidle
-    sway-audio-idle-inhibit
     grim
     slurp
     wl-clipboard
@@ -208,6 +201,8 @@
     spice-gtk
     adwaita-icon-theme
     xwayland-satellite
+    brightnessctl
+    pulseaudio
   ];
 
   fonts.packages = with pkgs; [

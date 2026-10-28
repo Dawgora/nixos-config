@@ -1,8 +1,5 @@
 {
-  config,
   lib,
-  pkgs,
-  inputs,
   ...
 }: let
   mod = "Mod4";
@@ -51,7 +48,7 @@ in
             "${mod}+space" = "focus mode_toggle";
 
             "${mod}+Shift+r" = "exec swaymsg reload";
-            "--release Print" = "exec --no-startup-id hyprshot -m region -o ~/Documents/Screenshots";
+          "--release Print" = "exec --no-startup-id ~/.local/bin/screenshot-region";
           "${mod}+Ctrl+l" = "exec swaylock -f";
           "${mod}+Ctrl+q" = "exit";
         }

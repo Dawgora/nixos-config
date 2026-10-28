@@ -2,7 +2,6 @@
 {
   imports = [
     ../../modules/user/common.nix
-    ../../modules/sway
     ./backgrounds.nix
   ];
 

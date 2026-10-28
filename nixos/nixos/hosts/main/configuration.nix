@@ -90,7 +90,6 @@
     libsecret
     gnome-keyring
     phodav
-    wlroots
     libyaml
   ];
 

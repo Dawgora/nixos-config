@@ -5,7 +5,6 @@
     ../../modules/nixos/common.nix
     ../../modules/steam
     ../../modules/nginx
-    ../../modules/display-manager
   ];
 
   home-manager.users.dawgora = import ./home.nix;
@@ -14,10 +13,7 @@
 
   # ── Session ─────────────────────────────────────────────────────────────
 
-  services.displayManager = {
-    defaultSession = "sway";
-    ly.settings.waylandsessions = "/etc/wayland-sessions";
-  };
+  services.displayManager.defaultSession = "niri";
 
   services.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = [ pkgs.nautilus ];

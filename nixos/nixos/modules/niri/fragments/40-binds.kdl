@@ -6,7 +6,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "sh" "-c" "pkill rofi || rofi -show drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "lock-screen"; }
-    Print      { screenshot show-pointer=false; }
+    Print hotkey-overlay-title="Screenshot a Region" { spawn "~/.local/bin/screenshot-region"; }
     Ctrl+Print { screenshot-screen show-pointer=false; }
     Alt+Print  { screenshot-window; }
 

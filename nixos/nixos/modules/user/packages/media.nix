@@ -9,8 +9,6 @@
     qbittorrent
     jellyfin-ffmpeg
     yt-dlp
-    flameshot
-    hyprshot
     swayimg
   ];
 }

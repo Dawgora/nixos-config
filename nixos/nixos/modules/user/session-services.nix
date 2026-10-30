@@ -48,10 +48,12 @@ in
       Install.WantedBy = [ "niri.service" ];
     };
 
+    # before-sleep: lock before suspend (lid close), so the session never wakes unlocked.
+    # -w makes swayidle wait for it; swaylock -f returns once the lock is up.
     swayidle = {
       Unit = niriUnit "Idle lock / monitor power-off";
       Service = {
-        ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${bin}/lock-if-idle lock' timeout 600 '${bin}/lock-if-idle poweroff' resume 'niri msg action power-on-monitors'";
+        ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${bin}/lock-if-idle lock' timeout 600 '${bin}/lock-if-idle poweroff' resume 'niri msg action power-on-monitors' before-sleep 'lock-screen'";
         Restart = "on-failure";
         RestartSec = 2;
       };

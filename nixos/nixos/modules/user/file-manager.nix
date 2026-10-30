@@ -24,7 +24,7 @@
   '';
 
   # Nemo's "Open in Terminal" reads the Cinnamon terminal setting
-  dconf.settings."org/cinnamon/desktop/default-applications/terminal" = {
+  dconf.settings."org/cinnamon/desktop/applications/terminal" = {
     exec = "alacritty";
     exec-arg = "-e";
   };

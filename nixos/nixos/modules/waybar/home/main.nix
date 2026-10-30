@@ -1,4 +1,7 @@
 { ... }:
+let
+  icon = import ../icon.nix;
+in
 {
   programs.waybar.settings.mainBar = {
     layer = "top";
@@ -13,8 +16,8 @@
       interval = 2;
       interface = "enp8s0";
       format = "{ifname}";
-      format-wifi = " {bandwidthDownBytes}  {bandwidthUpBytes} ";
-      format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes} 󰈁";
+      format-wifi = "${icon "f063"} {bandwidthDownBytes} ${icon "f062"} {bandwidthUpBytes} ${icon "f1eb"}";
+      format-ethernet = "${icon "f063"} {bandwidthDownBytes} ${icon "f062"} {bandwidthUpBytes} 󰈁";
       format-disconnected = "󰖪 Disconnected";
       tooltip-format-wifi = "{essid} ({signalStrength}%)";
       tooltip-format-ethernet = "{ifname} {ipaddr}/{cidr}";

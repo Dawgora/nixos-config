@@ -38,7 +38,7 @@ fi
 
 TOOLTIP=$(printf 'CPU: %s%% overall\n\n%s\n%s' "$OVERALL" "$CORES_TXT" "$TEMP_LINE")
 
-jq -nc --arg text " ${OVERALL}%" \
+jq -nc --arg pct "${OVERALL}" \
        --arg class "used" \
        --arg tooltip "$TOOLTIP" \
-   '{text: $text, class: $class, tooltip: $tooltip}'
+   '{text: ("\uf2db " + $pct + "%"), class: $class, tooltip: $tooltip}'

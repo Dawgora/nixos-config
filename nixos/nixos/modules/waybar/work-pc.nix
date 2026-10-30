@@ -1,4 +1,7 @@
 { ... }:
+let
+  icon = import ./icon.nix;
+in
 {
   programs.waybar.settings.mainBar = {
     layer = "top";
@@ -22,9 +25,9 @@
         critical = 15;
       };
       format = "{icon} {capacity:2}%";
-      format-charging = " {capacity:2}%";
-      format-plugged = " {capacity:2}%";
-      format-icons = [ "" "" "" "" "" ];
+      format-charging = "${icon "f0e7"} {capacity:2}%";
+      format-plugged = "${icon "f1e6"} {capacity:2}%";
+      format-icons = map icon [ "f244" "f243" "f242" "f241" "f240" ];
       interval = 30;
       tooltip = false;
     };
@@ -32,14 +35,14 @@
     "backlight" = {
       device = "intel_backlight";
       format = "{icon} {percent:2}%";
-      format-icons = [ "" "" "" "" "" "" "" "" ];
+      format-icons = map icon [ "f186" "f185" ];
       on-scroll-up = "brightnessctl set +5%";
       on-scroll-down = "brightnessctl set 5%-";
     };
 
     "bluetooth" = {
-      format = " {status}";
-      format-connected = " {num_connections}";
+      format = "${icon "f293"} {status}";
+      format-connected = "${icon "f293"} {num_connections}";
       tooltip-format = "{controller_alias}: {status}";
       tooltip-format-connected = "{device_alias}";
       on-click = "overskride";
@@ -47,14 +50,14 @@
 
     "network#wifi" = {
       interface = "wlp3s0";   # change me
-      format-wifi = " {essid}";
+      format-wifi = "${icon "f1eb"} {essid}";
       format-disconnected = "";  # invisible when no wifi
       tooltip-format = "{ifname} {essid} ({signalStrength}%) {ipaddr}";
     };
 
     "network#eth" = {
       interface = "enp0s31f6";  # change me
-      format-ethernet = " Wired";
+      format-ethernet = "󰈀 Wired";
       format-disconnected = "";
       tooltip-format = "{ifname} {ipaddr}";
     };

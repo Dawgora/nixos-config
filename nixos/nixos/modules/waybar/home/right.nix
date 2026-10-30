@@ -1,4 +1,7 @@
 { ... }:
+let
+  icon = import ../icon.nix;
+in
 {
   programs.waybar.settings.rightSidebar = {
     layer = "top";
@@ -14,7 +17,7 @@
       on-click = "activate";
     };
 
-    "clock#2" = { format = " {:%H:%M}"; tooltip = false; };
-    "clock#3" = { format = " {:%m-%d}"; tooltip = false; };
+    "clock#2" = { format = "${icon "f017"} {:%H:%M}"; tooltip = false; };
+    "clock#3" = { format = "${icon "f073"} {:%m-%d}"; tooltip = false; };
   };
 }

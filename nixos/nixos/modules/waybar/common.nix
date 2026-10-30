@@ -2,6 +2,7 @@
 let
   systemType = specialArgs.systemType or "default";
   isMain = systemType == "main";
+  icon = import ./icon.nix;
 
   diskModules =
     if isMain
@@ -49,7 +50,7 @@ in
     };
 
     "clock" = {
-      format = " {:%H:%M:%S}";
+      format = "${icon "f017"} {:%H:%M:%S}";
       tooltip-format = "<tt><big>{calendar}</big></tt>";
       interval = 1;
       locale = "en_GB.UTF-8";
@@ -164,7 +165,7 @@ in
 
     "pulseaudio#microphone" = {
       format = "{format_source}";
-      format-source = " {volume}%";
+      format-source = "${icon "f130"} {volume}%";
       format-source-muted = " 󰍭";
       on-click = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
     };

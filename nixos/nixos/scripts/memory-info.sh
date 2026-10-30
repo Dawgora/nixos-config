@@ -29,7 +29,7 @@ fi
 TOOLTIP=$(printf 'RAM: %s GiB / %s GiB (%d%%)\nAvailable: %s GiB\nCached: %s GiB\n\nSwap used: %s MiB' \
           "$USED_GIB" "$TOTAL_GIB" "$PERCENT" "$AVAIL_GIB" "$CACHED_GIB" "$SWAP_USED_MIB")
 
-jq -nc --arg text " ${PERCENT}%" \
+jq -nc --arg pct "${PERCENT}" \
        --arg class "used" \
        --arg tooltip "$TOOLTIP" \
-   '{text: $text, class: $class, tooltip: $tooltip}'
+   '{text: ("\udb80\udf5b " + $pct + "%"), class: $class, tooltip: $tooltip}'

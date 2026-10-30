@@ -40,7 +40,7 @@ in
     #workspaces, #niri-workspaces,
     #network, #language,
     #clock, #clock.2, #clock.3,
-    #cpu, #memory, #disk, #battery,
+    #cpu, #memory, #disk, #battery, #backlight, #bluetooth,
     #pulseaudio, #pulseaudio.microphone,
     #idle_inhibitor, #tray, #taskbar, #mode, #custom-power, #media,
     #custom-disk-root, #custom-disk-ssd, #custom-disk-hdd, #custom-disk-win,
@@ -98,6 +98,8 @@ in
     #cpu              { color: @purple; }
     #disk             { color: @yellow; }
     #battery          { color: @green; }
+    #backlight        { color: @yellow; }
+    #bluetooth        { color: @blue; }
     #battery.warning,
     #battery.critical { color: @red; }
 

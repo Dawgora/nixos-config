@@ -14,6 +14,7 @@
   # ── Session ─────────────────────────────────────────────────────────────
 
   services.displayManager.defaultSession = "niri";
+  boot.loader.grub.configurationLimit = 3;
 
   services.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = [ pkgs.nautilus ];
@@ -24,10 +25,9 @@
   hardware.bluetooth.settings.General.Experimental = true;
 
   # ── Work services ───────────────────────────────────────────────────────
-  services.teamviewer.enable = true;
   services.netbird.enable = true;
 
-  dawgora.unfreePackages = [ "teamviewer" "google-chrome" ];
+  dawgora.unfreePackages = ["google-chrome" ];
 
   programs.winbox = {
     enable = true;

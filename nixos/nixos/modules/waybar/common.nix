@@ -16,7 +16,7 @@ in
     };
 
     "niri/window" = {
-      format = "{}";
+      format = "{title}";
       max-length = 40;
     };
 

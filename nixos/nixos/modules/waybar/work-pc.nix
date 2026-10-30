@@ -40,7 +40,8 @@
     "bluetooth" = {
       format = " {status}";
       format-connected = " {num_connections}";
-      tooltip-format = "{deviceAlias}";
+      tooltip-format = "{controller_alias}: {status}";
+      tooltip-format-connected = "{device_alias}";
       on-click = "overskride";
     };
 

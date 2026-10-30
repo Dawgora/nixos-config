@@ -33,7 +33,7 @@ in
     };
 
     "backlight" = {
-      device = "intel_backlight";
+      device = "amdgpu_bl1";
       format = "{icon} {percent:2}%";
       format-icons = map icon [ "f186" "f185" ];
       on-scroll-up = "brightnessctl set +5%";

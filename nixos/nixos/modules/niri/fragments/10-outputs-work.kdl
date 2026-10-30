@@ -1,0 +1,32 @@
+// work (ThinkPad T14s): outputs are matched by make/model/serial, so the
+// home daisy chain keeps its layout whatever DP-n names the ports get.
+// Screens that aren't connected are ignored, so this one file covers
+// laptop alone, laptop + home Dells, and lid closed. An unknown screen
+// (e.g. a hotel HDMI) gets niri's defaults and is placed to the right.
+// With the lid closed and an external screen connected, niri turns the
+// built-in panel off by itself.
+
+// built-in panel, leftmost; bottom edge lined up with the left Dell
+output "Lenovo Group Limited 0x40A9 Unknown" {
+    mode "1920x1080@60.003"
+    scale 1.25
+    transform "normal"
+    position x=0 y=1136
+}
+
+// home, left: Dell U2724DE (main's middle screen)
+output "Dell Inc. DELL U2724DE 2C99KJ4" {
+    mode "2560x1440@59.951"
+    scale 1
+    transform "normal"
+    position x=1536 y=560
+    focus-at-startup
+}
+
+// home, right: Dell U2724DE (main's right screen), portrait
+output "Dell Inc. DELL U2724DE HF99KJ4" {
+    mode "2560x1440@59.951"
+    scale 1
+    transform "270"
+    position x=4096 y=0
+}

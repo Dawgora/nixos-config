@@ -1,5 +1,7 @@
-{ config, ... }:
+{ config, specialArgs, ... }:
 let
+  # outputs differ per host: main's and the laptop's layouts share monitors
+  outputs = ./fragments + "/10-outputs-${specialArgs.systemType}.kdl";
   c = config.lib.stylix.colors.withHashtag;
   cursor = config.stylix.cursor;
 
@@ -15,7 +17,7 @@ in
   # concern (input, outputs, layout, binds...) lives in its own module
   xdg.configFile."niri/config.kdl".text = builtins.concatStringsSep "\n" [
     (builtins.readFile ./fragments/00-input.kdl)
-    (builtins.readFile ./fragments/10-outputs.kdl)
+    (builtins.readFile outputs)
     (themed ./fragments/20-layout.kdl)
     (builtins.readFile ./fragments/30-rules.kdl)
     (builtins.readFile ./fragments/40-binds.kdl)

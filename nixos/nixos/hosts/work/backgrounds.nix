@@ -6,7 +6,8 @@
 
   home.packages = [
     (pkgs.writeShellScriptBin "set-backgrounds" ''
-      ${pkgs.awww}/bin/awww img -o eDP-1 \
+      # no -o: every connected screen; awww remembers it per screen name
+      ${pkgs.awww}/bin/awww img \
         ~/.local/share/backgrounds/middle-screen.png --resize fit
     '')
   ];

@@ -7,7 +7,6 @@ in
     layer = "top";
     position = "top";
     height = 40;
-    output = "eDP-1";
 
     modules-left = [ "niri/workspaces" "niri/window" "clock" ];
     modules-center = [];

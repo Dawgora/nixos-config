@@ -8,13 +8,15 @@
   ];
 
   dawgora.swaylock.images = [
-    "eDP-1:/home/dawgora/.local/share/backgrounds/middle-screen.png"
+    # no output prefix: the same image on every screen
+    "/home/dawgora/.local/share/backgrounds/middle-screen.png"
   ];
 
   # GNOME's terminal setting (GNOME session only)
   dconf = {
     enable = true;
-    settings."org/gnome/desktop/default-applications/terminal" = {
+    # schema org.gnome.desktop.default-applications.terminal lives at this path
+    settings."org/gnome/desktop/applications/terminal" = {
       exec = "${pkgs.alacritty}/bin/alacritty";
     };
   };

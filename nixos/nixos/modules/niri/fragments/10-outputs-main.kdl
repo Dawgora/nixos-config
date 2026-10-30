@@ -1,0 +1,41 @@
+// main: outputs are matched by make/model/serial, so the layout follows the
+// monitor, not the port. The same two Dells are used by the laptop at home
+// (hosts' own fragments keep their settings apart).
+
+// left: LG 27GL850, portrait
+output "LG Electronics 27GL850 006NTUW09846" {
+    mode "2560x1440@144.000"
+    scale 1
+    transform "90"
+    position x=0 y=0
+}
+
+// middle: Dell U2724DE, gaming screen
+output "Dell Inc. DELL U2724DE 2C99KJ4" {
+    mode "2560x1440@119.998"
+    scale 1
+    transform "normal"
+    position x=1440 y=560
+    focus-at-startup
+    variable-refresh-rate on-demand=true
+}
+
+// right: Dell U2724DE, portrait
+output "Dell Inc. DELL U2724DE HF99KJ4" {
+    mode "2560x1440@119.998"
+    scale 1
+    transform "270"
+    position x=4000 y=0
+}
+
+workspace "web" {
+    open-on-output "LG Electronics 27GL850 006NTUW09846"
+}
+
+workspace "main" {
+    open-on-output "Dell Inc. DELL U2724DE 2C99KJ4"
+}
+
+workspace "chat" {
+    open-on-output "Dell Inc. DELL U2724DE HF99KJ4"
+}

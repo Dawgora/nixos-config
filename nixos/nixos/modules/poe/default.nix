@@ -37,7 +37,6 @@ let
       procps
     ];
     text = ''
-      marker="$XDG_RUNTIME_DIR/poe-session"
       socket="/tmp/.X11-unix/X${displayNum}"
 
       Xwayland ":${displayNum}" -geometry ${geometry} &
@@ -45,7 +44,6 @@ let
 
       # shellcheck disable=SC2317  # only called through the trap
       cleanup() {
-        rm -f "$marker"
         # picom, openbox and APT are children of this script
         pkill -P $$ || true
       }
@@ -60,7 +58,6 @@ let
 
       export DISPLAY=":${displayNum}"
       unset WAYLAND_DISPLAY
-      echo "$DISPLAY" > "$marker"
 
       picom --backend xrender &
       openbox &
@@ -78,17 +75,16 @@ let
   };
 
   # Steam launch options: /home/dawgora/.local/bin/poe-run gamemoderun mangohud %command%
-  # Runs inside Steam's FHS env. Uses the PoE session's X server when it's running,
-  # otherwise PoE starts normally on niri (xwayland-satellite).
+  # Runs inside Steam's FHS sandbox. A marker in $XDG_RUNTIME_DIR wasn't seen there, so only the
+  # X socket is checked (/tmp is shared, games need it). If the session is running,
+  # PoE goes to its X server, otherwise it starts normally on niri (xwayland-satellite).
+  # Each start logs its choice to /tmp/poe-run.log.
   poe-run = pkgs.writeShellScript "poe-run" ''
-    marker="$XDG_RUNTIME_DIR/poe-session"
-    if [ -r "$marker" ]; then
-      display=$(cat "$marker")
-      if [ -S "/tmp/.X11-unix/X''${display#:}" ]; then
-        export DISPLAY="$display"
-        unset WAYLAND_DISPLAY
-      fi
+    if [ -S /tmp/.X11-unix/X${displayNum} ]; then
+      export DISPLAY=":${displayNum}"
+      unset WAYLAND_DISPLAY
     fi
+    echo "$(date '+%F %T') DISPLAY=$DISPLAY WAYLAND_DISPLAY=''${WAYLAND_DISPLAY:-}" >> /tmp/poe-run.log
     exec "$@"
   '';
 in

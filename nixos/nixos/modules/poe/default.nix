@@ -75,16 +75,18 @@ let
   };
 
   # Steam launch options: /home/dawgora/.local/bin/poe-run gamemoderun mangohud %command%
-  # Runs inside Steam's FHS sandbox. A marker in $XDG_RUNTIME_DIR wasn't seen there, so only the
-  # X socket is checked (/tmp is shared, games need it). If the session is running,
-  # PoE goes to its X server, otherwise it starts normally on niri (xwayland-satellite).
-  # Each start logs its choice to /tmp/poe-run.log.
+  # Runs inside Steam's FHS sandbox. Neither a marker in $XDG_RUNTIME_DIR nor the socket
+  # file in /tmp/.X11-unix was seen from there. Xwayland also listens on the abstract
+  # socket @/tmp/.X11-unix/X2, which shows up in /proc/net/unix (same network
+  # namespace) and disappears when Xwayland exits. If it's there, PoE goes to the
+  # session's X server, otherwise it starts normally on niri (xwayland-satellite).
+  # Each start logs its choice to ~/.cache/poe-run.log ($HOME is shared).
   poe-run = pkgs.writeShellScript "poe-run" ''
-    if [ -S /tmp/.X11-unix/X${displayNum} ]; then
+    if ${pkgs.gnugrep}/bin/grep -q '@/tmp/.X11-unix/X${displayNum}$' /proc/net/unix 2>/dev/null; then
       export DISPLAY=":${displayNum}"
       unset WAYLAND_DISPLAY
     fi
-    echo "$(date '+%F %T') DISPLAY=$DISPLAY WAYLAND_DISPLAY=''${WAYLAND_DISPLAY:-}" >> /tmp/poe-run.log
+    echo "$(${pkgs.coreutils}/bin/date '+%F %T') DISPLAY=$DISPLAY WAYLAND_DISPLAY=''${WAYLAND_DISPLAY:-}" >> "$HOME/.cache/poe-run.log"
     exec "$@"
   '';
 in

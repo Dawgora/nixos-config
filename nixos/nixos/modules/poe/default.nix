@@ -12,7 +12,9 @@
 #     └─ APT
 #
 # Start: rofi "PoE overlay session" (or `poe-session`), then PoE from Steam.
-# Stop: close the Xwayland window (or `systemctl --user stop poe-session`).
+# Stop: quit PoE in the game, then close the Xwayland window (or rofi "Stop PoE overlay
+# session" = `systemctl --user stop poe-session`). Ending the session also ends a PoE
+# that is still running in it.
 # Logs: journalctl --user -u poe-session
 #
 # Not declarative (PoE's Proton prefix, Steam compatdata/238960):
@@ -42,12 +44,22 @@ let
       Xwayland ":${displayNum}" -geometry ${geometry} &
       xwayland=$!
 
-      # shellcheck disable=SC2317  # only called through the trap
+      poe_seen=0
+
+      # shellcheck disable=SC2317  # only called through the traps
       cleanup() {
+        # Without its X server PoE keeps running blind (Wine doesn't exit), and a new
+        # session can't take it back. So end it with the session, but only if it was
+        # running in this session (not a PoE started normally on niri).
+        if [ "$poe_seen" = 1 ]; then
+          pkill -f 'PathOfExile[^/]*\.exe' || true
+        fi
         # picom, openbox and APT are children of this script
         pkill -P $$ || true
       }
       trap cleanup EXIT
+      # systemctl --user stop sends SIGTERM; exit so the EXIT trap runs
+      trap 'exit 0' INT TERM
 
       for _ in $(seq 100); do
         [ -S "$socket" ] && break
@@ -67,6 +79,7 @@ let
         kill -0 "$xwayland" 2>/dev/null || exit 0
         sleep 2
       done
+      poe_seen=1
       awakened-poe-trade --ozone-platform=x11 &
 
       # Closing the Xwayland window ends the session
@@ -102,6 +115,14 @@ in
     genericName = "Path of Exile + Awakened PoE Trade";
     exec = "systemd-run --user --collect --unit=poe-session ${poe-session}/bin/poe-session";
     icon = "applications-games";
+    terminal = false;
+    categories = [ "Game" ];
+  };
+
+  xdg.desktopEntries.poe-session-stop = {
+    name = "Stop PoE overlay session";
+    exec = "systemctl --user stop poe-session";
+    icon = "application-exit";
     terminal = false;
     categories = [ "Game" ];
   };

@@ -3,6 +3,7 @@
   imports = [
     ../../modules/user/common.nix
     ./backgrounds.nix
+    ../../modules/poe
   ];
 
   dawgora.swaylock.images = [

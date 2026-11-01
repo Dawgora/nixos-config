@@ -56,6 +56,8 @@ let
     "x-scheme-handler/bitwarden"     = [ "bitwarden.desktop" ];
     "x-scheme-handler/tidal"         = [ "tidal-hifi.desktop" ];
     "x-scheme-handler/discord"       = [ "discord.desktop" ];
+    "x-scheme-handler/pob"           = [ "rusty-path-of-building-1.desktop" ];
+    "x-scheme-handler/pob2"          = [ "rusty-path-of-building-2.desktop" ];
   };
 
   # { role = [ mime ... ]; }  →  { mime = [ app ]; }

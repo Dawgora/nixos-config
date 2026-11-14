@@ -37,7 +37,7 @@ let
     src = pkgs.fetchurl {
       url = "mirror://xorg/individual/xserver/xwayland-${version}.tar.xz";
       # Fill in from the build error ("got: sha256-…") on the first build
-      hash = pkgs.lib.fakeHash;
+      hash = "sha256-Tra5jWeCmaS5YTjYhjRbKUEwaVdgNF74RZYiWoIkB4o=";
     };
   });
 

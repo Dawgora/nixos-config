@@ -27,27 +27,21 @@ let
   # Rootful Xwayland doesn't resize with its window, so this is the middle Dell's mode
   geometry = "2560x1440";
 
-  # Pinned: with Xwayland 24.1.15 the price check (Ctrl+D) stopped working in the
-  # session: APT gets the hotkey (`Action type: copy-item`) but never the item text.
-  # The same session script with 24.1.14 works (tested 2026-11-14). Only used here;
-  # niri's xwayland-satellite keeps the current Xwayland. Drop the pin when a newer
-  # Xwayland is tested to work: replace `xwaylandPinned` with `xwayland` below.
-  xwaylandPinned = pkgs.xwayland.overrideAttrs (_: rec {
-    version = "24.1.14";
-    src = pkgs.fetchurl {
-      url = "mirror://xorg/individual/xserver/xwayland-${version}.tar.xz";
-      # Fill in from the build error ("got: sha256-…") on the first build
-      hash = "sha256-Tra5jWeCmaS5YTjYhjRbKUEwaVdgNF74RZYiWoIkB4o=";
-    };
-  });
+  # APT on Electron 43: nixpkgs runs APT on its default `electron`, and with Electron 45
+  # (lock update 2026-11) the price check stopped working in the session: APT gets the
+  # hotkey (`Action type: copy-item`) but never opens the panel. The same APT on
+  # `electron_43-bin` works (tested 2026-11-14). An Xwayland pin didn't help.
+  # Drop the override when a newer Electron is tested to work, or when nixpkgs removes
+  # electron_43 (evaluation then fails here).
+  awakened-poe-trade-e43 = pkgs.awakened-poe-trade.override { electron = pkgs.electron_43-bin; };
 
   poe-session = pkgs.writeShellApplication {
     name = "poe-session";
     runtimeInputs = with pkgs; [
-      xwaylandPinned
+      xwayland
       picom
       openbox
-      awakened-poe-trade
+      awakened-poe-trade-e43
       xdotool
       coreutils
       procps

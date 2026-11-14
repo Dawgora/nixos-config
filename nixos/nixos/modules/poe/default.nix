@@ -27,10 +27,24 @@ let
   # Rootful Xwayland doesn't resize with its window, so this is the middle Dell's mode
   geometry = "2560x1440";
 
+  # Pinned: with Xwayland 24.1.15 the price check (Ctrl+D) stopped working in the
+  # session: APT gets the hotkey (`Action type: copy-item`) but never the item text.
+  # The same session script with 24.1.14 works (tested 2026-11-14). Only used here;
+  # niri's xwayland-satellite keeps the current Xwayland. Drop the pin when a newer
+  # Xwayland is tested to work: replace `xwaylandPinned` with `xwayland` below.
+  xwaylandPinned = pkgs.xwayland.overrideAttrs (_: rec {
+    version = "24.1.14";
+    src = pkgs.fetchurl {
+      url = "mirror://xorg/individual/xserver/xwayland-${version}.tar.xz";
+      # Fill in from the build error ("got: sha256-…") on the first build
+      hash = pkgs.lib.fakeHash;
+    };
+  });
+
   poe-session = pkgs.writeShellApplication {
     name = "poe-session";
     runtimeInputs = with pkgs; [
-      xwayland
+      xwaylandPinned
       picom
       openbox
       awakened-poe-trade
